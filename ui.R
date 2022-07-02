@@ -1,13 +1,13 @@
 library(shiny)
 library(tablerDash)
 library(shinyWidgets)
-
+library(DT)
 
 profileCard <- tablerProfileCard(
   width = 12,
-  title = "SALPICON",
+  title = "SALPHYCON",
   subtitle = "Basic phylogenetics with phruta.",
-  background = "https://preview.tabler.io/demo/photos/ilnur-kalimullin-218996-500.jpg",
+  background = "https://cromanpa94.github.io/cromanpa/images/FrogMain_right_up.jpg",
   src = "https://raw.githubusercontent.com/cromanpa94/phruta/main/vignettes/logo.png",
   tablerSocialLinks(
     tablerSocialLink(
@@ -40,13 +40,14 @@ profileCard <- tablerProfileCard(
 
 
 plotCard <- tablerCard(
-  title = "Plots",
+  title = "Sequence alignments",
   zoomable = TRUE,
-  closable = TRUE,
+  closable = FALSE,
+  #overflow = TRUE,
   options = tagList(
     switchInput(
       inputId = "enable_distPlot",
-      label = "Plot?",
+      label = "Show alignments",
       value = TRUE,
       onStatus = "success",
       offStatus = "danger"
@@ -55,24 +56,32 @@ plotCard <- tablerCard(
   plotOutput("distPlot"),
   status = "info",
   statusSide = "left",
-  width = 12,
-  footer = tagList(
-    column(
-      width = 12,
-      align = "center",
-      sliderInput(
-        "obs",
-        "Number of observations:",
-        min = 0,
-        max = 1000,
-        value = 500
-      )
-    )
-  )
+  width = 12
 )
 
 
+tableCard <- tablerCard(
+  title = "Accession numbers",
+  zoomable = TRUE,
+  closable = FALSE,
+  overflow = TRUE,
+  # options = tagList(
+  #   switchInput(
+  #     inputId = "enable_distTable",
+  #     label = "Show table?",
+  #     value = TRUE,
+  #     onStatus = "success",
+  #     offStatus = "danger"
+  #   )
+  # ),
+  DT::dataTableOutput("distTable"),
+  status = "info",
+  statusSide = "left",
+  width = 12
+)
+
   ui = fluidPage(
+    #setBackgroundColor("DodgerBlue"),
     useTablerDash(),
     chooseSliderSkin("Modern"),
     #h1(" ", align = "center"),
@@ -83,77 +92,106 @@ plotCard <- tablerCard(
       column(
         width = 3,
         profileCard,
-        tablerStatCard(
-          value = 1,
-          title = "Historical users",
-          #trend = -10,
-          width = 12
-        ),
-        tablerAvatarList(
-          stacked = TRUE,
-          tablerAvatar(
-            name = "CRP",
-            size = "xl",
-            color = "blue",
-            url = "https://raw.githubusercontent.com/cromanpa94/phruta/main/vignettes/logo.png"
-          ),
-          tablerAvatar(
-            name = "WY",
-            color = "orange",
-            size = "m",
-            url = "https://raw.githubusercontent.com/cromanpa94/phruta/main/vignettes/logo.png"
+        tablerCard(
+          status = "yellow",
+          statusSide = "left",
+          width = 12,
+          h3("1. Groups"),
+          h5("Please input your target species and clades below"),
+          textInput("text", h6("Clades"), 
+                    value = "Enter text..."),
+          textInput("text", h6("Species"), 
+                    value = "Enter text..."),
+          
+          dropdown(
+            tags$h3("List of Input"),
+            fileInput("file", h5("List of taxa"), width = '80%'),
+            style = "unite", icon = icon("gear"),
+            status = "warning", width = "300px",
+            tooltip = tooltipOptions(title = "Click to see inputs !"),
+            animate = animateOptions(
+              enter = animations$fading_entrances$fadeInLeftBig,
+              exit = animations$fading_exits$fadeOutRightBig
+            )
           )
         )
       ),
       column(
-        width = 6,
-        plotCard
-      ),
-      column(
         width = 3,
         tablerCard(
+          status = "yellow",
+          statusSide = "left",
           width = 12,
-          tablerTimeline(
-            tablerTimelineItem(
-              title = "Item 1",
-              status = "green",
-              date = "now"
-            ),
-            tablerTimelineItem(
-              title = "Item 2",
-              status = NULL,
-              date = "yesterday",
-              "Lorem ipsum dolor sit amet,
-                  consectetur adipisicing elit."
+          h3("2. Genes"),
+          h5("Please input your target species and clades below"),
+          materialSwitch(
+            inputId = "Id079",
+            label = "Find genes?", 
+            value = TRUE,
+            status = "success"
+          ),
+          sliderInput("slider1", h3("Threshold find genes"),
+                      min = 0, max = 100, value = 50),
+          textInput("text", h6("Target genes"), 
+                    value = "Enter text..."),
+          dropdown(
+            tags$h3("List of Input"),
+            fileInput("file", h5("Select additional genes"), multiple = TRUE),
+            style = "unite", icon = icon("gear"),
+            status = "warning", width = "300px",
+            tooltip = tooltipOptions(title = "Click to see inputs !"),
+            animate = animateOptions(
+              enter = animations$fading_entrances$fadeInLeftBig,
+              exit = animations$fading_exits$fadeOutRightBig
             )
           )
         ),
-        tablerInfoCard(
-          value = "132 sales",
-          status = "danger",
-          icon = "dollar-sign",
-          description = "12 waiting payments",
-          width = 12
+        tablerCard(
+          status = "yellow",
+          statusSide = "left",
+          width = 12,
+          h3("3. Pipeline"),
+          awesomeCheckboxGroup("Process", 
+                             h5(""), 
+                             choices = list("Retrieve" = 0,
+                                            "Curate" = 1, 
+                                            "Align" = 2, 
+                                            "Mask" = 3, 
+                                            "RAxML" = 4),
+                             selected = 0),
+          dropdown(
+            tags$h3("List of Input"),
+            awesomeCheckbox("checkbox", "Arg1", value = TRUE),
+            awesomeCheckbox("checkbox", "Arg2", value = TRUE),
+            awesomeCheckbox("checkbox", "Arg3", value = TRUE),
+            style = "unite", icon = icon("gear"),
+            status = "warning", width = "300px",
+            tooltip = tooltipOptions(title = "Click to see inputs !"),
+            animate = animateOptions(
+              enter = animations$fading_entrances$fadeInLeftBig,
+              exit = animations$fading_exits$fadeOutRightBig
+            )
+          )
+          
         ),
-        numericInput(
-          inputId = "totalStorage",
-          label = "Enter storage capacity",
-          value = 1000),
-        uiOutput("info"),
-        knobInput(
-          inputId = "knob",
-          width = "50%",
-          label = "Progress value:",
-          value = 10,
-          min = 0,
-          max = 100,
-          skin = "tron",
-          displayPrevious = TRUE,
-          fgColor = "#428BCA",
-          inputColor = "#428BCA"
-        ),
-        uiOutput("progress")
+        tablerCard(
+          status = "yellow",
+          statusSide = "left",
+          width = 12,
+          h3("Run"),
+          actionButton("action", "Action", icon = icon("check"))
+        )
+        #,uiOutput("info"),
+        
+      ),
+      column(
+        width = 6,
+        tableCard,
+        plotCard
       )
     )
   )
+  
+
+  
   
