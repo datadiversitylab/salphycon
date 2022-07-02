@@ -1,0 +1,248 @@
+"ID","Description","padj","Count"
+"C0007124","Noninfiltrating Intraductal Carcinoma",1.56825149500072e-07,24
+"C3642347","Basal-Like Breast Carcinoma",3.03899325340052e-06,16
+"C1609538","Latent Tuberculosis",3.03899325340052e-06,14
+"C1827293","Carcinoma of urinary bladder, invasive",1.53594727639733e-05,16
+"C0278601","Inflammatory Breast Carcinoma",1.68980818582336e-05,13
+"C4733092","estrogen receptor-negative breast cancer",3.48141372206105e-05,17
+"C0023646","Lichen Planus",3.74690311339272e-05,10
+"C3160887","Node-positive breast cancer",4.36012395643941e-05,7
+"C0021368","Inflammation",4.64991578771463e-05,19
+"C0853879","Invasive carcinoma of breast",5.10128647705805e-05,19
+"C3642345","Luminal A Breast Carcinoma",8.55526731075676e-05,11
+"C0679427","myeloblastosis",0.000122849968644833,8
+"C0039103","Synovitis",0.000122849968644833,12
+"C0524910","Hepatitis C, Chronic",0.000202441446519721,17
+"C3875321","Inflammatory dermatosis",0.000202441446519721,16
+"C1739135","Progression of prostate cancer",0.000324949770426396,16
+"C3887524","Skin Erosion",0.000384235380167941,12
+"C3839280","High grade serous carcinoma",0.000410781720227209,9
+"C0036202","Sarcoidosis",0.000442083814034348,16
+"C0220636","Malignant neoplasm of salivary gland",0.000482095031749541,8
+"C0333307","Superficial ulcer",0.00066251203089539,12
+"C0001342","Acute periodontitis",0.000751054429393922,9
+"C0238461","Anaplastic thyroid carcinoma",0.000846939579294659,15
+"C0011603","Dermatitis",0.000846939579294659,17
+"C0282160","Aplasia Cutis Congenita",0.000846939579294659,15
+"C0278701","Gastric Adenocarcinoma",0.00104123540641096,16
+"C0242787","Malignant neoplasm of male breast",0.00104123540641096,7
+"C0751690","Malignant Peripheral Nerve Sheath Tumor",0.00107518002818062,12
+"C0151449","Primary SjC6gren's syndrome",0.00123537294476105,13
+"C1136382","Sclerocystic Ovaries",0.00123537294476105,9
+"C1134719","Invasive Ductal Breast Carcinoma",0.00123537294476105,15
+"C2112532","Postmenopausal endometrium",0.00123537294476105,4
+"C0031106","Aggressive Periodontitis",0.0012638997782365,10
+"C0812413","Malignant Pleural Mesothelioma",0.0014142317900763,15
+"C0024205","Lymphadenitis",0.00150250595642151,6
+"C1527336","Sjogren's Syndrome",0.001593002758406,16
+"C0010278","Craniosynostosis",0.00185044033054658,16
+"C0238033","Carcinoma of Male Breast",0.0019802674179197,7
+"C2959467","Tuberculous pleural effusion",0.00221063626064507,5
+"C1384600","Systemic onset juvenile chronic arthritis",0.00234886266304986,7
+"C0018133","Graft-vs-Host Disease",0.00236135546124169,15
+"C0022548","Keloid",0.00264956974319462,9
+"C0030805","Bullous pemphigoid",0.00264956974319462,8
+"C4551687","Sarcoma of soft tissue",0.00331140328432372,11
+"C0041327","Tuberculosis, Pulmonary",0.00340441188209934,13
+"C0279628","Adenocarcinoma Of Esophagus",0.0035639728964367,15
+"C1292778","Chronic myeloproliferative disorder",0.00408855830840175,13
+"C0206687","Carcinoma, Endometrioid",0.00450358527262094,10
+"C0279671","Cervical Squamous Cell Carcinoma",0.00450358527262094,13
+"C1176475","Ductal Carcinoma",0.00481214832398948,11
+"C0079772","T-Cell Lymphoma",0.00481214832398948,15
+"C0018188","Granuloma",0.00553772708942274,4
+"C0022408","Arthropathy",0.00566377726419135,9
+"C0279680","Transitional cell carcinoma of bladder",0.0060885627447192,12
+"C0079774","Peripheral T-Cell Lymphoma",0.00616720950412475,9
+"C0025289","Meningitis",0.00622017241993387,9
+"C0035369","Retroviridae Infections",0.00622017241993387,7
+"C0024759","Mansonelliasis",0.00622017241993387,3
+"C0948853","Euthymia",0.00622017241993387,3
+"C1868684","EAR, PATELLA, SHORT STATURE SYNDROME",0.00622017241993387,6
+"C0162820","Dermatitis, Allergic Contact",0.00622017241993387,8
+"C3495917","Advanced breast cancer",0.00622017241993387,8
+"C0023055","Laryngeal neoplasm",0.00622017241993387,5
+"C2145472","Urothelial Carcinoma",0.00622017241993387,14
+"C0003872","Arthritis, Psoriatic",0.00626946628087317,14
+"C0036420","Localized scleroderma",0.00717398464835558,5
+"C0036205","Sarcoidosis, Pulmonary",0.00717398464835558,6
+"C0015929","Fetal Diseases",0.00777236864439337,3
+"C0010823","Cytomegalovirus Infections",0.00777795417357797,14
+"C0392788","Nasal Type Extranodal NK/T-Cell Lymphoma",0.00794757783441281,5
+"C4733095","HER2-negative breast cancer",0.00794757783441281,8
+"C0333983","Hyperplastic Polyp",0.00794757783441281,9
+"C4721414","Mantle cell lymphoma",0.00794757783441281,14
+"C1262091","Lymphocytic infiltration",0.00794757783441281,6
+"C0948264","Neuroborreliosis",0.00920801309209552,3
+"C1708371","Histiocytoid Cardiomyopathy",0.00920801309209552,3
+"C1153706","Endometrial adenocarcinoma",0.0100938118804311,9
+"C4524092","Chronic rhinosinusitis with nasal polyps",0.0101869513393292,8
+"C0685938","Malignant neoplasm of gastrointestinal tract",0.0101869513393292,13
+"C0079773","Lymphoma, T-Cell, Cutaneous",0.0101869513393292,12
+"C0027430","Nasal Polyps",0.010706684127169,14
+"C1275122","Familial multiple trichoepitheliomata",0.0110292518671499,11
+"C0156181","Peritoneal adhesion",0.011069394945358,4
+"C1861453","Pseudohyperkalemia Cardiff",0.0113036312222221,9
+"C0041326","Pleural Tuberculosis",0.0113036312222221,5
+"C0006272","Bronchiolitis Obliterans",0.0119571085883171,6
+"C0008495","Chorioamnionitis",0.0122204953652874,7
+"C0014038","Encephalitis",0.0122862061291479,11
+"C0149521","Pancreatitis, Chronic",0.0122862061291479,12
+"C0263746","Osteoarthritis of the hand",0.0123572526299022,5
+"C4723838","Metastatic Breast Carcinoma",0.0123572526299022,5
+"C4024795","Nongranulomatous uveitis",0.0124117021340765,3
+"C0278622","Adult Malignant Peripheral Nerve Sheath Tumor",0.012913719155709,5
+"C0279987","Childhood Malignant Peripheral Nerve Sheath Tumor",0.012913719155709,5
+"C0032227","Pleural effusion disorder",0.0135720846806582,9
+"C0271907","Acquired aplastic anemia",0.014395901922015,5
+"C0235618","Proliferative glomerulonephritis",0.014395901922015,3
+"C1969653","MUNGAN SYNDROME",0.014395901922015,3
+"C0206686","Adrenocortical carcinoma",0.014395901922015,10
+"C0677607","Hashimoto Disease",0.014395901922015,11
+"C0559470","Allergy to peanuts",0.014395901922015,4
+"C3495559","Juvenile arthritis",0.014395901922015,13
+"C0220650","Metastatic malignant neoplasm to brain",0.014395901922015,12
+"C0002390","Extrinsic allergic alveolitis",0.014501747008992,5
+"C0850666","Infection caused by Helicobacter pylori",0.014501747008992,11
+"C0398650","Immune thrombocytopenic purpura",0.0147280248323308,11
+"C0027059","Myocarditis",0.0149381403429868,10
+"C0010403","Cryoglobulinemia",0.0150604962250897,4
+"C2986665","Early-Stage Breast Carcinoma",0.0152042669716567,7
+"C0750046","Granulomatous uveitis",0.0157110165460517,3
+"C0553723","Squamous cell carcinoma of skin",0.0157110165460517,13
+"C0029172","Oral Submucous Fibrosis",0.0183262362490318,6
+"C0597984","Biliary stricture",0.0183262362490318,3
+"C0877635","Cytomegalovirus viremia",0.0183262362490318,3
+"C0334634","Malignant lymphoma, lymphocytic, intermediate differentiation, diffuse",0.0186830773777717,10
+"C0007104","Female Breast Carcinoma",0.0194962858321683,5
+"C0278689","Recurrent ovarian cancer",0.0194962858321683,5
+"C0039101","synovial sarcoma",0.0196884196047941,10
+"C3160718","PARKINSON DISEASE, LATE-ONSET",0.0199407511741314,9
+"C0014740","Erythema Chronicum Migrans",0.0199407511741314,4
+"C0751633","Carotid Artery Plaque",0.0199407511741314,4
+"C0677055","CARCINOMA OF VULVA",0.0199407511741314,5
+"C0524909","Hepatitis B, Chronic",0.0199996074478565,12
+"C0151436","Vasculitis, Leukocytoclastic, Cutaneous",0.0200781725551733,3
+"C0206667","Adrenal Cortical Adenoma",0.0230824949734776,7
+"C0011608","Dermatitis Herpetiformis",0.0230824949734776,4
+"C0344539","Hypoplasia of iris",0.0231187100140541,3
+"C4552766","Miscarriage",0.0241520562413794,12
+"C0035328","Retinal Vein Occlusion",0.0241577932577761,5
+"C0027831","Neurofibromatosis 1",0.0241844357963959,10
+"C0007684","Central Nervous System Infection",0.0242432753770305,4
+"C0021670","insulinoma",0.0245768646172592,9
+"C0542476","Forgetful",0.0246235216808067,12
+"C0220605","Adult Non-Hodgkin Lymphoma",0.0246235216808067,11
+"C3714514","Infection",0.0246235216808067,13
+"C0036095","Salivary Gland Neoplasms",0.0246235216808067,6
+"C0220612","Childhood Non-Hodgkin Lymphoma",0.0246510378896638,11
+"C3273019","Early Hepatocellular Carcinoma",0.0248575593491688,3
+"C0339143","Thyroid associated opthalmopathies",0.0263562417522995,8
+"C0030186","Paget Disease Extramammary",0.0263562417522995,5
+"C0151936","Disorder of tendon",0.0263562417522995,5
+"C0007682","CNS disorder",0.0268574860207633,10
+"C3811653","Experimental Organism Basal Cell Carcinoma",0.0269472416887521,12
+"C1332347","Atypical Ductal Breast Hyperplasia",0.0271315632216033,5
+"C1568272","Tendinopathy",0.0271315632216033,5
+"C0235831","Renal Cell Dysplasia",0.028501885830978,5
+"C3495798","Periodontal inflammation",0.0296766671065649,5
+"C0149678","Epstein-Barr Virus Infections",0.0296766671065649,11
+"C0677932","Progressive Neoplastic Disease",0.0296766671065649,11
+"C3539781","Progressive cGVHD",0.0296766671065649,11
+"C0008479","Chondrosarcoma",0.0296766671065649,11
+"C0024668","Mammary Neoplasms, Experimental",0.0296766671065649,8
+"C0221056","Adult type dermatomyositis",0.0296766671065649,8
+"C0002940","Aneurysm",0.0296766671065649,3
+"C0014060","Encephalitis, St. Louis",0.0299696507153822,9
+"C0042029","Urinary tract infection",0.0299696507153822,8
+"C0858252","Breast adenocarcinoma",0.0299696507153822,8
+"C0043094","Weight Gain",0.0299823358237325,6
+"C0026269","Mitral Valve Stenosis",0.0301341862882951,7
+"C0747845","early pregnancy",0.0301341862882951,9
+"C4554601","Amyloidosis cutis dyschromia",0.0304438977026723,5
+"C0019159","Hepatitis A",0.031136134619473,12
+"C1290884","Inflammatory disorder",0.0314426274207979,11
+"C1997217","Low grade glioma",0.0314426274207979,5
+"C0019357","Keratitis, Herpetic",0.0314426274207979,3
+"C4049273","Systemic immune activation",0.0314426274207979,3
+"C0040021","Thromboangiitis Obliterans",0.0320850909283274,6
+"C0028259","Nodule",0.0325440565793326,9
+"C0269102","Endometrioma",0.033163291879296,9
+"C4290046","trachomatis",0.0334148631516648,7
+"C0007129","Merkel cell carcinoma",0.0336141106051343,8
+"C0019559","Hip joint pain",0.0343158621655031,3
+"C0206708","Cervical Intraepithelial Neoplasia",0.0343158621655031,11
+"C1855496","Contiguous gene syndrome",0.0343158621655031,4
+"C0279565","Invasive Lobular Breast Carcinoma",0.0343158621655031,5
+"C1569637","Adenocarcinoma, Endometrioid",0.0343158621655031,6
+"C0349566","Squamous cell carcinoma of tongue",0.0349197589060765,12
+"C4282128","PATENT DUCTUS ARTERIOSUS 1",0.0350881723621678,8
+"C0020507","Hyperplasia",0.0350881723621678,6
+"C0003119","Anophthalmos",0.0352532412462524,5
+"C0017677","Glossitis, Benign Migratory",0.0352623152631573,4
+"C0007112","Adenocarcinoma of prostate",0.0352623152631573,10
+"C0086981","Sicca Syndrome",0.0354849999134154,6
+"C1853926","NONAKA MYOPATHY",0.0354849999134154,6
+"C0020517","Hypersensitivity",0.0355605832735401,5
+"C1762616","Meningioma, benign, no ICD-O subtype",0.0355605832735401,11
+"C0282548","Leukostasis",0.0355605832735401,3
+"C3549742","Breast cancer, lobular",0.0355605832735401,3
+"C0266929","Chronic Periodontitis",0.0358540159781544,9
+"C0278877","Adult Meningioma",0.0358540159781544,11
+"C1141957","HIV disease progression",0.0360028320331768,4
+"C1960398","HER2-positive carcinoma of breast",0.0362947471451615,9
+"C0007282","Carotid Stenosis",0.0375606949129687,6
+"C0085655","Polymyositis",0.0375606949129687,7
+"C0011633","Dermatomyositis",0.0375606949129687,8
+"C4284413","Severe Fever with Thrombocytopenia Syndrome",0.0375606949129687,4
+"C0040100","Thymoma",0.0379056853209486,9
+"C1867103","Limited elbow extension",0.0379056853209486,3
+"C0333516","Tumor necrosis",0.0382206717646404,10
+"C0262584","Carcinoma, Small Cell",0.0390048833515931,7
+"C0023348","Leprosy, Lepromatous",0.0402021280031963,5
+"C0004763","Barrett Esophagus",0.0404204734001015,12
+"C1292769","Precursor B-cell lymphoblastic leukemia",0.0404204734001015,12
+"C0036221","Mast-Cell Sarcoma",0.040699127151443,3
+"C0280856","Squamous cell carcinoma of vulva",0.040699127151443,4
+"C1096155","Macrophage Activation Syndrome",0.040699127151443,4
+"C1836543","Thick vermilion border",0.040699127151443,5
+"C3536714","Renal dysplasia",0.040699127151443,5
+"C0007873","Uterine Cervical Neoplasm",0.0420846111626205,6
+"C0345967","Malignant mesothelioma",0.0430417472013854,11
+"C0035235","Respiratory Syncytial Virus Infections",0.0430417472013854,8
+"C0271694","Familial partial lipodystrophy",0.0430417472013854,3
+"C0279627","Adult Acute Myelomonocytic Leukemia",0.0430417472013854,3
+"C0279644","Childhood Acute Myelomonocytic Leukemia",0.0430417472013854,3
+"C0011311","Dengue Fever",0.0430417472013854,10
+"C3469521","FANCONI ANEMIA, COMPLEMENTATION GROUP A (disorder)",0.0430417472013854,10
+"C2362324","Pediatric Obesity",0.0430417472013854,7
+"C0014173","Endometrial Hyperplasia",0.0448762488958182,6
+"C0751688","Malignant Squamous Cell Neoplasm",0.0452144843587675,7
+"C0340288","Stable angina",0.0457147561017448,6
+"C0024620","Primary Malignant Liver Neoplasm",0.0457147561017448,4
+"C0002170","Alopecia",0.0457147561017448,12
+"C0206754","Neuroendocrine Tumors",0.0457147561017448,12
+"C0030360","Papillon-Lefevre Disease",0.0457147561017448,3
+"C0041330","Tuberculosis, Spinal",0.0457147561017448,3
+"C0346210","Vulval intraepithelial neoplasia",0.0457147561017448,3
+"C0002873","Anemia of chronic disease",0.0463231001406377,5
+"C0426980","Motor symptoms",0.0463231001406377,5
+"C0343641","Human papilloma virus infection",0.0463231001406377,11
+"C0085702","Monocytosis",0.0463231001406377,4
+"C1708350","Hereditary Leiomyomatosis and Renal Cell Cancer",0.0463231001406377,4
+"C0341439","Chronic liver disease",0.0463231001406377,7
+"C1527349","Ductal Breast Carcinoma",0.0463231001406377,7
+"C0677898","invasive cancer",0.0463742501456849,6
+"C1292777","Aggressive natural killer-cell leukemia",0.0480749793610094,3
+"C0011253","Delusions",0.0480749793610094,4
+"C0262985","Psoriasiform eczema",0.0480749793610094,4
+"C0263666","Dermatomyositis, Childhood Type",0.0480749793610094,4
+"C0686377","CNS metastases",0.0482998523319096,5
+"C0079588","Ichthyosis, X-Linked",0.0489376777078183,7
+"C0392514","Hereditary hemochromatosis",0.0489494524667542,8
+"C0010692","Cystitis",0.0489494524667542,6
+"C1857679","Sloping forehead",0.0489494524667542,6
+"C1368404","Hypopharyngeal Carcinoma",0.0489494524667542,5
+"C3544205","Ovarian clear cell carcinoma",0.0489494524667542,5
+"C3642346","Luminal B Breast Carcinoma",0.0489494524667542,5
+"C1608389","Autoimmune myocarditis",0.0491046474125653,4
