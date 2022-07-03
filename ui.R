@@ -90,11 +90,12 @@ i18n$set_translation_language("English")
     enable_preloader = FALSE,
     loading_duration = 2,
     navbar = tablerDashNav(
+      h3(code("Salphycon"), "- phylogentics with", code("phruta")),
       id = "mymenu",
       src = "https://raw.githubusercontent.com/cromanpa94/phruta/main/vignettes/logo.png",
       navMenu = tablerNavMenu(
         tablerNavMenuItem(
-          tabName = "Home",
+          tabName = i18n$t("Home"),
           icon = "home",
           "Home"
         ),
@@ -138,7 +139,7 @@ i18n$set_translation_language("English")
     body = tablerDashBody( 
       tablerTabItems(
         tablerTabItem(
-          tabName = "Home",
+          tabName = i18n$t("Home"),
           fluidPage(
             shiny.i18n::usei18n(i18n),
             fluidRow(
@@ -206,18 +207,18 @@ i18n$set_translation_language("English")
           statusSide = "left",
           width = 12,
           h3("1. Taxa"),
-          h5("Please input your target species and clades below"),
+          h5(i18n$t("Please input your target species and clades below")),
           textInput("text", h6(i18n$t("Clades")), 
                     value = "Enter text..."),
-          textInput("text", h6("Species"), 
+          textInput("text", h6(i18n$t("Species")), 
                     value = "Enter text..."),
           
           dropdown(
             tags$h3("List of Input"),
-            fileInput("file", h5("List of taxa"), width = '80%'),
+            fileInput("file", h5(i18n$t("List of taxa")), width = '80%'),
             style = "unite", icon = icon("cogs"),
             status = "warning", width = "300px",
-            tooltip = tooltipOptions(title = "Click to see inputs !"),
+            tooltip = tooltipOptions(title = i18n$t("Click to see inputs !")),
             animate = animateOptions(
               enter = animations$fading_entrances$fadeInLeftBig,
               exit = animations$fading_exits$fadeOutRightBig
@@ -233,23 +234,23 @@ i18n$set_translation_language("English")
             statusSide = "left",
             width = 12,
             h3("2. Genes"),
-            h5("Please input your target species and clades below"),
+            h5(i18n$t("Please input your target genes below")),
             materialSwitch(
               inputId = "Id079",
-              label = "Find genes?", 
+              label = i18n$t("Find genes?"), 
               value = TRUE,
               status = "success"
             ),
-            sliderInput("slider1", h6("Threshold find genes"),
+            sliderInput("slider1", h6(i18n$t("Threshold find genes")),
                         min = 0, max = 100, value = 50),
-            textInput("text", h6("Target genes"), 
+            textInput("text", h6(i18n$t("Target genes")), 
                       value = "Enter text..."),
             dropdown(
               tags$h3("List of Input"),
-              fileInput("file", h5("Select additional genes"), multiple = TRUE),
+              fileInput("file", h5(i18n$t("Select additional genes")), multiple = TRUE),
               style = "unite", icon = icon("cogs"),
               status = "warning", width = "300px",
-              tooltip = tooltipOptions(title = "Click to see inputs !"),
+              tooltip = tooltipOptions(title = i18n$t("Click to see inputs !")),
               animate = animateOptions(
                 enter = animations$fading_entrances$fadeInLeftBig,
                 exit = animations$fading_exits$fadeOutRightBig
@@ -267,7 +268,7 @@ i18n$set_translation_language("English")
             status = "yellow",
             statusSide = "left",
             width = 12,
-            h3("3. Tasks"),
+            h3(i18n$t("3. Tasks")),
             awesomeCheckboxGroup("Process", 
                                  h5(""), 
                                  choices = list("Retrieve" = 0,
