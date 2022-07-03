@@ -3,11 +3,12 @@ library(tablerDash)
 library(shinyWidgets)
 library(DT)
 #library(phruta)
+library(shiny.i18n)
 
 profileCard <- tablerProfileCard(
   width = 12,
   title = "SALPHYCON",
-  subtitle = "Basic phylogenetics with phruta.",
+  subtitle = i18n$t("Basic phylogenetics with phruta"),
   background = "https://cromanpa94.github.io/cromanpa/images/FrogMain_right_up.jpg",
   src = "https://raw.githubusercontent.com/cromanpa94/phruta/main/vignettes/logo.png",
   tablerSocialLinks(
@@ -81,6 +82,9 @@ tableCard <- tablerCard(
   width = 12
 )
 
+i18n <- Translator$new(translation_csvs_path = "translations/")
+i18n$set_translation_language("English") 
+
   ui = tablerDashPage(
     title = "Salphycon",
     enable_preloader = FALSE,
@@ -118,7 +122,14 @@ tableCard <- tablerCard(
           tabName = "TimeDating",
           icon = "box",
           "Time-dating"
-        ))),
+        ),
+        tablerNavMenuItem(
+          tabName = "About",
+          icon = "box",
+          "About"
+        )
+        )
+      ),
     
     footer = tablerDashFooter(
       copyrights = "NOTE"
@@ -129,14 +140,46 @@ tableCard <- tablerCard(
         tablerTabItem(
           tabName = "Home",
           fluidPage(
+            shiny.i18n::usei18n(i18n),
             fluidRow(
             column(
               width = 3,
-              profileCard
+              profileCard,
+              tablerBlogCard(
+                #title = "Blog Card",
+                #author = "David",
+                #date = "Today",
+                #href = "https://www.google.com",
+                #src = "https://preview.tabler.io/demo/photos/matt-barrett-339981-500.jpg",
+                #avatarUrl = "https://image.flaticon.com/icons/svg/145/145842.svg",
+                width = 12,
+                prettyRadioButtons(
+                  width = 12,
+                  inputId = "selected_language",
+                  label = i18n$t("Language:"), 
+                  choices = i18n$get_languages(),
+                  selected = i18n$get_key_translation(),
+                  icon = icon("check"), 
+                  bigger = TRUE,
+                  status = "info",
+                  animation = "jelly"
+                )
+              )
+              
+              #,
+              # pickerInput('selected_language',
+              #             i18n$t("Change language"),
+              #             choices = i18n$get_languages(),
+              #             selected = i18n$get_key_translation())
             ),
             column(
+              h6(i18n$t("Under construction")),
               width = 3,
-              h6("Under construction...")
+              #h6(i18n$t("Under construction..."))#,
+              # selectInput('selected_language',
+              #             i18n$t("Change language"),
+              #             choices = i18n$get_languages(),
+              #             selected = i18n$get_key_translation())
             )
             )
         ),
@@ -164,7 +207,7 @@ tableCard <- tablerCard(
           width = 12,
           h3("1. Taxa"),
           h5("Please input your target species and clades below"),
-          textInput("text", h6("Clades"), 
+          textInput("text", h6(i18n$t("Clades")), 
                     value = "Enter text..."),
           textInput("text", h6("Species"), 
                     value = "Enter text..."),
@@ -378,6 +421,42 @@ tableCard <- tablerCard(
         )
         )
       )
+  ),
+  tablerTabItem(
+    tabName = "About",
+    fluidPage(
+      useTablerDash(),
+      chooseSliderSkin("Modern"),
+      div(style = "height:30px"),
+      fluidRow(
+        column(
+          width = 3,
+          profileCard
+        ),
+        column(
+          width = 6,
+          tablerProfileCard(
+            width = 6,
+            title = "Cristian Roman Palacios",
+            subtitle = "Asistant Professor of Practice, UArizona",
+            background = "https://preview.tabler.io/demo/photos/ilnur-kalimullin-218996-500.jpg",
+            src = "https://cromanpa94.github.io/cromanpa/contact/2019-11-21%2010.51.14.jpg",
+            tablerSocialLinks(
+              tablerSocialLink(
+                name = "facebook",
+                href = "https://www.facebook.com",
+                icon = "facebook"
+              ),
+              tablerSocialLink(
+                name = "twitter",
+                href = "https://www.twitter.com",
+                icon = "twitter"
+              )
+            )
+          )
+        )
+      )
+    )
   )
     )
   )

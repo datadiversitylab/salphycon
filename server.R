@@ -1,7 +1,14 @@
 
 
-server = function(input, output) {
+server = function(input, output, session) {
   tan <- read.csv("data/go.csv")
+  
+  observeEvent(input$selected_language, {
+    # This print is just for demonstration
+    print(paste("Language change!", input$selected_language))
+    # Here is where we update language in session
+    shiny.i18n::update_lang(session, input$selected_language)
+  })
   
   ## Tables need to be editable
   ## https://stackoverflow.com/questions/70155520/how-to-make-datatable-editable-in-r-shiny
