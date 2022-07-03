@@ -8,9 +8,9 @@ library(shiny.i18n)
 profileCard <- tablerProfileCard(
   width = 12,
   title = "SALPHYCON",
-  subtitle = i18n$t("Basic phylogenetics with phruta"),
+  subtitle = "Basic phylogenetics with phruta",
   background = "https://cromanpa94.github.io/cromanpa/images/FrogMain_right_up.jpg",
-  src = "https://raw.githubusercontent.com/cromanpa94/phruta/main/vignettes/logo.png",
+  src = "img/salphycon_full.png",
   tablerSocialLinks(
     tablerSocialLink(
       name = "repo",
