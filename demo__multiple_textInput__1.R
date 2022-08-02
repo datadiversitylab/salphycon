@@ -1,4 +1,8 @@
 library(shiny)
+library(shiny.i18n)
+
+i18n <- Translator$new(translation_csvs_path = "translations/")
+i18n$set_translation_language("English")
 
 ui <- shinyUI(
   fluidPage(
