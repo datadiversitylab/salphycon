@@ -1,5 +1,4 @@
 library(shiny)
-library(shiny)
 library(shiny.i18n)
 
 i18n <- Translator$new(translation_csvs_path = "translations/")
