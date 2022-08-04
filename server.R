@@ -1,5 +1,3 @@
-
-
 server = function(input, output, session) {
   tan <- read.csv("data/go.csv")
   
@@ -16,16 +14,33 @@ server = function(input, output, session) {
   output$distTable <-
     DT::renderDataTable(tan,
                         extensions = 'Buttons',
-        options = list(scrollX = TRUE,
-                       pageLength = 10,
-                       searching = FALSE,
-                       dom = 'Bfrtip',
-                       buttons = c('csv', 'excel')),
-        rownames = FALSE)
+                        options = list(scrollX = TRUE,
+                                       pageLength = 10,
+                                       searching = FALSE,
+                                       dom = 'Bfrtip',
+                                       buttons = c('csv', 'excel')),
+                        rownames = FALSE)
   
   
   output$distPlot <- renderPlot({
     if (input$enable_distPlot) hist(rnorm(100))
+  })
+  
+  # Add Clades or Species text
+  i <- 0
+  observeEvent(input$addFilter, {
+    i <<- i + 1
+    output[[paste("filterPage",i,sep="")]] = renderUI({
+      list(
+        fluidPage(
+          fluidRow(
+            column(textInput("text", h6(i18n$t("Clades or Species")), 
+                             value = ""), width = 10),
+          )
+        ),
+        uiOutput(paste("filterPage",i + 1,sep=""))
+      )
+    })
   })
   
   output$info <- renderUI({

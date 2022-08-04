@@ -83,66 +83,66 @@ tableCard <- tablerCard(
 )
 
 i18n <- Translator$new(translation_csvs_path = "translations/")
-i18n$set_translation_language("English") 
+i18n$set_translation_language("English")
 
-  ui = tablerDashPage(
-    title = "Salphycon",
-    enable_preloader = FALSE,
-    loading_duration = 2,
-    navbar = tablerDashNav(
-      h3(code("Salphycon"), "- phylogentics with", code("phruta")),
-      id = "mymenu",
-      src = "https://raw.githubusercontent.com/cromanpa94/phruta/main/vignettes/logo.png",
-      navMenu = tablerNavMenu(
-        tablerNavMenuItem(
-          tabName = i18n$t("Home"),
-          icon = "home",
-          "Home"
-        ),
-        tablerNavMenuItem(
-          tabName = "Settings",
-          icon = "check",
-          "Settings"
-        ),
-        tablerNavMenuItem(
-          tabName = "Sampling",
-          icon = "box",
-          "Sampling"
-        ),
-        tablerNavMenuItem(
-          tabName = "Sequences",
-          icon = "box",
-          "Sequences"
-        ),
-        tablerNavMenuItem(
-          tabName = "Phylogenetics",
-          icon = "box",
-          "Phylogenetics"
-        ),
-        tablerNavMenuItem(
-          tabName = "TimeDating",
-          icon = "box",
-          "Time-dating"
-        ),
-        tablerNavMenuItem(
-          tabName = "About",
-          icon = "box",
-          "About"
-        )
-        )
+ui = tablerDashPage(
+  title = "Salphycon",
+  enable_preloader = FALSE,
+  loading_duration = 2,
+  navbar = tablerDashNav(
+    h3(code("Salphycon"), "- phylogentics with", code("phruta")),
+    id = "mymenu",
+    src = "https://raw.githubusercontent.com/cromanpa94/phruta/main/vignettes/logo.png",
+    navMenu = tablerNavMenu(
+      tablerNavMenuItem(
+        tabName = i18n$t("Home"),
+        icon = "home",
+        "Home"
       ),
-    
-    footer = tablerDashFooter(
-      copyrights = "NOTE"
-    ),
-    
-    body = tablerDashBody( 
-      tablerTabItems(
-        tablerTabItem(
-          tabName = i18n$t("Home"),
-          fluidPage(
-            shiny.i18n::usei18n(i18n),
-            fluidRow(
+      tablerNavMenuItem(
+        tabName = "Settings",
+        icon = "check",
+        "Settings"
+      ),
+      tablerNavMenuItem(
+        tabName = "Sampling",
+        icon = "box",
+        "Sampling"
+      ),
+      tablerNavMenuItem(
+        tabName = "Sequences",
+        icon = "box",
+        "Sequences"
+      ),
+      tablerNavMenuItem(
+        tabName = "Phylogenetics",
+        icon = "box",
+        "Phylogenetics"
+      ),
+      tablerNavMenuItem(
+        tabName = "TimeDating",
+        icon = "box",
+        "Time-dating"
+      ),
+      tablerNavMenuItem(
+        tabName = "About",
+        icon = "box",
+        "About"
+      )
+    )
+  ),
+  
+  footer = tablerDashFooter(
+    copyrights = "NOTE"
+  ),
+  
+  body = tablerDashBody( 
+    tablerTabItems(
+      tablerTabItem(
+        tabName = i18n$t("Home"),
+        fluidPage(
+          shiny.i18n::usei18n(i18n),
+          fluidRow(
             column(
               width = 3,
               profileCard,
@@ -182,285 +182,289 @@ i18n$set_translation_language("English")
               #             choices = i18n$get_languages(),
               #             selected = i18n$get_key_translation())
             )
-            )
+          )
         ),
-        ),
+      ),
       tablerTabItem(
         tabName = "Settings",
-    fluidPage(
-    #setBackgroundColor("DodgerBlue"),
-    useTablerDash(),
-    chooseSliderSkin("Modern"),
-    #h1(" ", align = "center"),
-    #h1(" ", align = "center"),
-    #h1(" ", align = "center"),
-    div(style = "height:30px"),
-    fluidRow(
-      column(
-        width = 3,
-        profileCard
-      ),
-      column(
-        width = 3,
-        tablerCard(
-          status = "yellow",
-          statusSide = "left",
-          width = 12,
-          h3("1. Taxa"),
-          h5(i18n$t("Please input your target species and clades below")),
-          textInput("text", h6(i18n$t("Clades")), 
-                    value = "Enter text..."),
-          textInput("text", h6(i18n$t("Species")), 
-                    value = "Enter text..."),
-          
-          dropdown(
-            tags$h3("List of Input"),
-            fileInput("file", h5(i18n$t("List of taxa")), width = '80%'),
-            style = "unite", icon = icon("cogs"),
-            status = "warning", width = "300px",
-            tooltip = tooltipOptions(title = i18n$t("Click to see inputs !")),
-            animate = animateOptions(
-              enter = animations$fading_entrances$fadeInLeftBig,
-              exit = animations$fading_exits$fadeOutRightBig
-            )
-          )
-        )
-      ),
-      column(
-        width = 3,
-        fluidRow(
-          tablerCard(
-            status = "yellow",
-            statusSide = "left",
-            width = 12,
-            h3("2. Genes"),
-            h5(i18n$t("Please input your target genes below")),
-            materialSwitch(
-              inputId = "Id079",
-              label = i18n$t("Find genes?"), 
-              value = TRUE,
-              status = "success"
+        fluidPage(
+          #setBackgroundColor("DodgerBlue"),
+          useTablerDash(),
+          chooseSliderSkin("Modern"),
+          #h1(" ", align = "center"),
+          #h1(" ", align = "center"),
+          #h1(" ", align = "center"),
+          div(style = "height:30px"),
+          fluidRow(
+            column(
+              width = 3,
+              profileCard
             ),
-            sliderInput("slider1", h6(i18n$t("Threshold find genes")),
-                        min = 0, max = 100, value = 50),
-            textInput("text", h6(i18n$t("Target genes")), 
-                      value = "Enter text..."),
-            dropdown(
-              tags$h3("List of Input"),
-              fileInput("file", h5(i18n$t("Select additional genes")), multiple = TRUE),
-              style = "unite", icon = icon("cogs"),
-              status = "warning", width = "300px",
-              tooltip = tooltipOptions(title = i18n$t("Click to see inputs !")),
-              animate = animateOptions(
-                enter = animations$fading_entrances$fadeInLeftBig,
-                exit = animations$fading_exits$fadeOutRightBig
+            column(
+              width = 3,
+              tablerCard(
+                status = "yellow",
+                statusSide = "left",
+                width = 12,
+                h3("1. Taxa"),
+                h5(i18n$t("Please input your target species and clades below")),
+                
+                # Add Clades or Species text
+                actionButton("addFilter", "Add Clades or Species", icon = icon("plus", class = NULL, lib = "font-awesome")),
+                uiOutput("filterPage1"),
+                
+                # textInput("text", h6(i18n$t("Clades or Species")), 
+                #           value = "Enter text..."),
+                # textInput("text", h6(i18n$t("Species")), 
+                #           value = "Enter text..."),
+                
+                dropdown(
+                  tags$h3("List of Input"),
+                  fileInput("file", h5(i18n$t("List of taxa")), width = '80%'),
+                  style = "unite", icon = icon("cogs"),
+                  status = "warning", width = "300px",
+                  tooltip = tooltipOptions(title = i18n$t("Click to see inputs !")),
+                  animate = animateOptions(
+                    enter = animations$fading_entrances$fadeInLeftBig,
+                    exit = animations$fading_exits$fadeOutRightBig
+                  )
+                )
               )
-            )
-          )
-        )
-        
-      ),
-      
-      column(
-        width = 3,
-        fluidRow(
-          tablerCard(
-            status = "yellow",
-            statusSide = "left",
-            width = 12,
-            h3(i18n$t("3. Tasks")),
-            awesomeCheckboxGroup("Process", 
-                                 h5(""), 
-                                 choices = list("Retrieve" = 0,
-                                                "Curate" = 1, 
-                                                "Align" = 2, 
-                                                "Mask" = 3, 
-                                                "RAxML" = 4),
-                                 selected = 0),
-            dropdown(
-              tags$h3("List of Input"),
-              awesomeCheckbox("checkbox", "Arg1", value = TRUE),
-              awesomeCheckbox("checkbox", "Arg2", value = TRUE),
-              awesomeCheckbox("checkbox", "Arg3", value = TRUE),
-              style = "unite", icon = icon("cogs"),
-              status = "warning", width = "300px",
-              tooltip = tooltipOptions(title = "Click to see inputs !"),
-              animate = animateOptions(
-                enter = animations$fading_entrances$fadeInLeftBig,
-                exit = animations$fading_exits$fadeOutRightBig
+            ),
+            column(
+              width = 3,
+              fluidRow(
+                tablerCard(
+                  status = "yellow",
+                  statusSide = "left",
+                  width = 12,
+                  h3("2. Genes"),
+                  h5(i18n$t("Please input your target genes below")),
+                  materialSwitch(
+                    inputId = "Id079",
+                    label = i18n$t("Find genes?"), 
+                    value = TRUE,
+                    status = "success"
+                  ),
+                  sliderInput("slider1", h6(i18n$t("Threshold find genes")),
+                              min = 0, max = 100, value = 50),
+                  textInput("text", h6(i18n$t("Target genes")), 
+                            value = "Enter text..."),
+                  dropdown(
+                    tags$h3("List of Input"),
+                    fileInput("file", h5(i18n$t("Select additional genes")), multiple = TRUE),
+                    style = "unite", icon = icon("cogs"),
+                    status = "warning", width = "300px",
+                    tooltip = tooltipOptions(title = i18n$t("Click to see inputs !")),
+                    animate = animateOptions(
+                      enter = animations$fading_entrances$fadeInLeftBig,
+                      exit = animations$fading_exits$fadeOutRightBig
+                    )
+                  )
+                )
               )
+              
+            ),
+            
+            column(
+              width = 3,
+              fluidRow(
+                tablerCard(
+                  status = "yellow",
+                  statusSide = "left",
+                  width = 12,
+                  h3(i18n$t("3. Tasks")),
+                  awesomeCheckboxGroup("Process", 
+                                       h5(""), 
+                                       choices = list("Retrieve" = 0,
+                                                      "Curate" = 1, 
+                                                      "Align" = 2, 
+                                                      "Mask" = 3, 
+                                                      "RAxML" = 4),
+                                       selected = 0),
+                  dropdown(
+                    tags$h3("List of Input"),
+                    awesomeCheckbox("checkbox", "Arg1", value = TRUE),
+                    awesomeCheckbox("checkbox", "Arg2", value = TRUE),
+                    awesomeCheckbox("checkbox", "Arg3", value = TRUE),
+                    style = "unite", icon = icon("cogs"),
+                    status = "warning", width = "300px",
+                    tooltip = tooltipOptions(title = "Click to see inputs !"),
+                    animate = animateOptions(
+                      enter = animations$fading_entrances$fadeInLeftBig,
+                      exit = animations$fading_exits$fadeOutRightBig
+                    )
+                  )
+                  
+                ),
+                tablerCard(
+                  status = "yellow",
+                  statusSide = "left",
+                  width = 12,
+                  h3("Run"),
+                  actionButton("action", "Action", icon = icon("check"))
+                )
+              )
+              
             )
             
-          ),
-          tablerCard(
-            status = "yellow",
-            statusSide = "left",
-            width = 12,
-            h3("Run"),
-            actionButton("action", "Action", icon = icon("check"))
           )
+          
         )
-        
-      )
-      
-    )
-    
-   )
-  ),
-  tablerTabItem(
-    tabName = "Sampling",
-    fluidPage(
-      useTablerDash(),
-      chooseSliderSkin("Modern"),
-      div(style = "height:30px"),
-      fluidRow(
-        column(
-          width = 3,
-          profileCard
-        ),
-        column(
-          width = 3,
-          tablerStatCard(
-            value = 1,
-            title = "Species",
-            #trend = -10,
-            width = 12
-          ),
-          tablerStatCard(
-            value = 1,
-            title = "Sequences",
-            #trend = -10,
-            width = 12
-          ),
-          tablerStatCard(
-            value = 1,
-            title = "Gene regions",
-            #trend = -10,
-            width = 12
-          )
-        ),
-        column(
-          width = 6,
-          tableCard,
-        )
-      )
-    )
-    #fluidPage(plotCard)
-  ),
-  tablerTabItem(
-    tabName = "Sequences",
-    fluidPage(
-      useTablerDash(),
-      chooseSliderSkin("Modern"),
-      div(style = "height:30px"),
-      fluidRow(
-        column(
-          width = 3,
-          profileCard
-        ),
-        column(
-          width = 3,
-          tablerStatCard(
-            value = 1,
-            title = "Species",
-            #trend = -10,
-            width = 12
-          ),
-          tablerStatCard(
-            value = 1,
-            title = "Sequences",
-            #trend = -10,
-            width = 12
-          ),
-          tablerStatCard(
-            value = 1,
-            title = "Gene regions",
-            #trend = -10,
-            width = 12
-          )
-        ),
-        column(
-          width = 6,
-          plotCard,
-        )
-      )
-    )
-    #fluidPage(plotCard)
-  ),
-  tablerTabItem(
-    tabName = "Phylogenetics",
-    fluidPage(
-      useTablerDash(),
-      chooseSliderSkin("Modern"),
-      div(style = "height:30px"),
-      fluidRow(
-        column(
-          width = 3,
-          profileCard
-        ),
-        column(
-          width = 3,
-          h6("Under construction...")
-        )
-      )
-    )
-  ),
-  tablerTabItem(
-    tabName = "TimeDating",
-    fluidPage(
-      useTablerDash(),
-      chooseSliderSkin("Modern"),
-      div(style = "height:30px"),
-      fluidRow(
-        column(
-          width = 3,
-          profileCard
-        ),
-        column(
-          width = 3,
-          h6("Under construction...")
-        )
-        )
-      )
-  ),
-  tablerTabItem(
-    tabName = "About",
-    fluidPage(
-      useTablerDash(),
-      chooseSliderSkin("Modern"),
-      div(style = "height:30px"),
-      fluidRow(
-        column(
-          width = 3,
-          profileCard
-        ),
-        column(
-          width = 6,
-          tablerProfileCard(
-            width = 6,
-            title = "Cristian Roman Palacios",
-            subtitle = "Asistant Professor of Practice, UArizona",
-            background = "https://preview.tabler.io/demo/photos/ilnur-kalimullin-218996-500.jpg",
-            src = "https://cromanpa94.github.io/cromanpa/contact/2019-11-21%2010.51.14.jpg",
-            tablerSocialLinks(
-              tablerSocialLink(
-                name = "facebook",
-                href = "https://www.facebook.com",
-                icon = "facebook"
+      ),
+      tablerTabItem(
+        tabName = "Sampling",
+        fluidPage(
+          useTablerDash(),
+          chooseSliderSkin("Modern"),
+          div(style = "height:30px"),
+          fluidRow(
+            column(
+              width = 3,
+              profileCard
+            ),
+            column(
+              width = 3,
+              tablerStatCard(
+                value = 1,
+                title = "Species",
+                #trend = -10,
+                width = 12
               ),
-              tablerSocialLink(
-                name = "twitter",
-                href = "https://www.twitter.com",
-                icon = "twitter"
+              tablerStatCard(
+                value = 1,
+                title = "Sequences",
+                #trend = -10,
+                width = 12
+              ),
+              tablerStatCard(
+                value = 1,
+                title = "Gene regions",
+                #trend = -10,
+                width = 12
+              )
+            ),
+            column(
+              width = 6,
+              tableCard,
+            )
+          )
+        )
+        #fluidPage(plotCard)
+      ),
+      tablerTabItem(
+        tabName = "Sequences",
+        fluidPage(
+          useTablerDash(),
+          chooseSliderSkin("Modern"),
+          div(style = "height:30px"),
+          fluidRow(
+            column(
+              width = 3,
+              profileCard
+            ),
+            column(
+              width = 3,
+              tablerStatCard(
+                value = 1,
+                title = "Species",
+                #trend = -10,
+                width = 12
+              ),
+              tablerStatCard(
+                value = 1,
+                title = "Sequences",
+                #trend = -10,
+                width = 12
+              ),
+              tablerStatCard(
+                value = 1,
+                title = "Gene regions",
+                #trend = -10,
+                width = 12
+              )
+            ),
+            column(
+              width = 6,
+              plotCard,
+            )
+          )
+        )
+        #fluidPage(plotCard)
+      ),
+      tablerTabItem(
+        tabName = "Phylogenetics",
+        fluidPage(
+          useTablerDash(),
+          chooseSliderSkin("Modern"),
+          div(style = "height:30px"),
+          fluidRow(
+            column(
+              width = 3,
+              profileCard
+            ),
+            column(
+              width = 3,
+              h6("Under construction...")
+            )
+          )
+        )
+      ),
+      tablerTabItem(
+        tabName = "TimeDating",
+        fluidPage(
+          useTablerDash(),
+          chooseSliderSkin("Modern"),
+          div(style = "height:30px"),
+          fluidRow(
+            column(
+              width = 3,
+              profileCard
+            ),
+            column(
+              width = 3,
+              h6("Under construction...")
+            )
+          )
+        )
+      ),
+      tablerTabItem(
+        tabName = "About",
+        fluidPage(
+          useTablerDash(),
+          chooseSliderSkin("Modern"),
+          div(style = "height:30px"),
+          fluidRow(
+            column(
+              width = 3,
+              profileCard
+            ),
+            column(
+              width = 6,
+              tablerProfileCard(
+                width = 6,
+                title = "Cristian Roman Palacios",
+                subtitle = "Asistant Professor of Practice, UArizona",
+                background = "https://preview.tabler.io/demo/photos/ilnur-kalimullin-218996-500.jpg",
+                src = "https://cromanpa94.github.io/cromanpa/contact/2019-11-21%2010.51.14.jpg",
+                tablerSocialLinks(
+                  tablerSocialLink(
+                    name = "facebook",
+                    href = "https://www.facebook.com",
+                    icon = "facebook"
+                  ),
+                  tablerSocialLink(
+                    name = "twitter",
+                    href = "https://www.twitter.com",
+                    icon = "twitter"
+                  )
+                )
               )
             )
           )
         )
       )
-    )
-  )
     )
   )
 )
-  
-  
+
