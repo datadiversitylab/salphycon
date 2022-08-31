@@ -1,6 +1,13 @@
 server = function(input, output, session) {
   tan <- read.csv("data/go.csv")
   
+  data <- eventReactive(input$action, {
+    
+    gs.seqs <- gene.sampling.retrieve(organism = c(input$text), 
+                                      speciesSampling = TRUE)
+    
+  }) # I updated the sample eventReactive function, but input$action is not working...
+  
   observeEvent(input$selected_language, {
     # This print is just for demonstration
     print(paste("Language change!", input$selected_language))
