@@ -5,37 +5,6 @@ library(DT)
 library(phruta)
 library(shiny.i18n)
 
-profileCard2 <- tablerProfileCard(
-  width = 12,
-  title = "Welcome to SALPHYCON!",
-  subtitle = "`phruta` is able to (1) find potentially (phylogenetically) relevant gene regions for a given set of taxa based on GenBank, (2) retrieve gene sequences and curate taxonomic information from the same database, (3) combine downloaded and local gene sequences, and (4) perform sequence alignment, phylogenetic inference, and basic tree dating tasks.",
-  background = "https://cromanpa94.github.io/cromanpa/images/FrogMain_right_up.jpg",
-  src = "img/salphycon_full.png",
-  tablerSocialLinks(
-    tablerSocialLink(
-      name = "salphycon",
-      href = "https://www.facebook.com",
-      icon = "github"
-    ),
-    tablerSocialLink(
-      name = "twitter",
-      href = "https://www.twitter.com",
-      icon = "twitter"
-    ),
-    tablerSocialLink(
-      name = "phruta",
-      href = "https://www.twitter.com",
-      icon = "github"
-    ),
-    tablerSocialLink(
-      name = "email",
-      href = "cromanpa94@arizona.edu",
-      icon = "gear"
-    )
-  )
-)
-
-
 
 profileCard <- tablerProfileCard(
   width = 12,
@@ -170,42 +139,118 @@ ui = tablerDashPage(
           shiny.i18n::usei18n(i18n),
           fluidRow(
             column(
-              width = 3,
-              tablerBlogCard(
-                title = "Select a language",
-                #author = "David",
-                #date = "Today",
-                #href = "https://www.google.com",
-                #src = "https://preview.tabler.io/demo/photos/matt-barrett-339981-500.jpg",
-                #avatarUrl = "https://image.flaticon.com/icons/svg/145/145842.svg",
-                width = 12,
-                prettyRadioButtons(
-                  width = 12,
-                  inputId = "selected_language",
-                  label = i18n$t("Language:"), 
-                  choices = i18n$get_languages(),
-                  selected = i18n$get_key_translation(),
-                  icon = icon("check"), 
-                  bigger = TRUE,
-                  status = "info",
-                  animation = "jelly"
-                )
-              )
-              
-              #,
-              # pickerInput('selected_language',
-              #             i18n$t("Change language"),
-              #             choices = i18n$get_languages(),
-              #             selected = i18n$get_key_translation())
+              width = 2
             ),
             column(
-              profileCard2,
-              width = 9,
-              #h6(i18n$t("Under construction..."))#,
-              # selectInput('selected_language',
-              #             i18n$t("Change language"),
-              #             choices = i18n$get_languages(),
-              #             selected = i18n$get_key_translation())
+              tablerProfileCard(
+                width = 12,
+                title = "Welcome to SALPHYCON!",
+                subtitle = "`phruta` is able to (1) find potentially (phylogenetically) relevant gene regions for a given set of taxa based on GenBank, (2) retrieve gene sequences and curate taxonomic information from the same database, (3) combine downloaded and local gene sequences, and (4) perform sequence alignment, phylogenetic inference, and basic tree dating tasks.",
+                background = "https://cromanpa94.github.io/cromanpa/images/FrogMain_right_up.jpg",
+                src = "img/salphycon_full.png",
+                tablerSocialLinks(
+                  tablerSocialLink(
+                    name = "salphycon",
+                    href = "https://www.facebook.com",
+                    icon = "github"
+                  ),
+                  tablerSocialLink(
+                    name = "twitter",
+                    href = "https://www.twitter.com",
+                    icon = "twitter"
+                  ),
+                  tablerSocialLink(
+                    name = "phruta",
+                    href = "https://www.twitter.com",
+                    icon = "github"
+                  ),
+                  tablerSocialLink(
+                    name = "email",
+                    href = "cromanpa94@arizona.edu",
+                    icon = "gear"
+                  )
+                )
+              ), tablerCard(
+                title = "Language/Idioma",
+                width = 12,
+                prettyRadioButtons(
+                  inline = TRUE,
+                  inputId = "selected_language",
+                  label = i18n$t(""), 
+                  choices = i18n$get_languages(),
+                  selected = i18n$get_key_translation(),
+                  bigger = FALSE,
+                  status = "info",
+                  animation = "jelly"
+                ),
+                collapsed = TRUE,
+                closable = FALSE, 
+                zoomable = FALSE
+              ),
+              fluidRow(
+              column(
+                width = 4,
+                tablerBlogCard(
+                  title = "Settings",
+                  width = 12,
+                  "Look, my liege! The Knights Who Say Ni
+      demand a sacrifice! …Are you suggesting
+      that coconuts migr..."
+                )
+              ),
+              column(
+                width = 4,
+                tablerBlogCard(
+                  title = "Sampling",
+                  width = 12,
+                  "Look, my liege! The Knights Who Say Ni
+      demand a sacrifice! …Are you suggesting
+      that coconuts migr..."
+                )
+              ),
+              column(
+                width = 4,
+                tablerBlogCard(
+                  title = "Sequences",
+                  width = 12,
+                  "Look, my liege! The Knights Who Say Ni
+      demand a sacrifice! …Are you suggesting
+      that coconuts migr..."
+                )
+              )
+              ),fluidRow(
+                column(
+                  width = 4,
+                  tablerBlogCard(
+                    title = "Phylogenetics",
+                    width = 12,
+                    "Look, my liege! The Knights Who Say Ni
+      demand a sacrifice! …Are you suggesting
+      that coconuts migr..."
+                  )
+                ),
+                column(
+                  width = 4,
+                  tablerBlogCard(
+                    title = "Tree dating",
+                    width = 12,
+                    "Look, my liege! The Knights Who Say Ni
+      demand a sacrifice! …Are you suggesting
+      that coconuts migr..."
+                  )
+                ),
+                column(
+                  width = 4,
+                  tablerBlogCard(
+                    title = "About",
+                    width = 12,
+                    "Look, my liege! The Knights Who Say Ni
+      demand a sacrifice! …Are you suggesting
+      that coconuts migr..."
+                  )
+                )
+              ),
+              width = 9
             )
           )
         ),
@@ -220,6 +265,12 @@ ui = tablerDashPage(
           #h1(" ", align = "center"),
           #h1(" ", align = "center"),
           div(style = "height:30px"),
+          tablerCard(
+            width = 12,
+            title = h3("SETTINGS"),
+            "XXXX",
+            closable = FALSE
+          ),
           fluidRow(
             column(
               width = 3,
@@ -348,6 +399,12 @@ ui = tablerDashPage(
           useTablerDash(),
           chooseSliderSkin("Modern"),
           div(style = "height:30px"),
+          tablerCard(
+            width = 12,
+            title = h3("SAMPLING"),
+            "XXXX",
+            closable = FALSE
+          ),
           fluidRow(
             column(
               width = 3,
@@ -388,6 +445,12 @@ ui = tablerDashPage(
           useTablerDash(),
           chooseSliderSkin("Modern"),
           div(style = "height:30px"),
+          tablerCard(
+            width = 12,
+            title = h3("SEQUENCES"),
+            "XXXX",
+            closable = FALSE
+          ),
           fluidRow(
             column(
               width = 3,
@@ -428,6 +491,12 @@ ui = tablerDashPage(
           useTablerDash(),
           chooseSliderSkin("Modern"),
           div(style = "height:30px"),
+          tablerCard(
+            width = 12,
+            title = h3("PHYLOGENETICS"),
+            "XXXX",
+            closable = FALSE
+          ),
           fluidRow(
             column(
               width = 3,
@@ -446,6 +515,12 @@ ui = tablerDashPage(
           useTablerDash(),
           chooseSliderSkin("Modern"),
           div(style = "height:30px"),
+          tablerCard(
+            width = 12,
+            title = h3("TIME DATING"),
+            "XXXX",
+            closable = FALSE
+          ),
           fluidRow(
             column(
               width = 3,
@@ -464,6 +539,12 @@ ui = tablerDashPage(
           useTablerDash(),
           chooseSliderSkin("Modern"),
           div(style = "height:30px"),
+          tablerCard(
+            width = 12,
+            title = h3("ABOUT"),
+            "XXXX",
+            closable = FALSE
+          ),
           fluidRow(
             column(
               width = 3,
