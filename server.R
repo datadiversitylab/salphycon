@@ -33,17 +33,6 @@ server = function(input, output, session) {
     if (input$enable_distPlot) hist(rnorm(100))
   })
   
-  # Add Clades or Species text
-  observeEvent(input$addTaxa, {
-    taxa <- input$addTaxa
-  }, ignoreInit = TRUE)
-  
-  # Add Clades or Species file
-  observeEvent(input$fileTaxa, {
-    taxa <- read.csv(input$fileTaxa)
-    taxa <- taxa[,1] #Single column
-  }, ignoreInit = TRUE)
-  
 
   # Add genes text
   # observeEvent(input$genesText, {
@@ -58,7 +47,15 @@ server = function(input, output, session) {
   # 
   
   observeEvent(input$action, {
-  
+    
+    taxa <- input$addTaxa
+    
+    # Add Clades or Species file
+    observeEvent(input$fileTaxa, {
+      taxa <- read.csv(input$fileTaxa)
+      taxa <- taxa[,1] #Single column
+    })
+    
     if( 0 %in% input$Process ) { #retrieve
       gs.seqs <- gene.sampling.retrieve(organism = taxa, 
                                         speciesSampling = TRUE)
