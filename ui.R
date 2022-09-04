@@ -285,20 +285,21 @@ ui = tablerDashPage(
                                                       "Align" = 2, 
                                                       "Mask" = 3, 
                                                       "RAxML" = 4),
-                                       selected = 0),
-                  dropdown(
-                    tags$h3("List of Input"),
-                    awesomeCheckbox("checkbox", "Arg1", value = TRUE),
-                    awesomeCheckbox("checkbox", "Arg2", value = TRUE),
-                    awesomeCheckbox("checkbox", "Arg3", value = TRUE),
-                    style = "unite", icon = icon("cogs"),
-                    status = "warning", width = "300px",
-                    tooltip = tooltipOptions(title = "Click to see inputs !"),
-                    animate = animateOptions(
-                      enter = animations$fading_entrances$fadeInLeftBig,
-                      exit = animations$fading_exits$fadeOutRightBig
-                    )
-                  )
+                                       selected = 0)
+                  #,
+                  # dropdown(
+                  #   tags$h3("List of Input"),
+                  #   awesomeCheckbox("checkbox", "Arg1", value = TRUE),
+                  #   awesomeCheckbox("checkbox", "Arg2", value = TRUE),
+                  #   awesomeCheckbox("checkbox", "Arg3", value = TRUE),
+                  #   style = "unite", icon = icon("cogs"),
+                  #   status = "warning", width = "300px",
+                  #   tooltip = tooltipOptions(title = "Click to see inputs !"),
+                  #   animate = animateOptions(
+                  #     enter = animations$fading_entrances$fadeInLeftBig,
+                  #     exit = animations$fading_exits$fadeOutRightBig
+                  #   )
+                  # )
                   
                 ),
                 tablerCard(
