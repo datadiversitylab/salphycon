@@ -2,7 +2,7 @@ library(shiny)
 library(tablerDash)
 library(shinyWidgets)
 library(DT)
-#library(phruta)
+library(phruta)
 library(shiny.i18n)
 
 profileCard <- tablerProfileCard(
@@ -210,7 +210,7 @@ ui = tablerDashPage(
                 h5(i18n$t("Please input your target species and clades below")),
                 
                 # Add Clades or Species text
-                actionButton("addFilter", "Add Clades or Species", icon = icon("plus", class = NULL, lib = "font-awesome")),
+                textInput("addTaxa", "Add clades or species", value = "", width = NULL, placeholder = "Taxa"),
                 uiOutput("filterPage1"),
                 
                 # textInput("text", h6(i18n$t("Clades or Species")), 
@@ -220,10 +220,14 @@ ui = tablerDashPage(
                 
                 dropdown(
                   tags$h3("List of Input"),
-                  fileInput("file", h5(i18n$t("List of taxa")), width = '80%'),
+                  fileInput("fileTaxa", h5("List of taxa"), width = '80%',
+                            accept = c(
+                                      "text/csv",
+                                      "text/comma-separated-values,text/plain",
+                                       ".csv")),
                   style = "unite", icon = icon("cogs"),
                   status = "warning", width = "300px",
-                  tooltip = tooltipOptions(title = i18n$t("Click to see inputs !")),
+                  tooltip = tooltipOptions(title = "Click to see inputs !"),
                   animate = animateOptions(
                     enter = animations$fading_entrances$fadeInLeftBig,
                     exit = animations$fading_exits$fadeOutRightBig
@@ -239,28 +243,28 @@ ui = tablerDashPage(
                   statusSide = "left",
                   width = 12,
                   h3("2. Genes"),
-                  h5(i18n$t("Please input your target genes below")),
-                  materialSwitch(
-                    inputId = "Id079",
-                    label = i18n$t("Find genes?"), 
-                    value = TRUE,
-                    status = "success"
-                  ),
-                  sliderInput("slider1", h6(i18n$t("Threshold find genes")),
+                  # h5(i18n$t("Please input your target genes below")),
+                  # materialSwitch(
+                  #   inputId = "findGenes",
+                  #   label = i18n$t("Find genes?"), 
+                  #   value = TRUE,
+                  #   status = "success"
+                  # ),
+                  sliderInput("sliderGenes", h6(i18n$t("Threshold find genes")),
                               min = 0, max = 100, value = 50),
-                  textInput("text", h6(i18n$t("Target genes")), 
-                            value = "Enter text..."),
-                  dropdown(
-                    tags$h3("List of Input"),
-                    fileInput("file", h5(i18n$t("Select additional genes")), multiple = TRUE),
-                    style = "unite", icon = icon("cogs"),
-                    status = "warning", width = "300px",
-                    tooltip = tooltipOptions(title = i18n$t("Click to see inputs !")),
-                    animate = animateOptions(
-                      enter = animations$fading_entrances$fadeInLeftBig,
-                      exit = animations$fading_exits$fadeOutRightBig
-                    )
-                  )
+                 # textInput("genesText", h6(i18n$t("Target genes")), 
+                  #          placeholder = "Genes"),
+                  # dropdown(
+                  #   tags$h3("List of Input"),
+                  #   fileInput("fileGenes", h5("Select additional genes"), multiple = TRUE),
+                  #   style = "unite", icon = icon("cogs"),
+                  #   status = "warning", width = "300px",
+                  #   tooltip = tooltipOptions(title = "Click to see inputs !"),
+                  #   animate = animateOptions(
+                  #     enter = animations$fading_entrances$fadeInLeftBig,
+                  #     exit = animations$fading_exits$fadeOutRightBig
+                  #   )
+                  # )
                 )
               )
               

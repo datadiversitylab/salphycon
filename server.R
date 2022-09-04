@@ -34,21 +34,84 @@ server = function(input, output, session) {
   })
   
   # Add Clades or Species text
-  i <- 0
-  observeEvent(input$addFilter, {
-    i <<- i + 1
-    output[[paste("filterPage",i,sep="")]] = renderUI({
-      list(
-        fluidPage(
-          fluidRow(
-            column(textInput("text", h6(i18n$t("Clades or Species")), 
-                             value = ""), width = 10),
-          )
-        ),
-        uiOutput(paste("filterPage",i + 1,sep=""))
+  observeEvent(input$addTaxa, {
+    taxa <- input$addTaxa
+  }, ignoreInit = TRUE)
+  
+  # Add Clades or Species file
+  observeEvent(input$fileTaxa, {
+    taxa <- read.csv(input$fileTaxa)
+    taxa <- taxa[,1] #Single column
+  }, ignoreInit = TRUE)
+  
+
+  # Add genes text
+  # observeEvent(input$genesText, {
+  #   genes <- input$genesText
+  # }, ignoreInit = TRUE)
+  # 
+  # # Add genes file
+  # observeEvent(input$fileGenes, {
+  #   genes <- read.csv(input$fileGenes)
+  #   genes <- taxa[,1] #Single column
+  # }, ignoreInit = TRUE)
+  # 
+  
+  observeEvent(input$action, {
+  
+    if( 0 %in% input$Process ) { #retrieve
+      gs.seqs <- gene.sampling.retrieve(organism = taxa, 
+                                        speciesSampling = TRUE)
+      
+      targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies > input$sliderGenes,]
+      acc.table <- acc.table.retrieve(
+        clades  = taxa,
+        genes = targetGenes$Gene,
+        speciesLevel = TRUE
       )
-    })
+      
+      sqs.downloaded <- sq.retrieve.indirect(acc.table = acc.table, 
+                                             download.sqs = FALSE)
+      
+    }
+
+    
+    if( c(0, 1, 2) %in% input$Process){ #Curate if seqs have been downloaded
+      sqs.curated <- sq.curate(filterTaxonomicCriteria = '[AZ]',
+                               kingdom = 'animals', 
+                               sqs.object = sqs.downloaded,
+                               removeOutliers = FALSE)
+    }
+    
+    if( c(0, 1, 2, 3) %in% input$Process){ #Aln if seqs have been downloaded
+      sqs.aln <- sq.aln(sqs.object = sqs.curated)
+    }
+    
+    if( c(0, 1, 2, 3, 4) %in% input$Process){ #RAxML if seqs have been aligned
+      dir.create("2.Alignments")
+      lapply(seq_along(sqs.aln), function(x){
+        ape::write.FASTA(sqs.aln[[x]]$Aln.Masked, 
+                         file = paste0(
+                           "2.Alignments/Masked_", names(sqs.aln)[x], ".fasta"
+                         )
+        )
+      })
+      
+      outgroup <- sqs.curated$Taxonomy[sqs.curated$Taxonomy$genus == 'Polyplectron',]
+      
+      tree.raxml(folder = '2.Alignments', 
+                 FilePatterns = 'Masked_', 
+                 raxml_exec = 'raxmlHPC', 
+                 Bootstrap = 100
+      )
+    }
+    
+    
   })
+  
+  
+  
+  
   
   output$info <- renderUI({
     tablerInfoCard(
