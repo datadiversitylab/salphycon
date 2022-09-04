@@ -5,15 +5,15 @@ library(DT)
 library(phruta)
 library(shiny.i18n)
 
-profileCard <- tablerProfileCard(
+profileCard2 <- tablerProfileCard(
   width = 12,
-  title = "SALPHYCON",
-  subtitle = "Basic phylogenetics with phruta",
+  title = "Welcome to SALPHYCON!",
+  subtitle = "`phruta` is able to (1) find potentially (phylogenetically) relevant gene regions for a given set of taxa based on GenBank, (2) retrieve gene sequences and curate taxonomic information from the same database, (3) combine downloaded and local gene sequences, and (4) perform sequence alignment, phylogenetic inference, and basic tree dating tasks.",
   background = "https://cromanpa94.github.io/cromanpa/images/FrogMain_right_up.jpg",
   src = "img/salphycon_full.png",
   tablerSocialLinks(
     tablerSocialLink(
-      name = "repo",
+      name = "salphycon",
       href = "https://www.facebook.com",
       icon = "github"
     ),
@@ -23,23 +23,49 @@ profileCard <- tablerProfileCard(
       icon = "twitter"
     ),
     tablerSocialLink(
-      name = "twitter",
+      name = "phruta",
       href = "https://www.twitter.com",
-      icon = "glass"
+      icon = "github"
     ),
     tablerSocialLink(
-      name = "twitter",
-      href = "https://www.twitter.com",
-      icon = "mail"
-    ),
-    tablerSocialLink(
-      name = "twitter",
-      href = "https://www.twitter.com",
-      icon = "head"
+      name = "email",
+      href = "cromanpa94@arizona.edu",
+      icon = "gear"
     )
   )
 )
 
+
+
+profileCard <- tablerProfileCard(
+  width = 12,
+  title = "SALPHYCON",
+  subtitle = "Basic phylogenetics in R",
+  background = "https://cromanpa94.github.io/cromanpa/images/FrogMain_right_up.jpg",
+  src = "img/salphycon_full.png",
+  tablerSocialLinks(
+    tablerSocialLink(
+      name = "salphycon",
+      href = "https://www.facebook.com",
+      icon = "github"
+    ),
+    tablerSocialLink(
+      name = "twitter",
+      href = "https://www.twitter.com",
+      icon = "twitter"
+    ),
+    tablerSocialLink(
+      name = "phruta",
+      href = "https://www.twitter.com",
+      icon = "github"
+    ),
+    tablerSocialLink(
+      name = "email",
+      href = "cromanpa94@arizona.edu",
+      icon = "gear"
+    )
+  )
+)
 
 plotCard <- tablerCard(
   title = "Sequence alignments",
@@ -145,9 +171,8 @@ ui = tablerDashPage(
           fluidRow(
             column(
               width = 3,
-              profileCard,
               tablerBlogCard(
-                #title = "Blog Card",
+                title = "Select a language",
                 #author = "David",
                 #date = "Today",
                 #href = "https://www.google.com",
@@ -174,8 +199,8 @@ ui = tablerDashPage(
               #             selected = i18n$get_key_translation())
             ),
             column(
-              h6(i18n$t("Under construction")),
-              width = 3,
+              profileCard2,
+              width = 9,
               #h6(i18n$t("Under construction..."))#,
               # selectInput('selected_language',
               #             i18n$t("Change language"),
@@ -222,9 +247,9 @@ ui = tablerDashPage(
                   tags$h3("List of Input"),
                   fileInput("fileTaxa", h5("List of taxa"), width = '80%',
                             accept = c(
-                                      "text/csv",
-                                      "text/comma-separated-values,text/plain",
-                                       ".csv")),
+                              "text/csv",
+                              "text/comma-separated-values,text/plain",
+                              ".csv")),
                   style = "unite", icon = icon("cogs"),
                   status = "warning", width = "300px",
                   tooltip = tooltipOptions(title = "Click to see inputs !"),
@@ -252,7 +277,7 @@ ui = tablerDashPage(
                   # ),
                   sliderInput("sliderGenes", h6(i18n$t("Threshold find genes")),
                               min = 0, max = 100, value = 50),
-                 # textInput("genesText", h6(i18n$t("Target genes")), 
+                  # textInput("genesText", h6(i18n$t("Target genes")), 
                   #          placeholder = "Genes"),
                   # dropdown(
                   #   tags$h3("List of Input"),

@@ -1,12 +1,4 @@
 server = function(input, output, session) {
-  tan <- read.csv("data/go.csv")
-  
-  data <- eventReactive(input$action, {
-    
-    gs.seqs <- gene.sampling.retrieve(organism = c(input$text), 
-                                      speciesSampling = TRUE)
-    
-  }) # I updated the sample eventReactive function, but input$action is not working...
   
   observeEvent(input$selected_language, {
     # This print is just for demonstration
@@ -18,8 +10,11 @@ server = function(input, output, session) {
   ## Tables need to be editable
   ## https://stackoverflow.com/questions/70155520/how-to-make-datatable-editable-in-r-shiny
   
+ 
+  
+  tan <- read.csv("data/go.csv")
   output$distTable <-
-    DT::renderDataTable(tan,
+    DT::renderDataTable(if(is.null(acc)){tan}else{acc},
                         extensions = 'Buttons',
                         options = list(scrollX = TRUE,
                                        pageLength = 10,
@@ -48,7 +43,13 @@ server = function(input, output, session) {
   
   observeEvent(input$action, {
     
+    progress <- shiny::Progress$new()
+    #on.exit(progress$close())
+    progress$set(message = "Running {phruta}...", value = 0)
+    
     taxa <- input$addTaxa
+    
+    npro <- length(input$Process)
     
     # Add Clades or Species file
     observeEvent(input$fileTaxa, {
@@ -70,6 +71,8 @@ server = function(input, output, session) {
       sqs.downloaded <- sq.retrieve.indirect(acc.table = acc.table, 
                                              download.sqs = FALSE)
       
+      progress$inc(1/npro, detail = "Sequences downloaded...")
+      
     }
 
     
@@ -78,10 +81,14 @@ server = function(input, output, session) {
                                kingdom = 'animals', 
                                sqs.object = sqs.downloaded,
                                removeOutliers = FALSE)
+      progress$inc(1/npro, detail = "Sequences curated...")
+      
     }
     
     if( c(0, 1, 2, 3) %in% input$Process){ #Aln if seqs have been downloaded
       sqs.aln <- sq.aln(sqs.object = sqs.curated)
+      progress$inc(1/4, detail = "Sequences aligned...")
+      
     }
     
     if( c(0, 1, 2, 3, 4) %in% input$Process){ #RAxML if seqs have been aligned
@@ -101,15 +108,14 @@ server = function(input, output, session) {
                  raxml_exec = 'raxmlHPC', 
                  Bootstrap = 100
       )
+      progress$inc(1/npro, detail = "Tree constructed...")
+      
     }
     
     
   })
   
-  
-  
-  
-  
+
   output$info <- renderUI({
     tablerInfoCard(
       width = 12,
