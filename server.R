@@ -24,7 +24,7 @@ server = function(input, output, session) {
   # 
   
   observeEvent(input$action, {
-    tryCatch({
+    
     progress <- shiny::Progress$new()
     #on.exit(progress$close())
     progress$set(message = "Running {phruta}...", value = 0)
@@ -175,7 +175,5 @@ server = function(input, output, session) {
       tablerProgress(value = input$knob, status = "red", size = "sm")
     )
   })
-  
-  
   
 }
