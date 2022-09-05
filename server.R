@@ -11,24 +11,6 @@ server = function(input, output, session) {
   ## https://stackoverflow.com/questions/70155520/how-to-make-datatable-editable-in-r-shiny
   
  
-  
-  tan <- read.csv("data/go.csv")
-  output$distTable <-
-    DT::renderDataTable(if(is.null(acc)){tan}else{acc},
-                        extensions = 'Buttons',
-                        options = list(scrollX = TRUE,
-                                       pageLength = 10,
-                                       searching = FALSE,
-                                       dom = 'Bfrtip',
-                                       buttons = c('csv', 'excel')),
-                        rownames = FALSE)
-  
-  
-  output$distPlot <- renderPlot({
-    if (input$enable_distPlot) hist(rnorm(100))
-  })
-  
-
   # Add genes text
   # observeEvent(input$genesText, {
   #   genes <- input$genesText
@@ -42,7 +24,7 @@ server = function(input, output, session) {
   # 
   
   observeEvent(input$action, {
-    
+    tryCatch({
     progress <- shiny::Progress$new()
     #on.exit(progress$close())
     progress$set(message = "Running {phruta}...", value = 0)
@@ -81,17 +63,28 @@ server = function(input, output, session) {
                                kingdom = 'animals', 
                                sqs.object = sqs.downloaded,
                                removeOutliers = FALSE)
+      
+      output$distTable <-
+        DT::renderDataTable(sqs.curated$AccessionTable,
+                            extensions = 'Buttons',
+                            options = list(scrollX = TRUE,
+                                           pageLength = 10,
+                                           searching = FALSE,
+                                           dom = 'Bfrtip',
+                                           buttons = c('csv', 'excel')),
+                            rownames = FALSE)
+      
       progress$inc(1/npro, detail = "Sequences curated...")
       
     }
     
-    if( c(0, 1, 2, 3) %in% input$Process){ #Aln if seqs have been downloaded
+    if( c(0, 1, 2) %in% input$Process){ #Aln if seqs have been downloaded
       sqs.aln <- sq.aln(sqs.object = sqs.curated)
       progress$inc(1/4, detail = "Sequences aligned...")
       
     }
     
-    if( c(0, 1, 2, 3, 4) %in% input$Process){ #RAxML if seqs have been aligned
+    if( c(0, 1, 2, 3) %in% input$Process){ #RAxML if seqs have been aligned
       dir.create("2.Alignments")
       lapply(seq_along(sqs.aln), function(x){
         ape::write.FASTA(sqs.aln[[x]]$Aln.Masked, 
@@ -112,8 +105,57 @@ server = function(input, output, session) {
       
     }
     
+    ## Outputs in the sequences tab
+    
+    output$geneRegions <- renderUI({
+      tablerStatCard(
+        value = 20,
+        title = "Gene regions",
+        #trend = -10,
+        width = 12
+      )
+    })
+    
+    output$nSeqs <- renderUI({
+      tablerStatCard(
+        value = 1,
+        title = "Sequences",
+        #trend = -10,
+        width = 12
+      )
+    })
+    
+    output$nTaxa <- renderUI({
+      tablerStatCard(
+        value = 1,
+        title = "Species",
+        #trend = -10,
+        width = 12
+      )
+    })
+    
+    output$tableAccN <- renderUI({
+      tablerCard(
+        title = "Accession numbers",
+        zoomable = TRUE,
+        closable = FALSE,
+        overflow = TRUE,
+        DT::dataTableOutput("distTable"),
+        status = "info",
+        statusSide = "left",
+        width = 12
+      )
+    })
+    
     
   })
+  
+
+  
+  output$distPlot <- renderPlot({
+    if (input$enable_distPlot) hist(rnorm(100))
+  })
+  
   
 
   output$info <- renderUI({
@@ -133,5 +175,7 @@ server = function(input, output, session) {
       tablerProgress(value = input$knob, status = "red", size = "sm")
     )
   })
+  
+  
   
 }
