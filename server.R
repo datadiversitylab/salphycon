@@ -41,13 +41,17 @@ server = function(input, output, session) {
     
     if( 0 %in% input$Process ) { #retrieve
       gs.seqs <- gene.sampling.retrieve(organism = taxa, 
-                                        speciesSampling = TRUE)
+                                        speciesSampling = TRUE,
+                                        npar = 6,
+                                        nSearchesBatch = 500)
       
       targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies > input$sliderGenes,]
       acc.table <- acc.table.retrieve(
         clades  = taxa,
         genes = targetGenes$Gene,
-        speciesLevel = TRUE
+        speciesLevel = TRUE,
+        npar = 6,
+        nSearchesBatch = 500
       )
       
       sqs.downloaded <- sq.retrieve.indirect(acc.table = acc.table, 
@@ -58,7 +62,7 @@ server = function(input, output, session) {
     }
 
     
-    if( c(0, 1, 2) %in% input$Process){ #Curate if seqs have been downloaded
+    if( all(c(0, 1) %in% input$Process)){ #Curate if seqs have been downloaded
       sqs.curated <- sq.curate(filterTaxonomicCriteria = '[AZ]',
                                kingdom = 'animals', 
                                sqs.object = sqs.downloaded,
@@ -78,13 +82,13 @@ server = function(input, output, session) {
       
     }
     
-    if( c(0, 1, 2) %in% input$Process){ #Aln if seqs have been downloaded
+    if( all(c(0, 1, 2) %in% input$Process)){ #Aln if seqs have been downloaded
       sqs.aln <- sq.aln(sqs.object = sqs.curated)
       progress$inc(1/4, detail = "Sequences aligned...")
       
     }
     
-    if( c(0, 1, 2, 3) %in% input$Process){ #RAxML if seqs have been aligned
+    if( all(c(0, 1, 2, 3) %in% input$Process)){ #RAxML if seqs have been aligned
       dir.create("2.Alignments")
       lapply(seq_along(sqs.aln), function(x){
         ape::write.FASTA(sqs.aln[[x]]$Aln.Masked, 
@@ -109,7 +113,7 @@ server = function(input, output, session) {
     
     output$geneRegions <- renderUI({
       tablerStatCard(
-        value = 20,
+        value = length(unique(sqs.curated$AccessionTable$file)),
         title = "Gene regions",
         #trend = -10,
         width = 12
@@ -118,7 +122,7 @@ server = function(input, output, session) {
     
     output$nSeqs <- renderUI({
       tablerStatCard(
-        value = 1,
+        value = nrow(sqs.curated$AccessionTable),
         title = "Sequences",
         #trend = -10,
         width = 12
@@ -127,7 +131,7 @@ server = function(input, output, session) {
     
     output$nTaxa <- renderUI({
       tablerStatCard(
-        value = 1,
+        value = nrow(sqs.curated$Taxonomy),
         title = "Species",
         #trend = -10,
         width = 12
