@@ -4,7 +4,7 @@ library(shinyWidgets)
 library(DT)
 library(phruta)
 library(shiny.i18n)
-
+library(ggmsa)
 
 profileCard <- tablerProfileCard(
   width = 12,
@@ -35,26 +35,26 @@ profileCard <- tablerProfileCard(
     )
   )
 )
-
-plotCard <- tablerCard(
-  title = "Sequence alignments",
-  zoomable = TRUE,
-  closable = FALSE,
-  #overflow = TRUE,
-  options = tagList(
-    switchInput(
-      inputId = "enable_distPlot",
-      label = "Show alignments",
-      value = TRUE,
-      onStatus = "success",
-      offStatus = "danger"
-    )
-  ),
-  plotOutput("distPlot"),
-  status = "info",
-  statusSide = "left",
-  width = 12
-)
+# 
+# plotCard <- tablerCard(
+#   title = "Sequence alignments",
+#   zoomable = TRUE,
+#   closable = FALSE,
+#   #overflow = TRUE,
+#   options = tagList(
+#     switchInput(
+#       inputId = "enable_distPlot",
+#       label = "Show alignments",
+#       value = TRUE,
+#       onStatus = "success",
+#       offStatus = "danger"
+#     )
+#   ),
+#   plotOutput("distPlot"),
+#   status = "info",
+#   statusSide = "left",
+#   width = 12
+# )
 
 
 # tableCard <- tablerCard(
@@ -96,9 +96,9 @@ ui = tablerDashPage(
         "Sampling"
       ),
       tablerNavMenuItem(
-        tabName = "Sequences",
+        tabName = "Alignments",
         icon = "box",
-        "Sequences"
+        "Alignments"
       ),
       tablerNavMenuItem(
         tabName = "Phylogenetics",
@@ -198,7 +198,7 @@ ui = tablerDashPage(
               column(
                 width = 4,
                 tablerBlogCard(
-                  title = "Sequences",
+                  title = "Alignments",
                   width = 12,
                   "Interested in visualizing the alignments assembled using {salphycon}? Check out the visuals in this tab."
                 )
@@ -408,22 +408,22 @@ ui = tablerDashPage(
             ),
             column(
               width = 6,
-              uiOutput("tableAccN"),
+              uiOutput("tableAccN")
             )
           )
         )
         #fluidPage(plotCard)
       ),
       tablerTabItem(
-        tabName = "Sequences",
+        tabName = "Alignments",
         fluidPage(
           useTablerDash(),
           chooseSliderSkin("Modern"),
           div(style = "height:30px"),
           tablerCard(
             width = 12,
-            title = h3("SEQUENCES"),
-            "Once you have defined the species- and gene-level make up of your analyses in the previous two tabs, you will be able to visualize the resulting alignments. You will be able to retrieve the alignments at this point and will be provided with information described each of the alignments.",
+            title = h3("ALIGNMENTS"),
+            "Once you have defined the species- and gene-level makeup of your analyses in the previous two tabs, you will be able to visualize the resulting alignments. For now, the app will only display the masked alignments. You will be able to retrieve the alignments at this point and will be provided with information described each of the alignments.",
             closable = FALSE
           ),
           fluidRow(
@@ -433,28 +433,13 @@ ui = tablerDashPage(
             ),
             column(
               width = 3,
-              tablerStatCard(
-                value = 1,
-                title = "Species",
-                #trend = -10,
-                width = 12
-              ),
-              tablerStatCard(
-                value = 1,
-                title = "Sequences",
-                #trend = -10,
-                width = 12
-              ),
-              tablerStatCard(
-                value = 1,
-                title = "Gene regions",
-                #trend = -10,
-                width = 12
-              )
+              uiOutput("dropGenes"),
+              uiOutput("nGaps"),
+              uiOutput("SpeciesRegion"),
             ),
             column(
               width = 6,
-              plotCard,
+              uiOutput("seqPlots")
             )
           )
         )

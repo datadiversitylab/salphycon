@@ -40,13 +40,13 @@ server = function(input, output, session) {
     })
     
     if( 0 %in% input$Process ) { #retrieve
-      gs.seqs <- gene.sampling.retrieve(organism = taxa, 
+      gs.seqs <<- gene.sampling.retrieve(organism = taxa, 
                                         speciesSampling = TRUE,
                                         npar = 6,
                                         nSearchesBatch = 500)
       
-      targetGenes <- gs.seqs[gs.seqs$PercentOfSampledSpecies > input$sliderGenes,]
-      acc.table <- acc.table.retrieve(
+      targetGenes <<- gs.seqs[gs.seqs$PercentOfSampledSpecies > input$sliderGenes,]
+      acc.table <<- acc.table.retrieve(
         clades  = taxa,
         genes = targetGenes$Gene,
         speciesLevel = TRUE,
@@ -54,7 +54,7 @@ server = function(input, output, session) {
         nSearchesBatch = 500
       )
       
-      sqs.downloaded <- sq.retrieve.indirect(acc.table = acc.table, 
+      sqs.downloaded <<- sq.retrieve.indirect(acc.table = acc.table, 
                                              download.sqs = FALSE)
       
       progress$inc(1/npro, detail = "Sequences downloaded...")
@@ -63,7 +63,7 @@ server = function(input, output, session) {
 
     
     if( all(c(0, 1) %in% input$Process)){ #Curate if seqs have been downloaded
-      sqs.curated <- sq.curate(filterTaxonomicCriteria = '[AZ]',
+      sqs.curated <<- sq.curate(filterTaxonomicCriteria = '[AZ]',
                                kingdom = 'animals', 
                                sqs.object = sqs.downloaded,
                                removeOutliers = FALSE)
@@ -83,7 +83,7 @@ server = function(input, output, session) {
     }
     
     if( all(c(0, 1, 2) %in% input$Process)){ #Aln if seqs have been downloaded
-      sqs.aln <- sq.aln(sqs.object = sqs.curated)
+      sqs.aln <<- sq.aln(sqs.object = sqs.curated)
       progress$inc(1/4, detail = "Sequences aligned...")
       
     }
@@ -98,7 +98,7 @@ server = function(input, output, session) {
         )
       })
       
-      outgroup <- sqs.curated$Taxonomy[sqs.curated$Taxonomy$genus == 'Polyplectron',]
+      outgroup <<- sqs.curated$Taxonomy[sqs.curated$Taxonomy$genus == 'Polyplectron',]
       
       tree.raxml(folder = '2.Alignments', 
                  FilePatterns = 'Masked_', 
@@ -109,59 +109,11 @@ server = function(input, output, session) {
       
     }
     
-    ## Outputs in the sequences tab
-    
-    output$geneRegions <- renderUI({
-      tablerStatCard(
-        value = length(unique(sqs.curated$AccessionTable$file)),
-        title = "Gene regions",
-        #trend = -10,
-        width = 12
-      )
-    })
-    
-    output$nSeqs <- renderUI({
-      tablerStatCard(
-        value = nrow(sqs.curated$AccessionTable),
-        title = "Sequences",
-        #trend = -10,
-        width = 12
-      )
-    })
-    
-    output$nTaxa <- renderUI({
-      tablerStatCard(
-        value = nrow(sqs.curated$Taxonomy),
-        title = "Species",
-        #trend = -10,
-        width = 12
-      )
-    })
-    
-    output$tableAccN <- renderUI({
-      tablerCard(
-        title = "Accession numbers",
-        zoomable = TRUE,
-        closable = FALSE,
-        overflow = TRUE,
-        DT::dataTableOutput("distTable"),
-        status = "info",
-        statusSide = "left",
-        width = 12
-      )
-    })
-    
-    
+
   })
   
 
   
-  output$distPlot <- renderPlot({
-    if (input$enable_distPlot) hist(rnorm(100))
-  })
-  
-  
-
   output$info <- renderUI({
     tablerInfoCard(
       width = 12,
@@ -171,6 +123,129 @@ server = function(input, output, session) {
       description = "Total Storage Capacity"
     )
   })
+  
+  
+  
+  ##Sampling tab boxes
+  valuesSampling <- reactiveValues(ngeneregions = 0, nseqs = 0, spp = 0)
+  observe({
+  output$geneRegions <- renderUI({
+    tablerStatCard(
+      value = valuesSampling$ngeneregions,
+      title = "Gene regions",
+      width = 12
+    )
+  })
+  
+  output$nSeqs <- renderUI({
+    tablerStatCard(
+      value = valuesSampling$nseqs,
+      title = "Sequences",
+      width = 12
+    )
+  })
+  
+  output$nTaxa <- renderUI({
+    tablerStatCard(
+      value = valuesSampling$spp,
+      title = "Species",
+      width = 12
+    )
+  })
+  
+  output$tableAccN <- renderUI({
+    tablerCard(
+      title = "Accession numbers",
+      zoomable = TRUE,
+      closable = FALSE,
+      overflow = TRUE,
+      DT::dataTableOutput("distTable"),
+      status = "info",
+      statusSide = "left",
+      width = 12
+    )
+  })
+  
+  })
+  
+  observeEvent(input$action, {
+    valuesSampling$ngeneregions <- length(na.omit(unique(sqs.curated$AccessionTable$file)))
+    valuesSampling$nseqs <- nrow(sqs.curated$AccessionTable)
+    valuesSampling$spp <- nrow(sqs.curated$Taxonomy)
+  })  
+  
+  
+  ##alignment tab boxes
+  valuesSequences <- reactiveValues(nspecies = 0, ntaxareg = 0, genes = NULL, DNAbin = NULL)
+  
+  observe({
+    output$SpeciesRegion <- renderUI({
+      tablerStatCard(
+        value = valuesSequences$nspecies,
+        title = "Sequences",
+        width = 12
+      )
+    })
+    
+    
+    output$nGaps <- renderUI({
+      tablerStatCard(
+        value = valuesSequences$ntaxareg,
+        title = "Sites",
+        width = 12
+      )
+    })
+    
+    output$dropGenes <- renderUI({
+      tablerCard(
+        status = "yellow",
+        statusSide = "left",
+        width = 12,
+        column(
+          12,
+          selectInput("geneSel", "Choose a gene region:",
+                      valuesSequences$genes
+          ), align = "center")
+      )
+    })
+    
+    output$seqPlots <- renderUI({
+      tablerCard(
+        title = "Sequence alignments",
+        zoomable = TRUE,
+        closable = FALSE,
+        #overflow = TRUE,
+        plotOutput("distPlot"),
+        status = "info",
+        statusSide = "left",
+        width = 12
+      )
+    })
+    
+    output$distPlot <- renderPlot({
+     if(!is.null(valuesSequences$DNAbin)){
+      image(valuesSequences$DNAbin, 
+            xlab = "Position",
+            ylab = "Species", 
+            legend = TRUE
+      )
+     }
+    })
+    
+  })
+  
+ ##These boxes are not updating
+
+  observeEvent(input$action, {
+    valuesSequences$genes <- names(sqs.aln)
+  })  
+  
+  observeEvent(input$geneSel, {
+    valuesSequences$nspecies <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked)
+    valuesSequences$ntaxareg <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked[[1]])
+    valuesSequences$DNAbin <- sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked
+  })
+  
   
   
   output$progress <- renderUI({
