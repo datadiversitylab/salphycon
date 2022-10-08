@@ -5,6 +5,7 @@ library(DT)
 library(phruta)
 library(shiny.i18n)
 library(ggmsa)
+library(zip)
 
 profileCard <- tablerProfileCard(
   width = 12,
@@ -404,7 +405,8 @@ ui = tablerDashPage(
               width = 3,
               uiOutput("nTaxa"),
               uiOutput("nSeqs"),
-              uiOutput("geneRegions")
+              uiOutput("geneRegions"),
+              uiOutput("sqsDownload")
             ),
             column(
               width = 6,
@@ -436,6 +438,7 @@ ui = tablerDashPage(
               uiOutput("dropGenes"),
               uiOutput("nGaps"),
               uiOutput("SpeciesRegion"),
+              uiOutput("alnDownload")
             ),
             column(
               width = 6,
@@ -464,7 +467,12 @@ ui = tablerDashPage(
             ),
             column(
               width = 3,
-              h6("Under construction...")
+              uiOutput("phyloControl"),
+              uiOutput("phyloDownload")
+            ),
+            column(
+              width = 6,
+              uiOutput("phyloPlots")
             )
           )
         )

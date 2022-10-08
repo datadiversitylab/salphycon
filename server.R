@@ -1,5 +1,10 @@
 server = function(input, output, session) {
   
+  tree <- NULL
+  sqs.aln <- NULL
+  ##So phruta doesn't where
+  assign(".testMode", TRUE, envir = phruta:::pkg.env)
+  
   observeEvent(input$selected_language, {
     # This print is just for demonstration
     print(paste("Language change!", input$selected_language))
@@ -98,33 +103,18 @@ server = function(input, output, session) {
         )
       })
       
-      outgroup <<- sqs.curated$Taxonomy[sqs.curated$Taxonomy$genus == 'Polyplectron',]
-      
       tree.raxml(folder = '2.Alignments', 
                  FilePatterns = 'Masked_', 
                  raxml_exec = 'raxmlHPC', 
-                 Bootstrap = 100
+                 Bootstrap = 2
       )
+      
       progress$inc(1/npro, detail = "Tree constructed...")
       
     }
     
 
   })
-  
-
-  
-  output$info <- renderUI({
-    tablerInfoCard(
-      width = 12,
-      value = paste0(input$totalStorage, "GB"),
-      status = "success",
-      icon = "database",
-      description = "Total Storage Capacity"
-    )
-  })
-  
-  
   
   ##Sampling tab boxes
   valuesSampling <- reactiveValues(ngeneregions = 0, nseqs = 0, spp = 0)
@@ -163,6 +153,29 @@ server = function(input, output, session) {
       status = "info",
       statusSide = "left",
       width = 12
+    )
+  })
+  
+  
+  output$downloadsqs <- downloadHandler(
+    filename = function() { 
+      paste("sqs-phruta-", Sys.Date(), ".zip", sep="")
+    },
+    content = function(file) {
+      zip(zipfile = file, files = '0.Sequences')
+    },
+    contentType = "application/zip"
+  )
+  
+  output$sqsDownload <- renderUI({
+    tablerCard(
+      status = "yellow",
+      statusSide = "left",
+      width = 12,
+      column(
+        12,
+        downloadButton('downloadsqs', 'Download'),
+        align = "center")
     )
   })
   
@@ -209,6 +222,30 @@ server = function(input, output, session) {
       )
     })
     
+    
+    output$downloadAln <- downloadHandler(
+      filename = function() { 
+        paste("aln-phruta-", Sys.Date(), ".zip", sep="")
+      },
+      content = function(file) {
+        zip(zipfile = file, files = '2.Alignments')
+      },
+      contentType = "application/zip"
+    )
+    
+    output$alnDownload <- renderUI({
+      tablerCard(
+        status = "yellow",
+        statusSide = "left",
+        width = 12,
+        column(
+          12,
+          downloadButton('downloadAln', 'Download'),
+          align = "center")
+      )
+    })
+    
+    
     output$seqPlots <- renderUI({
       tablerCard(
         title = "Sequence alignments",
@@ -232,10 +269,67 @@ server = function(input, output, session) {
      }
     })
     
+    
+    output$phyloControl <- renderUI({
+      tablerCard(
+        status = "yellow",
+        statusSide = "left",
+        width = 12,
+        column(
+          12,
+          selectInput("selPhylo", "Choose an option:",
+                      choices = c("test1", "test2")
+          ), align = "center")
+      )
+    })
+    
+ 
+    output$phyloPlots <- renderUI({
+      tablerCard(
+        title = "Phylogeny",
+        zoomable = TRUE,
+        closable = FALSE,
+        #overflow = TRUE,
+        plotOutput("phyloPlot"),
+        status = "info",
+        statusSide = "left",
+        width = 12
+      )
+    })
+    
+    output$phyloPlot <- renderPlot({
+      if(3 %in% input$Process){
+     tree <- read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
+     tree_bst <- read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
+     
+     ape::plot.phylo(tree, type = "cladogram")
+      }
+    })
+    
+    output$downloadTree <- downloadHandler(
+      filename = function() { 
+        paste("phylogeny-phruta-", Sys.Date(), ".zip", sep="")
+      },
+      content = function(file) {
+        zip(zipfile = file, files = '3.Phylogeny')
+      },
+      contentType = "application/zip"
+      )
+    
+    output$phyloDownload <- renderUI({
+      tablerCard(
+        status = "yellow",
+        statusSide = "left",
+        width = 12,
+        column(
+          12,
+          downloadButton('downloadTree', 'Download'),
+          align = "center")
+      )
+    })
+    
   })
   
- ##These boxes are not updating
-
   observeEvent(input$action, {
     valuesSequences$genes <- names(sqs.aln)
   })  
