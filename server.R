@@ -112,8 +112,78 @@ server = function(input, output, session) {
       progress$inc(1/npro, detail = "Tree constructed...")
       
     }
-    
-
+  })
+  
+  
+  ##Needs more work!
+  observeEvent(input$update, {
+    if(!is.null(dataUpdated())){
+      
+      if( 0 %in% input$Process ) { #retrieve
+        dataset <<- dataUpdated()
+        
+        acc.table <<- acc.table.retrieve(
+          clades  = dataset$taxa,
+          genes = dataset$Gene,
+          speciesLevel = TRUE,
+          npar = 6,
+          nSearchesBatch = 500
+        )
+        
+        sqs.downloaded <<- sq.retrieve.indirect(acc.table = acc.table, 
+                                                download.sqs = FALSE)
+        
+        progress$inc(1/npro, detail = "Sequences downloaded...")
+        
+      }
+      
+      
+      if( all(c(0, 1) %in% input$Process)){ #Curate if seqs have been downloaded
+        sqs.curated <<- sq.curate(filterTaxonomicCriteria = '[AZ]',
+                                  kingdom = 'animals', 
+                                  sqs.object = sqs.downloaded,
+                                  removeOutliers = FALSE)
+        
+        output$distTable <-
+          DT::renderDataTable(sqs.curated$AccessionTable,
+                              extensions = 'Buttons',
+                              options = list(scrollX = TRUE,
+                                             pageLength = 10,
+                                             searching = FALSE,
+                                             dom = 'Bfrtip',
+                                             buttons = c('csv', 'excel')),
+                              rownames = FALSE)
+        
+        progress$inc(1/npro, detail = "Sequences curated...")
+        
+      }
+      
+      if( all(c(0, 1, 2) %in% input$Process)){ #Aln if seqs have been downloaded
+        sqs.aln <<- sq.aln(sqs.object = sqs.curated)
+        progress$inc(1/4, detail = "Sequences aligned...")
+        
+      }
+      
+      if( all(c(0, 1, 2, 3) %in% input$Process)){ #RAxML if seqs have been aligned
+        dir.create("2.Alignments")
+        lapply(seq_along(sqs.aln), function(x){
+          ape::write.FASTA(sqs.aln[[x]]$Aln.Masked, 
+                           file = paste0(
+                             "2.Alignments/Masked_", names(sqs.aln)[x], ".fasta"
+                           )
+          )
+        })
+        
+        tree.raxml(folder = '2.Alignments', 
+                   FilePatterns = 'Masked_', 
+                   raxml_exec = 'raxmlHPC', 
+                   Bootstrap = 2
+        )
+        
+        progress$inc(1/npro, detail = "Tree constructed...")
+      }
+      
+    }
   })
   
   ##Sampling tab boxes
@@ -143,6 +213,29 @@ server = function(input, output, session) {
     )
   })
   
+  output$Refresh <- renderUI({
+    tablerCard(
+      status = "yellow",
+      statusSide = "left",
+      width = 12,
+      column(
+        12,
+        fileInput('file1', 'Choose CSV File',
+                  accept=c('text/csv',
+                           'text/comma-separated-values,text/plain',
+                           '.csv')),
+        actionButton("refresh", "Refresh", icon = icon("check"),
+                     style = "color: #fff; background-color: #27ae60; border-color: #fff"), align = "center")
+    )
+  })
+  
+  dataUpdated <- reactive({
+    inFile <- input$file1
+    if (is.null(inFile)) return(NULL)
+    data <- read.csv(inFile$datapath, header = TRUE)
+    data
+  })
+  
   output$tableAccN <- renderUI({
     tablerCard(
       title = "Accession numbers",
@@ -156,28 +249,6 @@ server = function(input, output, session) {
     )
   })
   
-  
-  output$downloadsqs <- downloadHandler(
-    filename = function() { 
-      paste("sqs-phruta-", Sys.Date(), ".zip", sep="")
-    },
-    content = function(file) {
-      zip(zipfile = file, files = '0.Sequences')
-    },
-    contentType = "application/zip"
-  )
-  
-  output$sqsDownload <- renderUI({
-    tablerCard(
-      status = "yellow",
-      statusSide = "left",
-      width = 12,
-      column(
-        12,
-        downloadButton('downloadsqs', 'Download'),
-        align = "center")
-    )
-  })
   
   })
   
@@ -224,11 +295,27 @@ server = function(input, output, session) {
     
     
     output$downloadAln <- downloadHandler(
+      
       filename = function() { 
         paste("aln-phruta-", Sys.Date(), ".zip", sep="")
       },
       content = function(file) {
+        if(!is.null(sqs.aln)){
+        unlink("2.Alignments", recursive = TRUE)
+        dir.create("2.Alignments")
+        invisible(
+        lapply(seq_along(sqs.aln), function(x){
+          write.FASTA(sqs.aln[[x]]$Aln.Original, file = paste0("2.Alignments/Raw_", 
+                                                     names(sqs.aln)[x], 
+                                                     ".fasta"))
+          write.FASTA(sqs.aln[[x]]$Aln.Masked, file = paste0("2.Alignments/Masked_", 
+                                                                       names(sqs.aln)[x], 
+                                                             ".fasta"))
+        })
+        )
         zip(zipfile = file, files = '2.Alignments')
+        unlink("2.Alignments", recursive = TRUE)
+        }
       },
       contentType = "application/zip"
     )
@@ -245,13 +332,12 @@ server = function(input, output, session) {
       )
     })
     
-    
+
     output$seqPlots <- renderUI({
       tablerCard(
         title = "Sequence alignments",
         zoomable = TRUE,
         closable = FALSE,
-        #overflow = TRUE,
         plotOutput("distPlot"),
         status = "info",
         statusSide = "left",
@@ -289,7 +375,6 @@ server = function(input, output, session) {
         title = "Phylogeny",
         zoomable = TRUE,
         closable = FALSE,
-        #overflow = TRUE,
         plotOutput("phyloPlot"),
         status = "info",
         statusSide = "left",
@@ -301,7 +386,6 @@ server = function(input, output, session) {
       if(3 %in% input$Process){
      tree <- read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
      tree_bst <- read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
-     
      ape::plot.phylo(tree, type = "cladogram")
       }
     })
@@ -312,6 +396,8 @@ server = function(input, output, session) {
       },
       content = function(file) {
         zip(zipfile = file, files = '3.Phylogeny')
+        unlink("3.Phylogeny", recursive = TRUE)
+        
       },
       contentType = "application/zip"
       )

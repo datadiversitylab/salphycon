@@ -36,38 +36,7 @@ profileCard <- tablerProfileCard(
     )
   )
 )
-# 
-# plotCard <- tablerCard(
-#   title = "Sequence alignments",
-#   zoomable = TRUE,
-#   closable = FALSE,
-#   #overflow = TRUE,
-#   options = tagList(
-#     switchInput(
-#       inputId = "enable_distPlot",
-#       label = "Show alignments",
-#       value = TRUE,
-#       onStatus = "success",
-#       offStatus = "danger"
-#     )
-#   ),
-#   plotOutput("distPlot"),
-#   status = "info",
-#   statusSide = "left",
-#   width = 12
-# )
 
-
-# tableCard <- tablerCard(
-#   title = "Accession numbers",
-#   zoomable = TRUE,
-#   closable = FALSE,
-#   overflow = TRUE,
-#   DT::dataTableOutput("distTable"),
-#   status = "info",
-#   statusSide = "left",
-#   width = 12
-# )
 
 i18n <- Translator$new(translation_csvs_path = "translations/")
 i18n$set_translation_language("English")
@@ -88,7 +57,7 @@ ui = tablerDashPage(
       ),
       tablerNavMenuItem(
         tabName = "Settings",
-        icon = "check",
+        icon = "lock",
         "Settings"
       ),
       tablerNavMenuItem(
@@ -98,22 +67,22 @@ ui = tablerDashPage(
       ),
       tablerNavMenuItem(
         tabName = "Alignments",
-        icon = "box",
+        icon = "layers",
         "Alignments"
       ),
       tablerNavMenuItem(
         tabName = "Phylogenetics",
-        icon = "box",
+        icon = "activity",
         "Phylogenetics"
       ),
-      tablerNavMenuItem(
-        tabName = "TimeDating",
-        icon = "box",
-        "Time-dating"
-      ),
+      # tablerNavMenuItem(
+      #   tabName = "TimeDating",
+      #   icon = "clock",
+      #   "Time-dating"
+      # ),
       tablerNavMenuItem(
         tabName = "About",
-        icon = "box",
+        icon = "info",
         "About"
       )
     )
@@ -238,12 +207,8 @@ ui = tablerDashPage(
       tablerTabItem(
         tabName = "Settings",
         fluidPage(
-          #setBackgroundColor("DodgerBlue"),
           useTablerDash(),
           chooseSliderSkin("Modern"),
-          #h1(" ", align = "center"),
-          #h1(" ", align = "center"),
-          #h1(" ", align = "center"),
           div(style = "height:30px"),
           tablerCard(
             width = 12,
@@ -268,11 +233,6 @@ ui = tablerDashPage(
                 # Add Clades or Species text
                 textInput("addTaxa", "", value = "", width = NULL, placeholder = "Halobates, Metrocoris, ..."),
                 uiOutput("filterPage1"),
-                
-                # textInput("text", h6(i18n$t("Clades or Species")), 
-                #           value = "Enter text..."),
-                # textInput("text", h6(i18n$t("Species")), 
-                #           value = "Enter text..."),
                 
                 dropdown(
                   "Select a file in {csv} format that includes taxonomic names in the rows and a single column. Please do not include column names.",
@@ -302,28 +262,9 @@ ui = tablerDashPage(
                   i18n$t("Please define the genetic makeup of your analyses. For now, you will be able to indicate what is the minimum percetage of species that genes should include in order to be included in the analyses."),
                   h3(""),
                   h3(""),
-                  # h5(i18n$t("Please input your target genes below")),
-                  # materialSwitch(
-                  #   inputId = "findGenes",
-                  #   label = i18n$t("Find genes?"), 
-                  #   value = TRUE,
-                  #   status = "success"
-                  # ),
+
                   sliderInput("sliderGenes", h6(i18n$t("Threshold to find genes")),
-                              min = 0, max = 100, value = 20),
-                  # textInput("genesText", h6(i18n$t("Target genes")), 
-                  #          placeholder = "Genes"),
-                  # dropdown(
-                  #   tags$h3("List of Input"),
-                  #   fileInput("fileGenes", h5("Select additional genes"), multiple = TRUE),
-                  #   style = "unite", icon = icon("cogs"),
-                  #   status = "warning", width = "300px",
-                  #   tooltip = tooltipOptions(title = "Click to see inputs !"),
-                  #   animate = animateOptions(
-                  #     enter = animations$fading_entrances$fadeInLeftBig,
-                  #     exit = animations$fading_exits$fadeOutRightBig
-                  #   )
-                  # )
+                              min = 0, max = 100, value = 20)
                 ),
                 tablerCard(
                   status = "yellow",
@@ -406,7 +347,7 @@ ui = tablerDashPage(
               uiOutput("nTaxa"),
               uiOutput("nSeqs"),
               uiOutput("geneRegions"),
-              uiOutput("sqsDownload")
+              uiOutput("Refresh")
             ),
             column(
               width = 6,
@@ -465,42 +406,39 @@ ui = tablerDashPage(
               width = 3,
               profileCard
             ),
+            
             column(
-              width = 3,
-              uiOutput("phyloControl"),
+              width = 9,
+              uiOutput("phyloPlots"),
               uiOutput("phyloDownload")
-            ),
-            column(
-              width = 6,
-              uiOutput("phyloPlots")
             )
           )
         )
       ),
-      tablerTabItem(
-        tabName = "TimeDating",
-        fluidPage(
-          useTablerDash(),
-          chooseSliderSkin("Modern"),
-          div(style = "height:30px"),
-          tablerCard(
-            width = 12,
-            title = h3("TIME DATING"),
-            "Configure and analyze time-calibrated phylogenies based on phylogenies constructed using {salphycon}.",
-            closable = FALSE
-          ),
-          fluidRow(
-            column(
-              width = 3,
-              profileCard
-            ),
-            column(
-              width = 3,
-              h6("Under construction...")
-            )
-          )
-        )
-      ),
+      # tablerTabItem(
+      #   tabName = "TimeDating",
+      #   fluidPage(
+      #     useTablerDash(),
+      #     chooseSliderSkin("Modern"),
+      #     div(style = "height:30px"),
+      #     tablerCard(
+      #       width = 12,
+      #       title = h3("TIME DATING"),
+      #       "Configure and analyze time-calibrated phylogenies based on phylogenies constructed using {salphycon}.",
+      #       closable = FALSE
+      #     ),
+      #     fluidRow(
+      #       column(
+      #         width = 3,
+      #         profileCard
+      #       ),
+      #       column(
+      #         width = 3,
+      #         h6("Under construction...")
+      #       )
+      #     )
+      #   )
+      # ),
       tablerTabItem(
         tabName = "About",
         fluidPage(
