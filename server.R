@@ -31,7 +31,7 @@ server = function(input, output, session) {
   observeEvent(input$action, {
     
     progress <- shiny::Progress$new()
-    #on.exit(progress$close())
+    on.exit(progress$close())
     progress$set(message = "Running {phruta}...", value = 0)
     
     taxa <- input$addTaxa
@@ -62,6 +62,7 @@ server = function(input, output, session) {
       sqs.downloaded <<- sq.retrieve.indirect(acc.table = acc.table, 
                                              download.sqs = FALSE)
       
+      #sqs.curated <<- sqs.downloaded ##If no curation happens
       progress$inc(1/npro, detail = "Sequences downloaded...")
       
     }
@@ -115,22 +116,33 @@ server = function(input, output, session) {
   })
   
   
-  ##Needs more work!
-  observeEvent(input$update, {
+  dataUpdated <- reactive({
+    inFile <- input$file1
+    if (is.null(inFile)) return(NULL)
+    data <- read.csv(inFile$datapath, header = TRUE)
+    data
+  })
+  
+  
+  
+  
+  observeEvent(input$refresh, {
     if(!is.null(dataUpdated())){
+      
+      progress <- shiny::Progress$new()
+      on.exit(progress$close())
+      progress$set(message = "Updating {phruta}...", value = 0)
+      
+      npro <- length(input$Process)
       
       if( 0 %in% input$Process ) { #retrieve
         dataset <<- dataUpdated()
         
-        acc.table <<- acc.table.retrieve(
-          clades  = dataset$taxa,
-          genes = dataset$Gene,
-          speciesLevel = TRUE,
-          npar = 6,
-          nSearchesBatch = 500
-        )
+        tFile <- cbind.data.frame(Acc =  dataset$AccN, 
+                                  gene = dataset$file,
+                                  Species = dataset$Species)
         
-        sqs.downloaded <<- sq.retrieve.indirect(acc.table = acc.table, 
+        sqs.downloaded <<- sq.retrieve.indirect(acc.table = tFile, 
                                                 download.sqs = FALSE)
         
         progress$inc(1/npro, detail = "Sequences downloaded...")
@@ -142,10 +154,11 @@ server = function(input, output, session) {
         sqs.curated <<- sq.curate(filterTaxonomicCriteria = '[AZ]',
                                   kingdom = 'animals', 
                                   sqs.object = sqs.downloaded,
-                                  removeOutliers = FALSE)
+                                  removeOutliers = FALSE,
+                                  minSeqs = 1)
         
         output$distTable <-
-          DT::renderDataTable(sqs.curated$AccessionTable,
+          DT::renderDataTable(dataset,
                               extensions = 'Buttons',
                               options = list(scrollX = TRUE,
                                              pageLength = 10,
@@ -186,8 +199,10 @@ server = function(input, output, session) {
     }
   })
   
+
   ##Sampling tab boxes
   valuesSampling <- reactiveValues(ngeneregions = 0, nseqs = 0, spp = 0)
+  
   observe({
   output$geneRegions <- renderUI({
     tablerStatCard(
@@ -229,12 +244,7 @@ server = function(input, output, session) {
     )
   })
   
-  dataUpdated <- reactive({
-    inFile <- input$file1
-    if (is.null(inFile)) return(NULL)
-    data <- read.csv(inFile$datapath, header = TRUE)
-    data
-  })
+
   
   output$tableAccN <- renderUI({
     tablerCard(
@@ -248,11 +258,14 @@ server = function(input, output, session) {
       width = 12
     )
   })
-  
-  
   })
   
-  observeEvent(input$action, {
+  
+  toListen <- reactive({
+    list(input$action, input$refresh)
+  })
+  
+  observeEvent(toListen(), {
     valuesSampling$ngeneregions <- length(na.omit(unique(sqs.curated$AccessionTable$file)))
     valuesSampling$nseqs <- nrow(sqs.curated$AccessionTable)
     valuesSampling$spp <- nrow(sqs.curated$Taxonomy)
@@ -416,7 +429,7 @@ server = function(input, output, session) {
     
   })
   
-  observeEvent(input$action, {
+  observeEvent(toListen(), {
     valuesSequences$genes <- names(sqs.aln)
   })  
   
@@ -425,7 +438,6 @@ server = function(input, output, session) {
     valuesSequences$ntaxareg <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked[[1]])
     valuesSequences$DNAbin <- sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked
   })
-  
   
   
   output$progress <- renderUI({
