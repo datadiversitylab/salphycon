@@ -121,10 +121,8 @@ server = function(input, output, session) {
     data
   })
   
-  
-  
-  
   observeEvent(input$refresh, {
+    
     if(!is.null(dataUpdated())){
       
       progress <- shiny::Progress$new()
@@ -201,7 +199,6 @@ server = function(input, output, session) {
     
     
   })
-  
 
   ##Sampling tab boxes
   valuesSampling <- reactiveValues(ngeneregions = 0, nseqs = 0, spp = 0)
@@ -321,10 +318,10 @@ server = function(input, output, session) {
         dir.create("2.Alignments")
         invisible(
         lapply(seq_along(sqs.aln), function(x){
-          write.FASTA(sqs.aln[[x]]$Aln.Original, file = paste0("2.Alignments/Raw_", 
+          ape::write.FASTA(sqs.aln[[x]]$Aln.Original, file = paste0("2.Alignments/Raw_", 
                                                      names(sqs.aln)[x], 
                                                      ".fasta"))
-          write.FASTA(sqs.aln[[x]]$Aln.Masked, file = paste0("2.Alignments/Masked_", 
+          ape::write.FASTA(sqs.aln[[x]]$Aln.Masked, file = paste0("2.Alignments/Masked_", 
                                                                        names(sqs.aln)[x], 
                                                              ".fasta"))
         })
@@ -441,7 +438,6 @@ server = function(input, output, session) {
     valuesSequences$ntaxareg <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked[[1]])
     valuesSequences$DNAbin <- sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked
   })
-  
   
   output$progress <- renderUI({
     tagList(
