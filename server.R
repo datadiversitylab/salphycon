@@ -1,5 +1,5 @@
 server = function(input, output, session) {
-  
+  sqs.curated <- NULL
   tree <- NULL
   sqs.aln <- NULL
   ##So phruta doesn't where
@@ -39,10 +39,9 @@ server = function(input, output, session) {
     npro <- length(input$Process)
     
     # Add Clades or Species file
-    observeEvent(input$fileTaxa, {
-      taxa <- read.csv(input$fileTaxa)
-      taxa <- taxa[,1] #Single column
-    })
+    taxa2 <- read.csv(input$fileTaxa$datapath,
+                   header = FALSE)
+    taxa <- c(taxa, taxa2[,1])
     
     if( 0 %in% input$Process ) { #retrieve
       gs.seqs <<- gene.sampling.retrieve(organism = taxa, 
@@ -75,7 +74,8 @@ server = function(input, output, session) {
                                removeOutliers = FALSE)
       
       output$distTable <-
-        DT::renderDataTable(sqs.curated$AccessionTable,
+        DT::renderDataTable(server = FALSE, { 
+          DT::datatable(sqs.curated$AccessionTable,
                             extensions = 'Buttons',
                             options = list(scrollX = TRUE,
                                            pageLength = 10,
@@ -83,6 +83,7 @@ server = function(input, output, session) {
                                            dom = 'Bfrtip',
                                            buttons = c('csv', 'excel')),
                             rownames = FALSE)
+        })
       
       progress$inc(1/npro, detail = "Sequences curated...")
       
@@ -196,7 +197,12 @@ server = function(input, output, session) {
         progress$inc(1/npro, detail = "Tree constructed...")
       }
       
+      
+      
     }
+    
+    
+    
   })
   
 
