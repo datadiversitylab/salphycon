@@ -267,8 +267,8 @@ server = function(input, output, session) {
   
   observeEvent(toListen(), {
     valuesSampling$ngeneregions <- length(na.omit(unique(sqs.curated$AccessionTable$file)))
-    valuesSampling$nseqs <- nrow(sqs.curated$AccessionTable)
-    valuesSampling$spp <- nrow(sqs.curated$Taxonomy)
+    valuesSampling$nseqs <- ifelse(is.null(nrow(sqs.curated$AccessionTable)), 0,  nrow(sqs.curated$AccessionTable))
+    valuesSampling$spp <- ifelse(is.null(nrow(sqs.curated$Taxonomy)), 0,  nrow(sqs.curated$Taxonomy))
   })  
   
   
