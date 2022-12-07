@@ -264,7 +264,22 @@ ui = tablerDashPage(
                   h3(""),
 
                   sliderInput("sliderGenes", h6(i18n$t("Threshold to find genes")),
-                              min = 0, max = 100, value = 20)
+                              min = 0, max = 100, value = 20),
+                  dropdown(
+                    "Select a file in {csv} format that includes gene names in the rows and a single column. Please do not include column names.",
+                    fileInput("fileGenes", h5(""), width = '80%',
+                              accept = c(
+                                "text/csv",
+                                "text/comma-separated-values,text/plain",
+                                ".csv")),
+                    style = "unite", icon = icon("cogs"),
+                    status = "warning", width = "300px",
+                    tooltip = tooltipOptions(title = "Upload a file!"),
+                    animate = animateOptions(
+                      enter = animations$fading_entrances$fadeInLeftBig,
+                      exit = animations$fading_exits$fadeOutRightBig
+                    )
+                  )
                 ),
                 tablerCard(
                   status = "yellow",

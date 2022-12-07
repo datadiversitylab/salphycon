@@ -15,19 +15,7 @@ server = function(input, output, session) {
   ## Tables need to be editable
   ## https://stackoverflow.com/questions/70155520/how-to-make-datatable-editable-in-r-shiny
   
- 
-  # Add genes text
-  # observeEvent(input$genesText, {
-  #   genes <- input$genesText
-  # }, ignoreInit = TRUE)
-  # 
-  # # Add genes file
-  # observeEvent(input$fileGenes, {
-  #   genes <- read.csv(input$fileGenes)
-  #   genes <- taxa[,1] #Single column
-  # }, ignoreInit = TRUE)
-  # 
-  
+
   observeEvent(input$action, {
     
     progress <- shiny::Progress$new()
@@ -44,12 +32,21 @@ server = function(input, output, session) {
     taxa <- c(taxa, taxa2[,1])
     
     if( 0 %in% input$Process ) { #retrieve
+      
+      genes <- read.csv(input$fileGenes$datapath,
+                        header = FALSE)
+      
+      if(!is.null(input$fileGenes)){
+      targetGenes <- data.frame('Gene' = genes[,1])
+      }else{
       gs.seqs <<- gene.sampling.retrieve(organism = taxa, 
                                         speciesSampling = TRUE,
                                         npar = 6,
                                         nSearchesBatch = 500)
       
       targetGenes <<- gs.seqs[gs.seqs$PercentOfSampledSpecies > input$sliderGenes,]
+      }
+      
       acc.table <<- acc.table.retrieve(
         clades  = taxa,
         genes = targetGenes$Gene,
