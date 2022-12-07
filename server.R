@@ -111,8 +111,247 @@ server = function(input, output, session) {
       progress$inc(1/npro, detail = "Tree constructed...")
       
     }
+    
+    
+    ##Sampling tab boxes
+    valuesSampling <- reactiveValues(ngeneregions = 0, nseqs = 0, spp = 0)
+    
+    observe({
+      output$geneRegions <- renderUI({
+        tablerStatCard(
+          value = valuesSampling$ngeneregions,
+          title = "Gene regions",
+          width = 12
+        )
+      })
+      
+      output$nSeqs <- renderUI({
+        tablerStatCard(
+          value = valuesSampling$nseqs,
+          title = "Sequences",
+          width = 12
+        )
+      })
+      
+      output$nTaxa <- renderUI({
+        tablerStatCard(
+          value = valuesSampling$spp,
+          title = "Species",
+          width = 12
+        )
+      })
+      
+      output$Refresh <- renderUI({
+        tablerCard(
+          status = "yellow",
+          statusSide = "left",
+          width = 12,
+          column(
+            12,
+            fileInput('file1', 'Choose CSV File',
+                      accept=c('text/csv',
+                               'text/comma-separated-values,text/plain',
+                               '.csv')),
+            actionButton("refresh", "Refresh", icon = icon("check"),
+                         style = "color: #fff; background-color: #27ae60; border-color: #fff"), align = "center")
+        )
+      })
+      
+      
+      
+      output$tableAccN <- renderUI({
+        tablerCard(
+          title = "Accession numbers",
+          zoomable = TRUE,
+          closable = FALSE,
+          overflow = TRUE,
+          DT::dataTableOutput("distTable"),
+          status = "info",
+          statusSide = "left",
+          width = 12
+        )
+      })
+    })
+    
+    toListen <- reactive({
+      list(input$action)
+    })
+    
+    observeEvent(toListen(), {
+      valuesSampling$ngeneregions <- length(na.omit(unique(sqs.curated$AccessionTable$file)))
+      valuesSampling$nseqs <- ifelse(is.null(nrow(sqs.curated$AccessionTable)), 0,  nrow(sqs.curated$AccessionTable))
+      valuesSampling$spp <- ifelse(is.null(nrow(sqs.curated$Taxonomy)), 0,  nrow(sqs.curated$Taxonomy))
+    })  
+    
+    
+    ##alignment tab boxes
+    valuesSequences <- reactiveValues(nspecies = 0, ntaxareg = 0, genes = NULL, DNAbin = NULL)
+    
+    observe({
+      output$SpeciesRegion <- renderUI({
+        tablerStatCard(
+          value = valuesSequences$nspecies,
+          title = "Sequences",
+          width = 12
+        )
+      })
+      
+      
+      output$nGaps <- renderUI({
+        tablerStatCard(
+          value = valuesSequences$ntaxareg,
+          title = "Sites",
+          width = 12
+        )
+      })
+      
+      output$dropGenes <- renderUI({
+        tablerCard(
+          status = "yellow",
+          statusSide = "left",
+          width = 12,
+          column(
+            12,
+            selectInput("geneSel", "Choose a gene region:",
+                        valuesSequences$genes
+            ), align = "center")
+        )
+      })
+      
+      
+      output$downloadAln <- downloadHandler(
+        
+        filename = function() { 
+          paste("aln-phruta-", Sys.Date(), ".zip", sep="")
+        },
+        content = function(file) {
+          if(!is.null(sqs.aln)){
+            unlink("2.Alignments", recursive = TRUE)
+            dir.create("2.Alignments")
+            invisible(
+              lapply(seq_along(sqs.aln), function(x){
+                ape::write.FASTA(sqs.aln[[x]]$Aln.Original, file = paste0("2.Alignments/Raw_", 
+                                                                          names(sqs.aln)[x], 
+                                                                          ".fasta"))
+                ape::write.FASTA(sqs.aln[[x]]$Aln.Masked, file = paste0("2.Alignments/Masked_", 
+                                                                        names(sqs.aln)[x], 
+                                                                        ".fasta"))
+              })
+            )
+            zip(zipfile = file, files = '2.Alignments')
+            unlink("2.Alignments", recursive = TRUE)
+          }
+        },
+        contentType = "application/zip"
+      )
+      
+      output$alnDownload <- renderUI({
+        tablerCard(
+          status = "yellow",
+          statusSide = "left",
+          width = 12,
+          column(
+            12,
+            downloadButton('downloadAln', 'Download'),
+            align = "center")
+        )
+      })
+      
+      
+      output$seqPlots <- renderUI({
+        tablerCard(
+          title = "Sequence alignments",
+          zoomable = TRUE,
+          closable = FALSE,
+          plotOutput("distPlot"),
+          status = "info",
+          statusSide = "left",
+          width = 12
+        )
+      })
+      
+      output$distPlot <- renderPlot({
+        if(!is.null(valuesSequences$DNAbin)){
+          image(valuesSequences$DNAbin, 
+                xlab = "Position",
+                ylab = "Species", 
+                legend = TRUE
+          )
+        }
+      })
+      
+      
+      output$phyloControl <- renderUI({
+        tablerCard(
+          status = "yellow",
+          statusSide = "left",
+          width = 12,
+          column(
+            12,
+            selectInput("selPhylo", "Choose an option:",
+                        choices = c("test1", "test2")
+            ), align = "center")
+        )
+      })
+      
+      
+      output$phyloPlots <- renderUI({
+        tablerCard(
+          title = "Phylogeny",
+          zoomable = TRUE,
+          closable = FALSE,
+          plotOutput("phyloPlot"),
+          status = "info",
+          statusSide = "left",
+          width = 12
+        )
+      })
+      
+      output$phyloPlot <- renderPlot({
+        if(3 %in% input$Process){
+          tree <- read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
+          tree_bst <- read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
+          ape::plot.phylo(tree, type = "cladogram")
+        }
+      })
+      
+      output$downloadTree <- downloadHandler(
+        filename = function() { 
+          paste("phylogeny-phruta-", Sys.Date(), ".zip", sep="")
+        },
+        content = function(file) {
+          zip(zipfile = file, files = '3.Phylogeny')
+          unlink("3.Phylogeny", recursive = TRUE)
+          
+        },
+        contentType = "application/zip"
+      )
+      
+      output$phyloDownload <- renderUI({
+        tablerCard(
+          status = "yellow",
+          statusSide = "left",
+          width = 12,
+          column(
+            12,
+            downloadButton('downloadTree', 'Download'),
+            align = "center")
+        )
+      })
+      
+    })
+    
+    observeEvent(toListen(), {
+      valuesSequences$genes <- names(sqs.aln)
+    })  
+    
+    observeEvent(input$geneSel, {
+      valuesSequences$nspecies <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked)
+      valuesSequences$ntaxareg <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked[[1]])
+      valuesSequences$DNAbin <- sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked
+    })
+    
   })
-  
   
   dataUpdated <- reactive({
     inFile <- input$file1
@@ -154,15 +393,17 @@ server = function(input, output, session) {
                                   minSeqs = 1)
         
         output$distTable <-
-          DT::renderDataTable(dataset,
-                              extensions = 'Buttons',
-                              options = list(scrollX = TRUE,
-                                             pageLength = 10,
-                                             searching = FALSE,
-                                             dom = 'Bfrtip',
-                                             buttons = c('csv', 'excel')),
-                              rownames = FALSE)
-        
+          DT::renderDataTable(server = FALSE, { 
+            DT::datatable(dataset,
+                          extensions = 'Buttons',
+                          options = list(scrollX = TRUE,
+                                         pageLength = 10,
+                                         searching = FALSE,
+                                         dom = 'Bfrtip',
+                                         buttons = c('csv', 'excel')),
+                          rownames = FALSE)
+          })
+
         progress$inc(1/npro, detail = "Sequences curated...")
         
       }
@@ -192,7 +433,243 @@ server = function(input, output, session) {
         progress$inc(1/npro, detail = "Tree constructed...")
       }
       
+      ##Sampling tab boxes
+      valuesSampling <- reactiveValues(ngeneregions = 0, nseqs = 0, spp = 0)
       
+      observe({
+        output$geneRegions <- renderUI({
+          tablerStatCard(
+            value = valuesSampling$ngeneregions,
+            title = "Gene regions",
+            width = 12
+          )
+        })
+        
+        output$nSeqs <- renderUI({
+          tablerStatCard(
+            value = valuesSampling$nseqs,
+            title = "Sequences",
+            width = 12
+          )
+        })
+        
+        output$nTaxa <- renderUI({
+          tablerStatCard(
+            value = valuesSampling$spp,
+            title = "Species",
+            width = 12
+          )
+        })
+        
+        output$Refresh <- renderUI({
+          tablerCard(
+            status = "yellow",
+            statusSide = "left",
+            width = 12,
+            column(
+              12,
+              fileInput('file1', 'Choose CSV File',
+                        accept=c('text/csv',
+                                 'text/comma-separated-values,text/plain',
+                                 '.csv')),
+              actionButton("refresh", "Refresh", icon = icon("check"),
+                           style = "color: #fff; background-color: #27ae60; border-color: #fff"), align = "center")
+          )
+        })
+        
+        
+        
+        output$tableAccN <- renderUI({
+          tablerCard(
+            title = "Accession numbers",
+            zoomable = TRUE,
+            closable = FALSE,
+            overflow = TRUE,
+            DT::dataTableOutput("distTable"),
+            status = "info",
+            statusSide = "left",
+            width = 12
+          )
+        })
+      })
+      
+      toListen <- reactive({
+        list(input$refresh)
+      })
+      
+      #observeEvent(toListen(), {
+        valuesSampling$ngeneregions <- length(na.omit(unique(dataset$file)))
+        valuesSampling$nseqs <- ifelse(is.null(nrow(dataset)), 0,  nrow(dataset))
+        valuesSampling$spp <- ifelse(is.null(nrow(dataset)), 0,  length(unique(dataset$Species)))
+      #})  
+      
+      
+      ##alignment tab boxes
+      valuesSequences <- reactiveValues(nspecies = 0, ntaxareg = 0, genes = NULL, DNAbin = NULL)
+      
+      observe({
+        output$SpeciesRegion <- renderUI({
+          tablerStatCard(
+            value = valuesSequences$nspecies,
+            title = "Sequences",
+            width = 12
+          )
+        })
+        
+        
+        output$nGaps <- renderUI({
+          tablerStatCard(
+            value = valuesSequences$ntaxareg,
+            title = "Sites",
+            width = 12
+          )
+        })
+        
+        output$dropGenes <- renderUI({
+          tablerCard(
+            status = "yellow",
+            statusSide = "left",
+            width = 12,
+            column(
+              12,
+              selectInput("geneSel", "Choose a gene region:",
+                          valuesSequences$genes
+              ), align = "center")
+          )
+        })
+        
+        
+        output$downloadAln <- downloadHandler(
+          
+          filename = function() { 
+            paste("aln-phruta-", Sys.Date(), ".zip", sep="")
+          },
+          content = function(file) {
+            if(!is.null(sqs.aln)){
+              unlink("2.Alignments", recursive = TRUE)
+              dir.create("2.Alignments")
+              invisible(
+                lapply(seq_along(sqs.aln), function(x){
+                  ape::write.FASTA(sqs.aln[[x]]$Aln.Original, file = paste0("2.Alignments/Raw_", 
+                                                                            names(sqs.aln)[x], 
+                                                                            ".fasta"))
+                  ape::write.FASTA(sqs.aln[[x]]$Aln.Masked, file = paste0("2.Alignments/Masked_", 
+                                                                          names(sqs.aln)[x], 
+                                                                          ".fasta"))
+                })
+              )
+              zip(zipfile = file, files = '2.Alignments')
+              unlink("2.Alignments", recursive = TRUE)
+            }
+          },
+          contentType = "application/zip"
+        )
+        
+        output$alnDownload <- renderUI({
+          tablerCard(
+            status = "yellow",
+            statusSide = "left",
+            width = 12,
+            column(
+              12,
+              downloadButton('downloadAln', 'Download'),
+              align = "center")
+          )
+        })
+        
+        
+        output$seqPlots <- renderUI({
+          tablerCard(
+            title = "Sequence alignments",
+            zoomable = TRUE,
+            closable = FALSE,
+            plotOutput("distPlot"),
+            status = "info",
+            statusSide = "left",
+            width = 12
+          )
+        })
+        
+        output$distPlot <- renderPlot({
+          if(!is.null(valuesSequences$DNAbin)){
+            image(valuesSequences$DNAbin, 
+                  xlab = "Position",
+                  ylab = "Species", 
+                  legend = TRUE
+            )
+          }
+        })
+        
+        
+        output$phyloControl <- renderUI({
+          tablerCard(
+            status = "yellow",
+            statusSide = "left",
+            width = 12,
+            column(
+              12,
+              selectInput("selPhylo", "Choose an option:",
+                          choices = c("test1", "test2")
+              ), align = "center")
+          )
+        })
+        
+        
+        output$phyloPlots <- renderUI({
+          tablerCard(
+            title = "Phylogeny",
+            zoomable = TRUE,
+            closable = FALSE,
+            plotOutput("phyloPlot"),
+            status = "info",
+            statusSide = "left",
+            width = 12
+          )
+        })
+        
+        output$phyloPlot <- renderPlot({
+          if(3 %in% input$Process){
+            tree <- read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
+            tree_bst <- read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
+            ape::plot.phylo(tree, type = "cladogram")
+          }
+        })
+        
+        output$downloadTree <- downloadHandler(
+          filename = function() { 
+            paste("phylogeny-phruta-", Sys.Date(), ".zip", sep="")
+          },
+          content = function(file) {
+            zip(zipfile = file, files = '3.Phylogeny')
+            unlink("3.Phylogeny", recursive = TRUE)
+            
+          },
+          contentType = "application/zip"
+        )
+        
+        output$phyloDownload <- renderUI({
+          tablerCard(
+            status = "yellow",
+            statusSide = "left",
+            width = 12,
+            column(
+              12,
+              downloadButton('downloadTree', 'Download'),
+              align = "center")
+          )
+        })
+        
+      })
+      
+      observeEvent(toListen(), {
+        valuesSequences$genes <- names(sqs.aln)
+      })  
+      
+      observeEvent(input$geneSel, {
+        valuesSequences$nspecies <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked)
+        valuesSequences$ntaxareg <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked[[1]])
+        valuesSequences$DNAbin <- sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked
+      })
       
     }
     
@@ -200,245 +677,6 @@ server = function(input, output, session) {
     
   })
 
-  ##Sampling tab boxes
-  valuesSampling <- reactiveValues(ngeneregions = 0, nseqs = 0, spp = 0)
-  
-  observe({
-  output$geneRegions <- renderUI({
-    tablerStatCard(
-      value = valuesSampling$ngeneregions,
-      title = "Gene regions",
-      width = 12
-    )
-  })
-  
-  output$nSeqs <- renderUI({
-    tablerStatCard(
-      value = valuesSampling$nseqs,
-      title = "Sequences",
-      width = 12
-    )
-  })
-  
-  output$nTaxa <- renderUI({
-    tablerStatCard(
-      value = valuesSampling$spp,
-      title = "Species",
-      width = 12
-    )
-  })
-  
-  output$Refresh <- renderUI({
-    tablerCard(
-      status = "yellow",
-      statusSide = "left",
-      width = 12,
-      column(
-        12,
-        fileInput('file1', 'Choose CSV File',
-                  accept=c('text/csv',
-                           'text/comma-separated-values,text/plain',
-                           '.csv')),
-        actionButton("refresh", "Refresh", icon = icon("check"),
-                     style = "color: #fff; background-color: #27ae60; border-color: #fff"), align = "center")
-    )
-  })
-  
-
-  
-  output$tableAccN <- renderUI({
-    tablerCard(
-      title = "Accession numbers",
-      zoomable = TRUE,
-      closable = FALSE,
-      overflow = TRUE,
-      DT::dataTableOutput("distTable"),
-      status = "info",
-      statusSide = "left",
-      width = 12
-    )
-  })
-  })
-  
-  
-  toListen <- reactive({
-    list(input$action, input$refresh)
-  })
-  
-  observeEvent(toListen(), {
-    valuesSampling$ngeneregions <- length(na.omit(unique(sqs.curated$AccessionTable$file)))
-    valuesSampling$nseqs <- ifelse(is.null(nrow(sqs.curated$AccessionTable)), 0,  nrow(sqs.curated$AccessionTable))
-    valuesSampling$spp <- ifelse(is.null(nrow(sqs.curated$Taxonomy)), 0,  nrow(sqs.curated$Taxonomy))
-  })  
-  
-  
-  ##alignment tab boxes
-  valuesSequences <- reactiveValues(nspecies = 0, ntaxareg = 0, genes = NULL, DNAbin = NULL)
-  
-  observe({
-    output$SpeciesRegion <- renderUI({
-      tablerStatCard(
-        value = valuesSequences$nspecies,
-        title = "Sequences",
-        width = 12
-      )
-    })
-    
-    
-    output$nGaps <- renderUI({
-      tablerStatCard(
-        value = valuesSequences$ntaxareg,
-        title = "Sites",
-        width = 12
-      )
-    })
-    
-    output$dropGenes <- renderUI({
-      tablerCard(
-        status = "yellow",
-        statusSide = "left",
-        width = 12,
-        column(
-          12,
-          selectInput("geneSel", "Choose a gene region:",
-                      valuesSequences$genes
-          ), align = "center")
-      )
-    })
-    
-    
-    output$downloadAln <- downloadHandler(
-      
-      filename = function() { 
-        paste("aln-phruta-", Sys.Date(), ".zip", sep="")
-      },
-      content = function(file) {
-        if(!is.null(sqs.aln)){
-        unlink("2.Alignments", recursive = TRUE)
-        dir.create("2.Alignments")
-        invisible(
-        lapply(seq_along(sqs.aln), function(x){
-          ape::write.FASTA(sqs.aln[[x]]$Aln.Original, file = paste0("2.Alignments/Raw_", 
-                                                     names(sqs.aln)[x], 
-                                                     ".fasta"))
-          ape::write.FASTA(sqs.aln[[x]]$Aln.Masked, file = paste0("2.Alignments/Masked_", 
-                                                                       names(sqs.aln)[x], 
-                                                             ".fasta"))
-        })
-        )
-        zip(zipfile = file, files = '2.Alignments')
-        unlink("2.Alignments", recursive = TRUE)
-        }
-      },
-      contentType = "application/zip"
-    )
-    
-    output$alnDownload <- renderUI({
-      tablerCard(
-        status = "yellow",
-        statusSide = "left",
-        width = 12,
-        column(
-          12,
-          downloadButton('downloadAln', 'Download'),
-          align = "center")
-      )
-    })
-    
-
-    output$seqPlots <- renderUI({
-      tablerCard(
-        title = "Sequence alignments",
-        zoomable = TRUE,
-        closable = FALSE,
-        plotOutput("distPlot"),
-        status = "info",
-        statusSide = "left",
-        width = 12
-      )
-    })
-    
-    output$distPlot <- renderPlot({
-     if(!is.null(valuesSequences$DNAbin)){
-      image(valuesSequences$DNAbin, 
-            xlab = "Position",
-            ylab = "Species", 
-            legend = TRUE
-      )
-     }
-    })
-    
-    
-    output$phyloControl <- renderUI({
-      tablerCard(
-        status = "yellow",
-        statusSide = "left",
-        width = 12,
-        column(
-          12,
-          selectInput("selPhylo", "Choose an option:",
-                      choices = c("test1", "test2")
-          ), align = "center")
-      )
-    })
-    
- 
-    output$phyloPlots <- renderUI({
-      tablerCard(
-        title = "Phylogeny",
-        zoomable = TRUE,
-        closable = FALSE,
-        plotOutput("phyloPlot"),
-        status = "info",
-        statusSide = "left",
-        width = 12
-      )
-    })
-    
-    output$phyloPlot <- renderPlot({
-      if(3 %in% input$Process){
-     tree <- read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
-     tree_bst <- read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
-     ape::plot.phylo(tree, type = "cladogram")
-      }
-    })
-    
-    output$downloadTree <- downloadHandler(
-      filename = function() { 
-        paste("phylogeny-phruta-", Sys.Date(), ".zip", sep="")
-      },
-      content = function(file) {
-        zip(zipfile = file, files = '3.Phylogeny')
-        unlink("3.Phylogeny", recursive = TRUE)
-        
-      },
-      contentType = "application/zip"
-      )
-    
-    output$phyloDownload <- renderUI({
-      tablerCard(
-        status = "yellow",
-        statusSide = "left",
-        width = 12,
-        column(
-          12,
-          downloadButton('downloadTree', 'Download'),
-          align = "center")
-      )
-    })
-    
-  })
-  
-  observeEvent(toListen(), {
-    valuesSequences$genes <- names(sqs.aln)
-  })  
-  
-  observeEvent(input$geneSel, {
-    valuesSequences$nspecies <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked)
-    valuesSequences$ntaxareg <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked[[1]])
-    valuesSequences$DNAbin <- sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked
-  })
-  
   output$progress <- renderUI({
     tagList(
       tablerProgress(value = input$knob, size = "xs", status = "yellow"),
