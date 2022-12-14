@@ -1,4 +1,6 @@
 server = function(input, output, session) {
+  
+  
   sqs.curated <- NULL
   tree <- NULL
   sqs.aln <- NULL
@@ -11,10 +13,7 @@ server = function(input, output, session) {
     # Here is where we update language in session
     shiny.i18n::update_lang(session, input$selected_language)
   })
-  
-  ## Tables need to be editable
-  ## https://stackoverflow.com/questions/70155520/how-to-make-datatable-editable-in-r-shiny
-  
+
 
   observeEvent(input$action, {
     
@@ -22,21 +21,23 @@ server = function(input, output, session) {
     on.exit(progress$close())
     progress$set(message = "Running {phruta}...", value = 0)
     
-    taxa <- input$addTaxa
     
     npro <- length(input$Process)
     
     # Add Clades or Species file
+    if(!is.null(input$fileTaxa)){
     taxa2 <- read.csv(input$fileTaxa$datapath,
                    header = FALSE)
     taxa <- c(taxa, taxa2[,1])
+    }else{
+    taxa <- input$addTaxa
+    }
     
     if( 0 %in% input$Process ) { #retrieve
       
-      genes <- read.csv(input$fileGenes$datapath,
-                        header = FALSE)
-      
       if(!is.null(input$fileGenes)){
+      genes <- read.csv(input$fileGenes$datapath,
+                          header = FALSE)
       targetGenes <- data.frame('Gene' = genes[,1])
       }else{
       gs.seqs <<- gene.sampling.retrieve(organism = taxa, 
@@ -46,6 +47,8 @@ server = function(input, output, session) {
       
       targetGenes <<- gs.seqs[gs.seqs$PercentOfSampledSpecies > input$sliderGenes,]
       }
+      
+      
       
       acc.table <<- acc.table.retrieve(
         clades  = taxa,
@@ -307,14 +310,25 @@ server = function(input, output, session) {
         )
       })
       
-      output$phyloPlot <- renderPlot({
-        if(3 %in% input$Process){
-          tree <- read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
-          tree_bst <- read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
-          ape::plot.phylo(tree, type = "cladogram")
-        }
+      tree2 <<- eventReactive(input$root, {
+       ape::root(tree, input$outgroup)
       })
       
+      output$phyloPlot <- renderPlot({
+        
+        if(3 %in% input$Process){
+          tree <<- ape::read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
+          tree_bst <<- ape::read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
+          tip_names <<- tree$tip.label
+        }
+        
+        if(input$root == 0){
+          ape::plot.phylo(ape::ladderize(tree, right = FALSE))
+        }else{
+          ape::plot.phylo(ape::ladderize(tree2(), right = FALSE))
+        }
+      })
+
       output$downloadTree <- downloadHandler(
         filename = function() { 
           paste("phylogeny-phruta-", Sys.Date(), ".zip", sep="")
@@ -334,6 +348,10 @@ server = function(input, output, session) {
           width = 12,
           column(
             12,
+            selectInput("outgroup","Select your outgroup",
+                        tip_names, multiple = TRUE),
+            actionButton("root", "Re-root", icon = icon("tree"),
+                         style = "color: #fff; background-color: #27ae60; border-color: #fff"),
             downloadButton('downloadTree', 'Download'),
             align = "center")
         )
@@ -684,4 +702,6 @@ server = function(input, output, session) {
     )
   })
   
-}
+
+  
+  }

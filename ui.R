@@ -6,6 +6,7 @@ library(phruta)
 library(shiny.i18n)
 library(ggmsa)
 library(zip)
+library(ape)
 
 profileCard <- tablerProfileCard(
   width = 12,
@@ -51,39 +52,35 @@ ui = tablerDashPage(
     src = "https://raw.githubusercontent.com/cromanpa94/phruta/main/vignettes/logo.png",
     navMenu = tablerNavMenu(
       tablerNavMenuItem(
-        tabName = i18n$t("Home"),
+        shiny.i18n::usei18n(i18n),
+        tabName = "Home",
         icon = "home",
-        "Home"
+        i18n$t("Home")
       ),
       tablerNavMenuItem(
         tabName = "Settings",
         icon = "lock",
-        "Settings"
+        i18n$t("Settings")
       ),
       tablerNavMenuItem(
         tabName = "Sampling",
         icon = "box",
-        "Sampling"
+        i18n$t("Sampling")
       ),
       tablerNavMenuItem(
         tabName = "Alignments",
         icon = "layers",
-        "Alignments"
+        i18n$t("Alignments")
       ),
       tablerNavMenuItem(
         tabName = "Phylogenetics",
         icon = "activity",
-        "Phylogenetics"
+        i18n$t("Phylogenetics")
       ),
-      # tablerNavMenuItem(
-      #   tabName = "TimeDating",
-      #   icon = "clock",
-      #   "Time-dating"
-      # ),
       tablerNavMenuItem(
         tabName = "About",
         icon = "info",
-        "About"
+        i18n$t("About")
       )
     )
   ),
@@ -105,8 +102,8 @@ ui = tablerDashPage(
             column(
               tablerProfileCard(
                 width = 12,
-                title = "Welcome to SALPHYCON!",
-                subtitle = "{Salphycon} is a shiny app that extends the functionalities of the {phruta} R package. {Salphycon} is able to (1) find potentially (phylogenetically) relevant gene regions for a given set of taxa based on GenBank, (2) retrieve gene sequences and curate taxonomic information from the same database, (3) combine downloaded and local gene sequences, and (4) perform sequence alignment, phylogenetic inference, and basic tree dating tasks. Both {phruta} and {salphycon} are focused on species-level analyses.",
+                title = i18n$t("Welcome to SALPHYCON!"),
+                subtitle = i18n$t("{Salphycon} is a shiny app that extends the functionalities of the {phruta} R package. {Salphycon} is able to (1) find potentially (phylogenetically) relevant gene regions for a given set of taxa based on GenBank, (2) retrieve gene sequences and curate taxonomic information from the same database, (3) combine downloaded and local gene sequences, and (4) perform sequence alignment, phylogenetic inference, and basic tree dating tasks. Both {phruta} and {salphycon} are focused on species-level analyses."),
                 background = "https://cromanpa94.github.io/cromanpa/images/FrogMain_right_up.jpg",
                 src = "img/salphycon_full.png",
                 tablerSocialLinks(
@@ -144,7 +141,7 @@ ui = tablerDashPage(
                   status = "info",
                   animation = "jelly"
                 ),
-                collapsed = TRUE,
+                collapsed = FALSE,
                 closable = FALSE, 
                 zoomable = FALSE
               ),
@@ -152,50 +149,50 @@ ui = tablerDashPage(
               column(
                 width = 4,
                 tablerBlogCard(
-                  title = "Settings",
+                  title = i18n$t("Settings"),
                   width = 12,
-                  "Select the species-, gene-level sampling and tasks that you would like to execute in {salphycon}."
+                  i18n$t("Select the species-, gene-level sampling and tasks that you would like to execute in {salphycon}.")
                 )
               ),
               column(
                 width = 4,
                 tablerBlogCard(
-                  title = "Sampling",
+                  title = i18n$t("Sampling"),
                   width = 12,
-                  "Once you have run the analyses under {Settings}, use this tab to edit and examine the species-, gene-level sampling."
+                  i18n$t("Once you have run the analyses under {Settings}, use this tab to edit and examine the species-, gene-level sampling.")
                 )
               ),
               column(
                 width = 4,
                 tablerBlogCard(
-                  title = "Alignments",
+                  title = i18n$t("Alignments"),
                   width = 12,
-                  "Interested in visualizing the alignments assembled using {salphycon}? Check out the visuals in this tab."
+                  i18n$t("Interested in visualizing the alignments assembled using {salphycon}? Check out the visuals in this tab.")
                 )
               )
               ),fluidRow(
                 column(
                   width = 4,
                   tablerBlogCard(
-                    title = "Phylogenetics",
+                    title = i18n$t("Phylogenetics"),
                     width = 12,
-                    "If you decided to run some phylogenetic analyses on your dataset, use this tab to examine and retrieve the resulting trees."
+                    i18n$t("If you decided to run some phylogenetic analyses on your dataset, use this tab to examine and retrieve the resulting trees.")
                   )
                 ),
                 column(
                   width = 4,
                   tablerBlogCard(
-                    title = "Tree dating",
+                    title = i18n$t("Tree dating"),
                     width = 12,
-                    "Configure and analyze time-calibrated phylogenies based on phylogenies constructed using {salphycon}."
+                    i18n$t("Configure and analyze time-calibrated phylogenies based on phylogenies constructed using {salphycon}.")
                   )
                 ),
                 column(
                   width = 4,
                   tablerBlogCard(
-                    title = "About",
+                    title = i18n$t("About"),
                     width = 12,
-                    "Find more information about the author and get details on how to cite {salphycon}."
+                    i18n$t("Find more information about the author and get details on how to cite {salphycon}.")
                   )
                 )
               ),
@@ -212,8 +209,8 @@ ui = tablerDashPage(
           div(style = "height:30px"),
           tablerCard(
             width = 12,
-            title = h3("SETTINGS"),
-            "Select the species-, gene-level sampling and tasks that you would like to execute in {salphycon}. First, start by choosing the taxonomic makeup of your analyses. You can either provide a comma-separated list of taxa (e.g. species, clades) or upload a {.csv} file with a single column taxa in rows. Second, select the genetic makeup of your analyses. In the current release of {salphycon}, users are only able to select what is the minimum species-level sampling percentage per gene (e.g. only genes sampled in 20% of the species). Third, select the tasks that you are interested in running. Finally, run the analyses!",
+            title = h3(i18n$t("SETTINGS")),
+            i18n$t("Select the species-, gene-level sampling and tasks that you would like to execute in {salphycon}. First, start by choosing the taxonomic makeup of your analyses. You can either provide a comma-separated list of taxa (e.g. species, clades) or upload a {.csv} file with a single column taxa in rows. Second, select the genetic makeup of your analyses. In the current release of {salphycon}, users are only able to select what is the minimum species-level sampling percentage per gene (e.g. only genes sampled in 20% of the species). Third, select the tasks that you are interested in running. Finally, run the analyses!"),
             closable = FALSE
           ),
           fluidRow(
@@ -227,15 +224,15 @@ ui = tablerDashPage(
                 status = "yellow",
                 statusSide = "left",
                 width = 12,
-                h3("1 - Taxa"),
-                i18n$t("Please define the taxonomic makeup of your analuses. You can either provide a comma-separated list of taxa in the box below or upload a csv file with taxa in rows."),
+                h3(i18n$t("1 - Taxa")),
+                i18n$t("Please define the taxonomic makeup of your analyses. You can either provide a comma-separated list of taxa in the box below or upload a csv file with taxa in rows."),
                 
                 # Add Clades or Species text
                 textInput("addTaxa", "", value = "", width = NULL, placeholder = "Halobates, Metrocoris, ..."),
                 uiOutput("filterPage1"),
                 
                 dropdown(
-                  "Select a file in {csv} format that includes taxonomic names in the rows and a single column. Please do not include column names.",
+                  i18n$t("Select a file in {csv} format that includes taxonomic names in the rows and a single column. Please do not include column names."),
                   fileInput("fileTaxa", h5(""), width = '80%',
                             accept = c(
                               "text/csv",
@@ -258,7 +255,7 @@ ui = tablerDashPage(
                   status = "yellow",
                   statusSide = "left",
                   width = 12,
-                  h3("2 - Genes"),
+                  h3(i18n$t("2 - Genes")),
                   i18n$t("Please define the genetic makeup of your analyses. For now, you will be able to indicate what is the minimum percetage of species that genes should include in order to be included in the analyses."),
                   h3(""),
                   h3(""),
@@ -266,7 +263,7 @@ ui = tablerDashPage(
                   sliderInput("sliderGenes", h6(i18n$t("Threshold to find genes")),
                               min = 0, max = 100, value = 20),
                   dropdown(
-                    "Select a file in {csv} format that includes gene names in the rows and a single column. Please do not include column names.",
+                    i18n$t("Select a file in {csv} format that includes gene names in the rows and a single column. Please do not include column names."),
                     fileInput("fileGenes", h5(""), width = '80%',
                               accept = c(
                                 "text/csv",
@@ -285,8 +282,8 @@ ui = tablerDashPage(
                   status = "yellow",
                   statusSide = "left",
                   width = 12,
-                  h3(" 4 - Run analyses"),
-                  i18n$t("Please make sure that all your settings are correct and run {salphycon}! "), h3(""),
+                  h3(i18n$t(" 4 - Run analyses")),
+                  i18n$t("Please make sure that all your settings are correct and run {salphycon}!"), h3(""),
                   column(
                     12,
                     actionButton("action", "Run analyses!", icon = icon("check"),
@@ -309,28 +306,12 @@ ui = tablerDashPage(
                     12,
                     awesomeCheckboxGroup("Process", 
                                        h5(""), 
-                                       
                                        choices = list("Retrieve" = 0,
                                                       "Curate" = 1, 
                                                       "Align" = 2, 
                                                       "RAxML" = 3),
                                        inline = TRUE,
-                                       selected = 0), align = "center")
-                  #,
-                  # dropdown(
-                  #   tags$h3("List of Input"),
-                  #   awesomeCheckbox("checkbox", "Arg1", value = TRUE),
-                  #   awesomeCheckbox("checkbox", "Arg2", value = TRUE),
-                  #   awesomeCheckbox("checkbox", "Arg3", value = TRUE),
-                  #   style = "unite", icon = icon("cogs"),
-                  #   status = "warning", width = "300px",
-                  #   tooltip = tooltipOptions(title = "Click to see inputs !"),
-                  #   animate = animateOptions(
-                  #     enter = animations$fading_entrances$fadeInLeftBig,
-                  #     exit = animations$fading_exits$fadeOutRightBig
-                  #   )
-                  # )
-                  
+                                       selected = c(0, 1)), align = "center")
                 )
               )
               
@@ -348,8 +329,8 @@ ui = tablerDashPage(
           div(style = "height:30px"),
           tablerCard(
             width = 12,
-            title = h3("SAMPLING"),
-            "Once you have run the analyses under {Settings}, use this tab to edit and examine the species-, gene-level sampling. In this tab, you will get basic information on the sampling you retrieved from the basic settings defined in the previous tab. You will be able to make changes on the taxonomic and genetic makeup of the analyses.",
+            title = h3(i18n$t("SAMPLING")),
+            i18n$t("Once you have run the analyses under {Settings}, use this tab to edit and examine the species-, gene-level sampling. In this tab, you will get basic information on the sampling you retrieved from the basic settings defined in the previous tab. You will be able to make changes on the taxonomic and genetic makeup of the analyses."),
             closable = FALSE
           ),
           fluidRow(
@@ -380,8 +361,8 @@ ui = tablerDashPage(
           div(style = "height:30px"),
           tablerCard(
             width = 12,
-            title = h3("ALIGNMENTS"),
-            "Once you have defined the species- and gene-level makeup of your analyses in the previous two tabs, you will be able to visualize the resulting alignments. For now, the app will only display the masked alignments. You will be able to retrieve the alignments at this point and will be provided with information described each of the alignments.",
+            title = h3(i18n$t("ALIGNMENTS")),
+            i18n$t("Once you have defined the species- and gene-level makeup of your analyses in the previous two tabs, you will be able to visualize the resulting alignments. For now, the app will only display the masked alignments. You will be able to retrieve the alignments at this point and will be provided with information described each of the alignments."),
             closable = FALSE
           ),
           fluidRow(
@@ -412,8 +393,8 @@ ui = tablerDashPage(
           div(style = "height:30px"),
           tablerCard(
             width = 12,
-            title = h3("PHYLOGENETICS"),
-            "If you decided to run some phylogenetic analyses on your dataset, this tab will allow you to examine and retrieve the resulting trees. This tab includes a basic visualizer, with the additional option of downloading the trees constructed in {salphycon}.",
+            title = h3(i18n$t("PHYLOGENETICS")),
+            i18n$t("If you decided to run some phylogenetic analyses on your dataset, this tab will allow you to examine and retrieve the resulting trees. This tab includes a basic visualizer, with the additional option of downloading the trees constructed in {salphycon}."),
             closable = FALSE
           ),
           fluidRow(
@@ -462,8 +443,8 @@ ui = tablerDashPage(
           div(style = "height:30px"),
           tablerCard(
             width = 12,
-            title = h3("ABOUT"),
-            "Find more information about the author and get details on how to cite {salphycon}.",
+            title = h3(i18n$t("ABOUT")),
+            i18n$t("Find more information about the author and get details on how to cite {salphycon}."),
             closable = FALSE
           ),
           fluidRow(
@@ -476,7 +457,7 @@ ui = tablerDashPage(
               tablerProfileCard(
                 width = 6,
                 title = "Cristian Roman Palacios",
-                subtitle = "Asistant Professor of Practice, UArizona",
+                subtitle = i18n$t("Asistant Professor of Practice, UArizona"),
                 background = "https://preview.tabler.io/demo/photos/ilnur-kalimullin-218996-500.jpg",
                 src = "https://cromanpa94.github.io/cromanpa/contact/2019-11-21%2010.51.14.jpg",
                 tablerSocialLinks(
