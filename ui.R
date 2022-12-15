@@ -297,9 +297,7 @@ ui = tablerDashPage(
                                  style = "color: #fff; background-color: #27ae60; border-color: #fff"), align = "center")
                 )
               )
-              
             ),
-            
             column(
               width = 3,
               fluidRow(
@@ -321,11 +319,8 @@ ui = tablerDashPage(
                                        selected = c(0, 1)), align = "center")
                 )
               )
-              
             )
-            
           )
-          
         )
       ),
       tablerTabItem(
@@ -358,7 +353,6 @@ ui = tablerDashPage(
             )
           )
         )
-        #fluidPage(plotCard)
       ),
       tablerTabItem(
         tabName = "Alignments",
@@ -390,7 +384,6 @@ ui = tablerDashPage(
             )
           )
         )
-        #fluidPage(plotCard)
       ),
       tablerTabItem(
         tabName = "Phylogenetics",
@@ -409,7 +402,6 @@ ui = tablerDashPage(
               width = 3,
               profileCard
             ),
-            
             column(
               width = 9,
               uiOutput("phyloPlots"),

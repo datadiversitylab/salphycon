@@ -33,19 +33,25 @@ server = function(input, output, session) {
     taxa <-   sub(" ", "", strsplit( input$addTaxa, ",")[[1]])
     }
     
-    if( 0 %in% input$Process ) { #retrieve
+    if( 0 %in% input$Process ) {
+      tryCatch({
+      #retrieve
       
       if(!is.null(input$fileGenes)){
       genes <- read.csv(input$fileGenes$datapath,
                           header = FALSE)
       targetGenes <- data.frame('Gene' = genes[,1])
       }else{
-      gs.seqs <<- gene.sampling.retrieve(organism = taxa, 
-                                        speciesSampling = TRUE,
-                                        npar = 6,
-                                        nSearchesBatch = 500)
+        
+        
+      gs.seqs <<- 
+        gene.sampling.retrieve(organism = taxa, 
+                    speciesSampling = TRUE,
+                    npar = 6,
+                    nSearchesBatch = 500)
       
       targetGenes <<- gs.seqs[gs.seqs$PercentOfSampledSpecies > input$sliderGenes,]
+      
       }
       
       
@@ -64,10 +70,13 @@ server = function(input, output, session) {
       #sqs.curated <<- sqs.downloaded ##If no curation happens
       progress$inc(1/npro, detail = "Sequences downloaded...")
       
-    }
+     
+      
+    }, error=function(e){NULL})
+      }
 
-    
     if( all(c(0, 1) %in% input$Process)){ #Curate if seqs have been downloaded
+      tryCatch({
       sqs.curated <<- sq.curate(filterTaxonomicCriteria = '[AZ]',
                                kingdom = 'animals', 
                                sqs.object = sqs.downloaded,
@@ -86,16 +95,24 @@ server = function(input, output, session) {
         })
       
       progress$inc(1/npro, detail = "Sequences curated...")
-      
+      }, error=function(e){})
     }
     
-    if( all(c(0, 1, 2) %in% input$Process)){ #Aln if seqs have been downloaded
+    if( all(c(0, 1, 2) %in% input$Process)){
+      tryCatch({  
+      
+       #Aln if seqs have been downloaded
       sqs.aln <<- sq.aln(sqs.object = sqs.curated)
       progress$inc(1/4, detail = "Sequences aligned...")
       
-    }
     
-    if( all(c(0, 1, 2, 3) %in% input$Process)){ #RAxML if seqs have been aligned
+      
+       
+    }, error=function(e){})
+      }
+    
+    if( all(c(0, 1, 2, 3) %in% input$Process)){  
+      tryCatch({  #RAxML if seqs have been aligned
       dir.create("2.Alignments")
       lapply(seq_along(sqs.aln), function(x){
         ape::write.FASTA(sqs.aln[[x]]$Aln.Masked, 
@@ -113,7 +130,7 @@ server = function(input, output, session) {
       
       progress$inc(1/npro, detail = "Tree constructed...")
       
-    }
+    }, error=function(e){})}
     
     
     ##Sampling tab boxes
@@ -702,7 +719,7 @@ server = function(input, output, session) {
     )
   })
   
-  observeEvent(input$action2, {
+  observeEvent(input$action2, {  tryCatch({ 
     
     progress <- shiny::Progress$new()
     on.exit(progress$close())
@@ -717,7 +734,7 @@ server = function(input, output, session) {
     }else{
       Taxagenes <- sub(" ", "", strsplit( input$genesearch, ",")[[1]])
     }
-    
+     
     gs.seqs_gene <<- gene.sampling.retrieve(organism = Taxagenes, 
                                        speciesSampling = TRUE,
                                        npar = 6,
@@ -750,6 +767,6 @@ server = function(input, output, session) {
     
     
     
-  })
+  }, error=function(e){})})
   
   }
