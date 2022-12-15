@@ -4,7 +4,6 @@ server = function(input, output, session) {
   sqs.curated <- NULL
   tree <- NULL
   sqs.aln <- NULL
-  ##So phruta doesn't where
   assign(".testMode", TRUE, envir = phruta:::pkg.env)
   
   observeEvent(input$selected_language, {
@@ -13,7 +12,6 @@ server = function(input, output, session) {
     # Here is where we update language in session
     shiny.i18n::update_lang(session, input$selected_language)
   })
-
 
   observeEvent(input$action, {
     
@@ -28,9 +26,11 @@ server = function(input, output, session) {
     if(!is.null(input$fileTaxa)){
     taxa2 <- read.csv(input$fileTaxa$datapath,
                    header = FALSE)
-    taxa <- c(taxa, taxa2[,1])
+    
+    taxa1 <- sub(" ", "", strsplit( input$addTaxa, ",")[[1]])
+    taxa <- c(taxa1, taxa2[,1])
     }else{
-    taxa <- input$addTaxa
+    taxa <-   sub(" ", "", strsplit( input$addTaxa, ",")[[1]])
     }
     
     if( 0 %in% input$Process ) { #retrieve
@@ -702,6 +702,54 @@ server = function(input, output, session) {
     )
   })
   
-
+  observeEvent(input$action2, {
+    
+    progress <- shiny::Progress$new()
+    on.exit(progress$close())
+    progress$set(message = "Running {phruta}...", value = 0)
+    
+    # Add Clades or Species file
+    if(!is.null(input$fileTaxaGenes)){
+      taxa2genes <- read.csv(input$fileTaxaGenes$datapath,
+                        header = FALSE)
+      Taxagenes <- sub(" ", "", strsplit( input$genesearch, ",")[[1]])
+      Taxagenes <- c(Taxagenes, taxa2genes[,1])
+    }else{
+      Taxagenes <- sub(" ", "", strsplit( input$genesearch, ",")[[1]])
+    }
+    
+    gs.seqs_gene <<- gene.sampling.retrieve(organism = Taxagenes, 
+                                       speciesSampling = TRUE,
+                                       npar = 6,
+                                       nSearchesBatch = 500)
+    
+    output$distTableGenes <-
+      DT::renderDataTable(server = FALSE, { 
+        DT::datatable(gs.seqs_gene,
+                      extensions = 'Buttons',
+                      options = list(scrollX = TRUE,
+                                     pageLength = 10,
+                                     searching = FALSE,
+                                     dom = 'Bfrtip',
+                                     buttons = c('csv', 'excel')),
+                      rownames = FALSE)
+      })
+    
+    output$tableGenes <- renderUI({
+      tablerCard(
+        title = "Gene sampling",
+        zoomable = TRUE,
+        closable = FALSE,
+        overflow = TRUE,
+        DT::dataTableOutput("distTableGenes"),
+        status = "info",
+        statusSide = "left",
+        width = 12
+      )
+    })
+    
+    
+    
+  })
   
   }

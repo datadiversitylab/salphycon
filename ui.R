@@ -78,6 +78,11 @@ ui = tablerDashPage(
         i18n$t("Phylogenetics")
       ),
       tablerNavMenuItem(
+        tabName = "GeneFinder",
+        icon = "map",
+        i18n$t("Gene finder")
+      ),
+      tablerNavMenuItem(
         tabName = "About",
         icon = "info",
         i18n$t("About")
@@ -100,6 +105,24 @@ ui = tablerDashPage(
               width = 2
             ),
             column(
+              tablerCard(
+                title = "Language/Idioma",
+                width = 12,
+                column(width = 12,
+                prettyRadioButtons(
+                  inline = TRUE,
+                  inputId = "selected_language",
+                  label = i18n$t(""), 
+                  choices = i18n$get_languages(),
+                  selected = i18n$get_key_translation(),
+                  bigger = FALSE,
+                  status = "info",
+                  animation = "jelly"
+                ), align = "center"),
+                collapsed = FALSE,
+                closable = FALSE, 
+                zoomable = FALSE
+              ),
               tablerProfileCard(
                 width = 12,
                 title = i18n$t("Welcome to SALPHYCON!"),
@@ -128,23 +151,7 @@ ui = tablerDashPage(
                     icon = "gear"
                   )
                 )
-              ), tablerCard(
-                title = "Language/Idioma",
-                width = 12,
-                prettyRadioButtons(
-                  inline = TRUE,
-                  inputId = "selected_language",
-                  label = i18n$t(""), 
-                  choices = i18n$get_languages(),
-                  selected = i18n$get_key_translation(),
-                  bigger = FALSE,
-                  status = "info",
-                  animation = "jelly"
-                ),
-                collapsed = FALSE,
-                closable = FALSE, 
-                zoomable = FALSE
-              ),
+              ), 
               fluidRow(
               column(
                 width = 4,
@@ -182,9 +189,9 @@ ui = tablerDashPage(
                 column(
                   width = 4,
                   tablerBlogCard(
-                    title = i18n$t("Tree dating"),
+                    title = i18n$t("Gene finder"),
                     width = 12,
-                    i18n$t("Configure and analyze time-calibrated phylogenies based on phylogenies constructed using {salphycon}.")
+                    i18n$t("Find genes for a target taxon or set of taxa using {salphycon}.")
                   )
                 ),
                 column(
@@ -407,6 +414,67 @@ ui = tablerDashPage(
               width = 9,
               uiOutput("phyloPlots"),
               uiOutput("phyloDownload")
+            )
+          )
+        )
+      ),
+      tablerTabItem(
+        tabName = "GeneFinder",
+        fluidPage(
+          useTablerDash(),
+          chooseSliderSkin("Modern"),
+          div(style = "height:30px"),
+          tablerCard(
+            width = 12,
+            title = h3(i18n$t("Gene finder")),
+            i18n$t("Find the distribution of sampled genes in GenBank for a target taxon or set of taxa."),
+            closable = FALSE
+          ),
+          fluidRow(
+            column(
+              width = 3,
+              profileCard
+            ),
+            column(
+              width = 3,
+              tablerCard(
+                status = "yellow",
+                statusSide = "left",
+                width = 12,
+                h3(i18n$t("Taxa")),
+                i18n$t("Please define the taxonomic makeup of your analyses. You can either provide a comma-separated list of taxa in the box below or upload a csv file with taxa in rows."),
+                
+                # Add Clades or Species text
+                textInput("genesearch", "", value = "", width = NULL, placeholder = "Halobates, Metrocoris, ..."),
+                column(
+                  12,
+                dropdown(
+                  i18n$t("Select a file in {csv} format that includes taxonomic names in the rows and a single column. Please do not include column names."),
+                  fileInput("fileTaxaGenes", h5(""), width = '80%',
+                            accept = c(
+                              "text/csv",
+                              "text/comma-separated-values,text/plain",
+                              ".csv")),
+                  style = "unite", icon = icon("cogs"),
+                  status = "warning", width = "300px",
+                  tooltip = tooltipOptions(title = "Upload a file!"),
+                  animate = animateOptions(
+                    enter = animations$fading_entrances$fadeInLeftBig,
+                    exit = animations$fading_exits$fadeOutRightBig
+                  )
+                ), align = "center"
+                ),
+                br(),
+                column(
+                  12,
+                  actionButton("action2", i18n$t("Find genes!"), icon = icon("check"),
+                               style = "color: #fff; background-color: #27ae60; border-color: #fff"), align = "center"
+                  )
+              )
+            ),
+            column(
+              width = 6,
+              uiOutput("tableGenes")
             )
           )
         )
