@@ -43,7 +43,7 @@ Select additional genes,Seleccionar genes adicionales
 "Select the species-, gene-level sampling and tasks that you would like to execute in {salphycon}.",Seleccione el muestreo a nivel de especie y de gen y las tareas que desea ejecutar en {salphycon}.
 "Select the species-, gene-level sampling and tasks that you would like to execute in {salphycon}. First, start by choosing the taxonomic makeup of your analyses. You can either provide a comma-separated list of taxa (e.g. species, clades) or upload a {.csv} file with a single column taxa in rows. Second, select the genetic makeup of your analyses. In the current release of {salphycon}, users are only able to select what is the minimum species-level sampling percentage per gene (e.g. only genes sampled in 20% of the species). Third, select the tasks that you are interested in running. Finally, run the analyses!","Seleccione el muestreo a nivel de especie y gen y las tareas que desea ejecutar en {salphycon}. En primer lugar, elija la composición taxonómica de sus análisis. Puede proporcionar una lista de taxones separada por comas (por ejemplo, especies, clados) o cargar un archivo {.csv} con una sola columna de taxones en filas. En segundo lugar, seleccione la composición genética de sus análisis. En la versión actual de {salphycon}, los usuarios sólo pueden seleccionar el porcentaje mínimo de muestreo por gen a nivel de especie (por ejemplo, sólo genes muestreados en el 20% de las especies). En tercer lugar, seleccione las tareas que le interesa ejecutar. Por último, ¡ejecute los análisis!"
 Sequence alignments,Alineamiento de secuencias
-Settings,Configuracion
+Settings,Configuración
 Species,Especies
 Target genes,Genes de interes
 Test,Test
@@ -58,3 +58,4 @@ Gene finder,Buscador de genes
 Find genes for a target taxon or set of taxa using {salphycon}.,Encuentra genes para un taxon o grupo de taones usando {salphycon}
 Find genes!,Buscar genes!
 Find the distribution of sampled genes in GenBank for a target taxon or set of taxa.,Encuentra genes para un taxon o grupo de taxones.
+SETTINGS,Configuración
