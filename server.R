@@ -1,6 +1,5 @@
 server = function(input, output, session) {
   
-  
   sqs.curated <- NULL
   tree <- NULL
   sqs.aln <- NULL
@@ -365,7 +364,7 @@ server = function(input, output, session) {
           width = 12,
           column(
             12,
-            selectInput("outgroup","Select your outgroup",
+            selectInput("outgroup", "Select your outgroup",
                         tip_names, multiple = TRUE),
             actionButton("root", "Re-root", icon = icon("tree"),
                          style = "color: #fff; background-color: #27ae60; border-color: #fff"),
@@ -768,5 +767,6 @@ server = function(input, output, session) {
     
     
   }, error=function(e){})})
+
   
   }

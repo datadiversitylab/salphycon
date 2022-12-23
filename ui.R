@@ -1,12 +1,4 @@
-library(shiny)
-library(tablerDash)
-library(shinyWidgets)
-library(DT)
-library(phruta)
-library(shiny.i18n)
-library(ggmsa)
-library(zip)
-library(ape)
+
 
 profileCard <- tablerProfileCard(
   width = 12,
@@ -294,7 +286,8 @@ ui = tablerDashPage(
                   column(
                     12,
                     actionButton("action", "Run analyses!", icon = icon("check"),
-                                 style = "color: #fff; background-color: #27ae60; border-color: #fff"), align = "center")
+                                 style = "color: #fff; background-color: #27ae60; border-color: #fff"), 
+                                 align = "center")
                 )
               )
             ),
@@ -316,7 +309,8 @@ ui = tablerDashPage(
                                                       "Align" = 2, 
                                                       "RAxML" = 3),
                                        inline = TRUE,
-                                       selected = c(0, 1)), align = "center")
+                                       selected = c(0, 1)), 
+                     align = "center")
                 )
               )
             )
