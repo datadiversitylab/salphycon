@@ -80,7 +80,7 @@
     },
     "DBI": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -148,7 +148,7 @@
     },
     "DT": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -179,7 +179,7 @@
     },
     "Formula": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -239,7 +239,7 @@
     },
     "GenomeInfoDbData": {
       "Source": "Bioconductor",
-      "Repository": null,
+      "Repository": "https://bioconductor.org/packages/3.15/data/annotation/src/contrib",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -261,7 +261,7 @@
     },
     "Hmisc": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -327,7 +327,7 @@
     },
     "KernSmooth": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -356,7 +356,7 @@
     },
     "LiblineaR": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -387,7 +387,7 @@
     },
     "MASS": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -421,7 +421,7 @@
     },
     "Matrix": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://R-Forge.R-project.org",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -461,7 +461,7 @@
     },
     "R.cache": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -489,7 +489,7 @@
     },
     "R.methodsS3": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -518,7 +518,7 @@
     },
     "R.oo": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -547,7 +547,7 @@
     },
     "R.utils": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -606,7 +606,7 @@
     },
     "R6": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -634,7 +634,7 @@
     },
     "RColorBrewer": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -659,7 +659,7 @@
     },
     "RCurl": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -688,7 +688,7 @@
     },
     "RSQLite": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -725,7 +725,7 @@
     },
     "Rcpp": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -755,7 +755,7 @@
     },
     "RcppArmadillo": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -787,7 +787,7 @@
     },
     "RcppEigen": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -819,7 +819,7 @@
     },
     "RcppGSL": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -851,7 +851,7 @@
     },
     "RcppZiggurat": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -881,7 +881,7 @@
     },
     "Rdpack": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -913,7 +913,7 @@
     },
     "Rfast": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -943,7 +943,7 @@
     },
     "Rogue": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -984,7 +984,7 @@
     },
     "Rttf2pt1": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1043,7 +1043,7 @@
     },
     "TreeDist": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1092,7 +1092,7 @@
     },
     "TreeTools": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1139,7 +1139,7 @@
     },
     "WikidataQueryServiceR": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1171,7 +1171,7 @@
     },
     "WikidataR": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1203,7 +1203,7 @@
     },
     "WikipediR": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1233,7 +1233,7 @@
     },
     "XML": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1296,7 +1296,7 @@
     },
     "ade4": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1325,7 +1325,7 @@
     },
     "apcluster": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1358,7 +1358,7 @@
     },
     "ape": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1390,7 +1390,7 @@
     },
     "aplot": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1418,7 +1418,7 @@
     },
     "ash": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1442,7 +1442,7 @@
     },
     "askpass": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1475,7 +1475,7 @@
     },
     "assertthat": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1502,7 +1502,7 @@
     },
     "backports": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1533,7 +1533,7 @@
     },
     "base64enc": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.rforge.net",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1559,7 +1559,7 @@
     },
     "bit": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1592,7 +1592,7 @@
     },
     "bit64": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1625,7 +1625,7 @@
     },
     "bitops": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1651,7 +1651,7 @@
     },
     "blob": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1683,7 +1683,7 @@
     },
     "bold": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1716,7 +1716,7 @@
     },
     "bslib": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1749,7 +1749,7 @@
     },
     "cachem": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1779,7 +1779,7 @@
     },
     "checkmate": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1815,7 +1815,7 @@
     },
     "class": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1844,7 +1844,7 @@
     },
     "cli": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1877,7 +1877,7 @@
     },
     "clipr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1910,7 +1910,7 @@
     },
     "cluster": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1944,7 +1944,7 @@
     },
     "clusterGeneration": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1968,7 +1968,7 @@
     },
     "coda": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -1994,7 +1994,7 @@
     },
     "codetools": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2019,7 +2019,7 @@
     },
     "colorspace": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://R-Forge.R-project.org",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2052,7 +2052,7 @@
     },
     "combinat": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2073,7 +2073,7 @@
     },
     "commonmark": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2104,7 +2104,7 @@
     },
     "conditionz": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2137,7 +2137,7 @@
     },
     "cpp11": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2169,7 +2169,7 @@
     },
     "crayon": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2199,7 +2199,7 @@
     },
     "crosstalk": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2229,7 +2229,7 @@
     },
     "crul": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2263,7 +2263,7 @@
     },
     "curl": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2297,7 +2297,7 @@
     },
     "data.table": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2329,7 +2329,7 @@
     },
     "deSolve": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2358,7 +2358,7 @@
     },
     "digest": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2388,7 +2388,7 @@
     },
     "doParallel": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2417,7 +2417,7 @@
     },
     "doSNOW": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2443,7 +2443,7 @@
     },
     "dplyr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2479,7 +2479,7 @@
     },
     "e1071": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2506,7 +2506,7 @@
     },
     "ellipsis": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2537,7 +2537,7 @@
     },
     "evaluate": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2568,7 +2568,7 @@
     },
     "expm": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2600,7 +2600,7 @@
     },
     "extrafont": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2627,7 +2627,7 @@
     },
     "extrafontdb": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2651,7 +2651,7 @@
     },
     "fansi": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2684,7 +2684,7 @@
     },
     "farver": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2715,7 +2715,7 @@
     },
     "fastmap": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2745,7 +2745,7 @@
     },
     "fastmatch": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2770,7 +2770,7 @@
     },
     "fontawesome": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2802,7 +2802,7 @@
     },
     "foreach": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2834,7 +2834,7 @@
     },
     "foreign": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2868,7 +2868,7 @@
     },
     "fs": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2904,7 +2904,7 @@
     },
     "geiger": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2934,7 +2934,7 @@
     },
     "generics": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2965,7 +2965,7 @@
     },
     "ggalt": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -2998,7 +2998,7 @@
     },
     "ggforce": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3033,7 +3033,7 @@
     },
     "ggfun": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3098,7 +3098,7 @@
     },
     "ggplot2": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3133,7 +3133,7 @@
     },
     "ggplotify": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3204,7 +3204,7 @@
     },
     "glue": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3239,7 +3239,7 @@
     },
     "gridExtra": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3267,7 +3267,7 @@
     },
     "gridGraphics": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3294,7 +3294,7 @@
     },
     "gtable": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3326,7 +3326,7 @@
     },
     "highr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3357,7 +3357,7 @@
     },
     "hms": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3388,7 +3388,7 @@
     },
     "htmlTable": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3419,7 +3419,7 @@
     },
     "htmltools": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3453,7 +3453,7 @@
     },
     "htmlwidgets": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3484,7 +3484,7 @@
     },
     "httpcode": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3513,7 +3513,7 @@
     },
     "httpuv": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3548,7 +3548,7 @@
     },
     "httr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3580,7 +3580,7 @@
     },
     "igraph": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3612,7 +3612,7 @@
     },
     "ips": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3640,7 +3640,7 @@
     },
     "isoband": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3673,7 +3673,7 @@
     },
     "iterators": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3700,7 +3700,7 @@
     },
     "jpeg": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3726,7 +3726,7 @@
     },
     "jquerylib": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3754,7 +3754,7 @@
     },
     "jsonlite": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3821,7 +3821,7 @@
     },
     "kernlab": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3849,7 +3849,7 @@
     },
     "knitr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3883,7 +3883,7 @@
     },
     "labeling": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3909,7 +3909,7 @@
     },
     "later": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3943,7 +3943,7 @@
     },
     "lattice": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -3976,7 +3976,7 @@
     },
     "latticeExtra": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4005,7 +4005,7 @@
     },
     "lazyeval": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4034,7 +4034,7 @@
     },
     "lifecycle": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4066,7 +4066,7 @@
     },
     "magrittr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4100,7 +4100,7 @@
     },
     "maps": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4128,7 +4128,7 @@
     },
     "matrixStats": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4160,7 +4160,7 @@
     },
     "mclust": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4193,7 +4193,7 @@
     },
     "memoise": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4222,7 +4222,7 @@
     },
     "mgcv": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4250,7 +4250,7 @@
     },
     "mime": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4280,7 +4280,7 @@
     },
     "mnormt": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4346,7 +4346,7 @@
     },
     "munsell": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4373,7 +4373,7 @@
     },
     "mvtnorm": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4401,7 +4401,7 @@
     },
     "natserv": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4437,7 +4437,7 @@
     },
     "ncbit": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4462,7 +4462,7 @@
     },
     "nlme": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4496,7 +4496,7 @@
     },
     "nnet": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4525,7 +4525,7 @@
     },
     "numDeriv": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://R-Forge.R-project.org",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4552,7 +4552,7 @@
     },
     "oai": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4618,7 +4618,7 @@
     },
     "openssl": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4651,7 +4651,7 @@
     },
     "patchwork": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://R-Forge.R-project.org",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4683,7 +4683,7 @@
     },
     "pbapply": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4712,7 +4712,7 @@
     },
     "phangorn": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4792,7 +4792,7 @@
     },
     "phytools": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4820,7 +4820,7 @@
     },
     "pillar": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4856,7 +4856,7 @@
     },
     "pixmap": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4881,7 +4881,7 @@
     },
     "pkgconfig": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4909,7 +4909,7 @@
     },
     "plogr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4939,7 +4939,7 @@
     },
     "plotly": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4970,7 +4970,7 @@
     },
     "plotrix": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -4995,7 +4995,7 @@
     },
     "plyr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5028,7 +5028,7 @@
     },
     "png": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5054,7 +5054,7 @@
     },
     "polyclip": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5086,7 +5086,7 @@
     },
     "prettyunits": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5114,7 +5114,7 @@
     },
     "progress": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5143,7 +5143,7 @@
     },
     "proj4": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5169,7 +5169,7 @@
     },
     "promises": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5204,7 +5204,7 @@
     },
     "proxy": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5233,7 +5233,7 @@
     },
     "purrr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5266,7 +5266,7 @@
     },
     "quadprog": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5292,7 +5292,7 @@
     },
     "rappdirs": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5325,7 +5325,7 @@
     },
     "ratelimitr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5355,7 +5355,7 @@
     },
     "rbibutils": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5388,7 +5388,7 @@
     },
     "readr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5426,7 +5426,7 @@
     },
     "rentrez": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5458,7 +5458,7 @@
     },
     "reshape": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5485,7 +5485,7 @@
     },
     "reutils": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5517,7 +5517,7 @@
     },
     "rex": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5549,7 +5549,7 @@
     },
     "rgbif": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5584,7 +5584,7 @@
     },
     "ritis": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5618,7 +5618,7 @@
     },
     "rlang": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5655,7 +5655,7 @@
     },
     "rncl": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5687,7 +5687,7 @@
     },
     "rotl": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5721,7 +5721,7 @@
     },
     "rpart": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5752,7 +5752,7 @@
     },
     "rredlist": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5786,7 +5786,7 @@
     },
     "rstudioapi": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5815,7 +5815,7 @@
     },
     "sass": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5849,7 +5849,7 @@
     },
     "scales": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5882,7 +5882,7 @@
     },
     "scatterplot3d": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5908,7 +5908,7 @@
     },
     "segmented": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5934,7 +5934,7 @@
     },
     "seqinr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -5968,7 +5968,7 @@
     },
     "seqmagick": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6000,7 +6000,7 @@
     },
     "shiny": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6034,7 +6034,7 @@
     },
     "shiny.i18n": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6065,7 +6065,7 @@
     },
     "shinyWidgets": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6096,7 +6096,7 @@
     },
     "shinyjs": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6127,7 +6127,7 @@
     },
     "snow": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6152,7 +6152,7 @@
     },
     "solrium": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6186,7 +6186,7 @@
     },
     "sourcetools": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6216,7 +6216,7 @@
     },
     "sp": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6247,7 +6247,7 @@
     },
     "statebins": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6280,7 +6280,7 @@
     },
     "stringi": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6313,7 +6313,7 @@
     },
     "stringr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6345,7 +6345,7 @@
     },
     "subplex": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6376,7 +6376,7 @@
     },
     "survival": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6407,7 +6407,7 @@
     },
     "sys": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6439,7 +6439,7 @@
     },
     "tablerDash": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6470,7 +6470,7 @@
     },
     "taxize": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6506,7 +6506,7 @@
     },
     "tibble": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6544,7 +6544,7 @@
     },
     "tidyr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6581,7 +6581,7 @@
     },
     "tidyselect": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6614,7 +6614,7 @@
     },
     "tidytree": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6646,7 +6646,7 @@
     },
     "tmvnsim": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6707,7 +6707,7 @@
     },
     "triebeard": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6740,7 +6740,7 @@
     },
     "tweenr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6774,7 +6774,7 @@
     },
     "tzdb": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6809,7 +6809,7 @@
     },
     "urltools": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6844,7 +6844,7 @@
     },
     "utf8": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6875,7 +6875,7 @@
     },
     "uuid": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.rforge.net",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6901,7 +6901,7 @@
     },
     "vctrs": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6937,7 +6937,7 @@
     },
     "viridis": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -6970,7 +6970,7 @@
     },
     "viridisLite": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7000,7 +7000,7 @@
     },
     "vroom": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7039,7 +7039,7 @@
     },
     "whisker": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7066,7 +7066,7 @@
     },
     "wikitaxa": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7103,7 +7103,7 @@
     },
     "withr": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7137,7 +7137,7 @@
     },
     "wk": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7168,7 +7168,7 @@
     },
     "worrms": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7204,7 +7204,7 @@
     },
     "xfun": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7236,7 +7236,7 @@
     },
     "xml2": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7270,7 +7270,7 @@
     },
     "xtable": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://R-Forge.R-project.org",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7299,7 +7299,7 @@
     },
     "yaml": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7327,7 +7327,7 @@
     },
     "yulab.utils": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7354,7 +7354,7 @@
     },
     "zip": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
@@ -7412,7 +7412,7 @@
     },
     "zoo": {
       "Source": "CRAN",
-      "Repository": null,
+      "Repository": "https://www.icesi.edu.co/CRAN",
       "GithubRepo": null,
       "GithubUsername": null,
       "GithubRef": null,
