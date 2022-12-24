@@ -40,19 +40,14 @@ server = function(input, output, session) {
     taxa <-   sub(" ", "", strsplit( input$addTaxa, ",")[[1]])
     }
     
-    if ( 0 == input$Process){input$Process <- c(0, 1) }
-
     if( 0 %in% input$Process ) {
       tryCatch({
       #retrieve
-      
       if(!is.null(input$fileGenes)){
       genes <- read.csv(input$fileGenes$datapath,
                           header = FALSE)
       targetGenes <- data.frame('Gene' = genes[,1])
-      }else{
-        
-        
+      }else{        
       gs.seqs <<- 
         gene.sampling.retrieve(organism = taxa, 
                     speciesSampling = TRUE,
@@ -62,8 +57,6 @@ server = function(input, output, session) {
       targetGenes <<- gs.seqs[gs.seqs$PercentOfSampledSpecies > input$sliderGenes,]
       
       }
-      
-      
       
       acc.table <<- acc.table.retrieve(
         clades  = taxa,
@@ -80,8 +73,9 @@ server = function(input, output, session) {
       progress$inc(1/npro, detail = "Sequences downloaded...")
       
      
-      
-    }, error=function(e){NULL})
+    }, error=function(e){
+      #showNotification("This is a notification.", type = "error")
+    })
       }
 
     if( all(c(0, 1) %in% input$Process)){ #Curate if seqs have been downloaded
@@ -104,7 +98,9 @@ server = function(input, output, session) {
         })
       
       progress$inc(1/npro, detail = "Sequences curated...")
-      }, error=function(e){})
+      }, error=function(e){
+              showNotification("No sequences found.", type = 'error')
+      })
     }
     
     if( all(c(0, 1, 2) %in% input$Process)){
@@ -139,7 +135,9 @@ server = function(input, output, session) {
       
       progress$inc(1/npro, detail = "Tree constructed...")
       
-    }, error=function(e){})}
+    }, error=function(e){
+      showNotification("No sequences found.", type = 'error')
+    })}
     
     
     ##Sampling tab boxes
@@ -781,7 +779,9 @@ server = function(input, output, session) {
     
     
     
-  }, error=function(e){})})
+  }, error=function(e){
+              showNotification("No genes found.", type = 'error')
+  })})
 
   
   }
