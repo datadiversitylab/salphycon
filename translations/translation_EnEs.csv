@@ -1,0 +1,61 @@
+﻿English,Español
+ 4 - Run analyses, 4 - Correr analisis
+"{Salphycon} is a shiny app that extends the functionalities of the {phruta} R package. {Salphycon} is able to (1) find potentially (phylogenetically) relevant gene regions for a given set of taxa based on GenBank, (2) retrieve gene sequences and curate taxonomic information from the same database, (3) combine downloaded and local gene sequences, and (4) perform sequence alignment, phylogenetic inference, and basic tree dating tasks. Both {phruta} and {salphycon} are focused on species-level analyses."," {Salphycon} es una aplicación que amplía las funcionalidades del paquete R {phruta}. {Salphycon} es capaz de (1) encontrar regiones genéticas potencialmente (filogenéticamente) relevantes para un conjunto dado de taxones basados en GenBank, (2) recuperar secuencias genéticas y curar información taxonómica de la misma base de datos, (3) combinar secuencias genéticas descargadas y locales, y (4) realizar alineamiento de secuencias, inferencia filogenética y tareas básicas de datación de árboles. Tanto {phruta} como {salphycon} se centran en análisis a nivel de especie."
+1 - Taxa,1 - Taxones
+3 - Tasks,3 - Procesos
+3. Tasks,3. Procesos
+About,Sobre nosotros
+ABOUT,SOBRE NOSOTROS
+Align,Alinear
+Alignments,Alineamientos
+ALIGNMENTS,ALINEAMIENTOS
+Basic phylogenetics with phruta,Filogenetica basica con phruta
+Change language,Cambiar idioma
+Clades,Clados
+Click to see inputs !,Click para ver opciones!
+Configure and analyze time-calibrated phylogenies based on phylogenies constructed using {salphycon}.,Configurar y analizar filogenias calibradas en el tiempo basadas en filogenias construidas usando {salphycon}.
+Curate,Curar
+Enter text...,Ingrese texto...
+Find genes?,Encontrar genes?
+Find more information about the author and get details on how to cite {salphycon}.,Encuentre más información sobre el autor y obtenga detalles sobre cómo citar a {salphycon}.
+Home,Inicio
+"If you decided to run some phylogenetic analyses on your dataset, this tab will allow you to examine and retrieve the resulting trees. This tab includes a basic visualizer, with the additional option of downloading the trees constructed in {salphycon}.","Si ha decidido realizar algunos análisis filogenéticos en su conjunto de datos, esta pestaña le permitirá examinar y recuperar los árboles resultantes. Esta pestaña incluye un visualizador básico, con la opción adicional de descargar los árboles construidos en {salphycon}."
+"If you decided to run some phylogenetic analyses on your dataset, use this tab to examine and retrieve the resulting trees.","Si ha decidido realizar algunos análisis filogenéticos en su conjunto de datos, utilice esta pestaña para examinar y recuperar los árboles resultantes."
+Interested in visualizing the alignments assembled using {salphycon}? Check out the visuals in this tab.,¿Está interesado en visualizar los alineamientos ensamblados con {salphycon}? Eche un vistazo a las imágenes de esta pestaña.
+Language:,Lenguaje:
+List of taxa,Lista de taxones
+Mask,Enmascarar
+"Once you have defined the species- and gene-level makeup of your analyses in the previous two tabs, you will be able to visualize the resulting alignments. For now, the app will only display the masked alignments. You will be able to retrieve the alignments at this point and will be provided with information described each of the alignments.","Una vez que haya definido la composición a nivel de especie y de gen de sus análisis en las dos pestañas anteriores, podrá visualizar las alineaciones resultantes. Por ahora, la aplicación sólo mostrará las alineaciones enmascaradas. Podrá recuperar los alineamientos en este punto y se le proporcionará información descrita de cada uno de los alineamientos."
+"Once you have run the analyses under {Settings}, use this tab to edit and examine the species-, gene-level sampling.","Una vez que haya ejecutado los análisis en {Configuración}, utilice esta pestaña para editar y examinar el muestreo a nivel de especie y de gen."
+"Once you have run the analyses under {Settings}, use this tab to edit and examine the species-, gene-level sampling. In this tab, you will get basic information on the sampling you retrieved from the basic settings defined in the previous tab. You will be able to make changes on the taxonomic and genetic makeup of the analyses.","Una vez que haya ejecutado los análisis en {Configuración}, utilice esta pestaña para editar y examinar el muestreo a nivel de especie y de gen. En esta pestaña, obtendrá información básica sobre el muestreo obtenido a partir de los ajustes básicos definidos en la pestaña anterior. Podrá realizar cambios en la composición taxonómica y genética de los análisis."
+Phylogenetics,Filogenias
+PHYLOGENETICS,FILOGENIAS
+"Please define the genetic makeup of your analyses. For now, you will be able to indicate what is the minimum percetage of species that genes should include in order to be included in the analyses.","Por favor, defina la composición genética de sus análisis. Por ahora, podrá indicar cuál es el porcentaje mínimo de especies que deben incluir los genes para ser incluidos en los análisis."
+Please define the taxonomic makeup of your analyses. You can either provide a comma-separated list of taxa in the box below or upload a csv file with taxa in rows.,Defina la composición taxonómica de sus análisis. Puede proporcionar una lista de taxones separados por comas en el cuadro siguiente o cargar un archivo csv con los taxones en filas.
+Please input your target genes below,Porfavor ingrese los genes de interes
+Please input your target species and clades below,Porfavor ingrese sus especies y clados de interes
+Please make sure that all your settings are correct and run {salphycon}!,Asegúrate de que todos los ajustes son correctos y ejecuta {salphycon}.
+Retrieve,Descargar
+Sampling,Muestreo
+SAMPLING,MUESTREO
+Select additional genes,Seleccionar genes adicionales
+"Select all the tasks that you would like to perform in {salphycon}. Sequence retrieval is requiered in the current release of the app. However, we will include compatibility for using local sequences in future releases.","Seleccione todas las tareas que desea realizar en {salphycon}. La recuperación de secuencias es necesaria en la versión actual de la aplicación. Sin embargo, incluiremos compatibilidad para usar secuencias locales en futuras versiones."
+"Select the species-, gene-level sampling and tasks that you would like to execute in {salphycon}.",Seleccione el muestreo a nivel de especie y de gen y las tareas que desea ejecutar en {salphycon}.
+"Select the species-, gene-level sampling and tasks that you would like to execute in {salphycon}. First, start by choosing the taxonomic makeup of your analyses. You can either provide a comma-separated list of taxa (e.g. species, clades) or upload a {.csv} file with a single column taxa in rows. Second, select the genetic makeup of your analyses. In the current release of {salphycon}, users are only able to select what is the minimum species-level sampling percentage per gene (e.g. only genes sampled in 20% of the species). Third, select the tasks that you are interested in running. Finally, run the analyses!","Seleccione el muestreo a nivel de especie y gen y las tareas que desea ejecutar en {salphycon}. En primer lugar, elija la composición taxonómica de sus análisis. Puede proporcionar una lista de taxones separada por comas (por ejemplo, especies, clados) o cargar un archivo {.csv} con una sola columna de taxones en filas. En segundo lugar, seleccione la composición genética de sus análisis. En la versión actual de {salphycon}, los usuarios sólo pueden seleccionar el porcentaje mínimo de muestreo por gen a nivel de especie (por ejemplo, sólo genes muestreados en el 20% de las especies). En tercer lugar, seleccione las tareas que le interesa ejecutar. Por último, ¡ejecute los análisis!"
+Sequence alignments,Alineamiento de secuencias
+Settings,Configuración
+Species,Especies
+Target genes,Genes de interes
+Test,Test
+Threshold find genes,Limite para encontrar genes
+Tree dating,Datacion absoluta
+Under construction,En construccion
+Welcome to SALPHYCON!,Bienvenidxs a SALPHYCON!
+Threshold to find genes,Umbral para encontrar genes
+Select a file in {csv} format that includes taxonomic names in the rows and a single column. Please do not include column names.,Seleccione un archivo en formato {csv} que incluya nombres taxonómicos en las filas y una sola columna. No incluya los nombres de las columnas.
+Select a file in {csv} format that includes gene names in the rows and a single column. Please do not include column names.,Seleccione un archivo en formato {csv} que incluya los nombres de los genes en las filas y una sola columna. No incluya los nombres de las columnas.
+Gene finder,Buscador de genes
+Find genes for a target taxon or set of taxa using {salphycon}.,Encuentra genes para un taxon o grupo de taones usando {salphycon}
+Find genes!,Buscar genes!
+Find the distribution of sampled genes in GenBank for a target taxon or set of taxa.,Encuentra genes para un taxon o grupo de taxones.
+SETTINGS,Configuración
