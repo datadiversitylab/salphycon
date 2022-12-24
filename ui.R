@@ -1,3 +1,9 @@
+###################
+# ui.R
+# 
+# UI controller. 
+# Used to define the graphical aspects of the app.
+###################
 
 
 profileCard <- tablerProfileCard(
@@ -9,17 +15,17 @@ profileCard <- tablerProfileCard(
   tablerSocialLinks(
     tablerSocialLink(
       name = "salphycon",
-      href = "https://www.facebook.com",
+      href = "https://github.com/cromanpa94/salphycon",
       icon = "github"
     ),
     tablerSocialLink(
       name = "twitter",
-      href = "https://www.twitter.com",
+      href = "https://www.twitter.com/cromanpa",
       icon = "twitter"
     ),
     tablerSocialLink(
       name = "phruta",
-      href = "https://www.twitter.com",
+      href = "https://github.com/cromanpa94/phruta",
       icon = "github"
     ),
     tablerSocialLink(
@@ -498,7 +504,10 @@ ui = tablerDashPage(
           tablerCard(
             width = 12,
             title = h3(i18n$t("ABOUT")),
-            i18n$t("Find more information about the author and get details on how to cite {salphycon}."),
+            i18n$t("Find more information about the author and get details on how to cite {salphycon}. 
+            To cite, please use (1) Román-Palacios, C. (2021). The phruta R package: Phylogenetic
+  Reconstruction and Time-dating. and (2) Román-Palacios, C. (2021). The salphycon shiny app: Phylogenetic
+  Reconstruction and Time-dating."),
             closable = FALSE
           ),
           fluidRow(
@@ -516,13 +525,13 @@ ui = tablerDashPage(
                 src = "https://cromanpa94.github.io/cromanpa/contact/2019-11-21%2010.51.14.jpg",
                 tablerSocialLinks(
                   tablerSocialLink(
-                    name = "facebook",
-                    href = "https://www.facebook.com",
-                    icon = "facebook"
+                    name = "website",
+                    href = "https://cromanpa94.github.io/cromanpa/",
+                    icon = "home"
                   ),
                   tablerSocialLink(
                     name = "twitter",
-                    href = "https://www.twitter.com",
+                    href = "https://www.twitter.com/cromanpa",
                     icon = "twitter"
                   )
                 )

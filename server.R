@@ -1,3 +1,11 @@
+###################
+# server.R
+# 
+# Server controller. 
+# Used to define the back-end aspects of the app.
+###################
+
+
 server = function(input, output, session) {
   
   sqs.curated <- NULL
@@ -32,6 +40,8 @@ server = function(input, output, session) {
     taxa <-   sub(" ", "", strsplit( input$addTaxa, ",")[[1]])
     }
     
+    if ( 0 == input$Process){input$Process <- c(0, 1) }
+
     if( 0 %in% input$Process ) {
       tryCatch({
       #retrieve
@@ -167,6 +177,11 @@ server = function(input, output, session) {
           width = 12,
           column(
             12,
+            h6("Need to update the resulting sampling?"),
+            br(),
+            "Please download the sampling table in `.csv`. Make all the relevant changes
+            you consider necessary. Do NOT change the structure of the file. Finally, submit
+            the updated file and run `refresh`.",
             fileInput('file1', 'Choose CSV File',
                       accept=c('text/csv',
                                'text/comma-separated-values,text/plain',

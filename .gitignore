@@ -27,3 +27,6 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 .DS_Store
+0.Sequences/*
+2.Alignments/*
+3.Phylogeny/*
