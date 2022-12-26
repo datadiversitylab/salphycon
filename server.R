@@ -783,5 +783,23 @@ server = function(input, output, session) {
               showNotification("No genes found.", type = 'error')
   })})
 
-  
+
+  output$downloadTemplateGenes <- downloadHandler(
+    filename = function() {
+      paste("phruta_genes_template", ".csv", sep="")
+    },
+    content = function(file) {
+      write.table(gene_temp, file, row.names = FALSE, col.names=FALSE, sep=",")
+    }
+  )
+
+  output$downloadTemplateTaxa <- downloadHandler(
+    filename = function() {
+      paste("phruta_taxa_template", ".csv", sep="")
+    },
+    content = function(file) {
+      write.table(taxa_temp, file, row.names = FALSE,  col.names = FALSE, sep=",")
+    }
+  )
+
   }

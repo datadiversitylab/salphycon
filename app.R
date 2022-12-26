@@ -15,7 +15,13 @@ library(ggmsa)
 library(zip)
 library(ape)
 
+#Load components
 source('ui.R')
 source('server.R')
 
+#Load files
+taxa_temp <- read.csv("data/taxa_temp.csv", header = FALSE)
+gene_temp <- read.csv("data/genes_temp.csv", header = FALSE)
+
+#Run the app
 shinyApp(ui, server)

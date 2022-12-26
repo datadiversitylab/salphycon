@@ -238,6 +238,7 @@ ui = tablerDashPage(
                 
                 dropdown(
                   i18n$t("Select a file in {csv} format that includes taxonomic names in the rows and a single column. Please do not include column names."),
+                  downloadButton("downloadTemplateTaxa", "Download template"),
                   fileInput("fileTaxa", h5(""), width = '80%',
                             accept = c(
                               "text/csv",
@@ -269,6 +270,7 @@ ui = tablerDashPage(
                               min = 0, max = 100, value = 20),
                   dropdown(
                     i18n$t("Select a file in {csv} format that includes gene names in the rows and a single column. Please do not include column names."),
+                    downloadButton("downloadTemplateGenes", "Download template"),
                     fileInput("fileGenes", h5(""), width = '80%',
                               accept = c(
                                 "text/csv",
