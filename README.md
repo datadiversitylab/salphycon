@@ -1,4 +1,4 @@
-# The `salphycon` `shiny` app <a href='https://cromanpa94.github.io/salphycon'><img src='www/img/salphycon_full.png' align="right" height="300" /></a>
+# The `salphycon` `shiny` app <a href='https://cromanpa94.github.io/salphycon'><img src='www/img/salphycon.png' align="right" height="300" /></a>
 
 ### Phylogenetics with `phruta`
 
