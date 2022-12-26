@@ -49,7 +49,7 @@ server = function(input, output, session) {
       targetGenes <- data.frame('Gene' = genes[,1])
       }else{        
       gs.seqs <<- 
-        gene.sampling.retrieve(organism = taxa, 
+        phruta::gene.sampling.retrieve(organism = taxa, 
                     speciesSampling = TRUE,
                     npar = 6,
                     nSearchesBatch = 500)
@@ -58,7 +58,7 @@ server = function(input, output, session) {
       
       }
       
-      acc.table <<- acc.table.retrieve(
+      acc.table <<- phruta::acc.table.retrieve(
         clades  = taxa,
         genes = targetGenes$Gene,
         speciesLevel = TRUE,
@@ -66,7 +66,7 @@ server = function(input, output, session) {
         nSearchesBatch = 500
       )
       
-      sqs.downloaded <<- sq.retrieve.indirect(acc.table = acc.table, 
+      sqs.downloaded <<- phruta::sq.retrieve.indirect(acc.table = acc.table, 
                                              download.sqs = FALSE)
       
       #sqs.curated <<- sqs.downloaded ##If no curation happens
@@ -80,7 +80,7 @@ server = function(input, output, session) {
 
     if( all(c(0, 1) %in% input$Process)){ #Curate if seqs have been downloaded
       tryCatch({
-      sqs.curated <<- sq.curate(filterTaxonomicCriteria = '[AZ]',
+      sqs.curated <<- phruta::sq.curate(filterTaxonomicCriteria = '[AZ]',
                                kingdom = 'animals', 
                                sqs.object = sqs.downloaded,
                                removeOutliers = FALSE)
@@ -107,7 +107,7 @@ server = function(input, output, session) {
       tryCatch({  
       
        #Aln if seqs have been downloaded
-      sqs.aln <<- sq.aln(sqs.object = sqs.curated)
+      sqs.aln <<- phruta::sq.aln(sqs.object = sqs.curated)
       progress$inc(1/4, detail = "Sequences aligned...")
       
     
@@ -145,7 +145,7 @@ server = function(input, output, session) {
     
     observe({
       output$geneRegions <- renderUI({
-        tablerStatCard(
+        tablerDash::tablerStatCard(
           value = valuesSampling$ngeneregions,
           title = "Gene regions",
           width = 12
@@ -153,7 +153,7 @@ server = function(input, output, session) {
       })
       
       output$nSeqs <- renderUI({
-        tablerStatCard(
+        tablerDash::tablerStatCard(
           value = valuesSampling$nseqs,
           title = "Sequences",
           width = 12
@@ -161,7 +161,7 @@ server = function(input, output, session) {
       })
       
       output$nTaxa <- renderUI({
-        tablerStatCard(
+        tablerDash::tablerStatCard(
           value = valuesSampling$spp,
           title = "Species",
           width = 12
@@ -169,7 +169,7 @@ server = function(input, output, session) {
       })
       
       output$Refresh <- renderUI({
-        tablerCard(
+        tablerDash::tablerCard(
           status = "yellow",
           statusSide = "left",
           width = 12,
@@ -177,9 +177,6 @@ server = function(input, output, session) {
             12,
             h6("Need to update the resulting sampling?"),
             br(),
-            "Please download the sampling table in `.csv`. Make all the relevant changes
-            you consider necessary. Do NOT change the structure of the file. Finally, submit
-            the updated file and run `refresh`.",
             fileInput('file1', 'Choose CSV File',
                       accept=c('text/csv',
                                'text/comma-separated-values,text/plain',
@@ -192,7 +189,7 @@ server = function(input, output, session) {
       
       
       output$tableAccN <- renderUI({
-        tablerCard(
+        tablerDash::tablerCard(
           title = "Accession numbers",
           zoomable = TRUE,
           closable = FALSE,
@@ -221,7 +218,7 @@ server = function(input, output, session) {
     
     observe({
       output$SpeciesRegion <- renderUI({
-        tablerStatCard(
+        tablerDash::tablerStatCard(
           value = valuesSequences$nspecies,
           title = "Sequences",
           width = 12
@@ -230,7 +227,7 @@ server = function(input, output, session) {
       
       
       output$nGaps <- renderUI({
-        tablerStatCard(
+        tablerDash::tablerStatCard(
           value = valuesSequences$ntaxareg,
           title = "Sites",
           width = 12
@@ -238,7 +235,7 @@ server = function(input, output, session) {
       })
       
       output$dropGenes <- renderUI({
-        tablerCard(
+        tablerDash::tablerCard(
           status = "yellow",
           statusSide = "left",
           width = 12,
@@ -278,7 +275,7 @@ server = function(input, output, session) {
       )
       
       output$alnDownload <- renderUI({
-        tablerCard(
+        tablerDash::tablerCard(
           status = "yellow",
           statusSide = "left",
           width = 12,
@@ -291,7 +288,7 @@ server = function(input, output, session) {
       
       
       output$seqPlots <- renderUI({
-        tablerCard(
+        tablerDash::tablerCard(
           title = "Sequence alignments",
           zoomable = TRUE,
           closable = FALSE,
@@ -314,7 +311,7 @@ server = function(input, output, session) {
       
       
       output$phyloControl <- renderUI({
-        tablerCard(
+        tablerDash::tablerCard(
           status = "yellow",
           statusSide = "left",
           width = 12,
@@ -328,7 +325,7 @@ server = function(input, output, session) {
       
       
       output$phyloPlots <- renderUI({
-        tablerCard(
+        tablerDash::tablerCard(
           title = "Phylogeny",
           zoomable = TRUE,
           closable = FALSE,
@@ -338,6 +335,7 @@ server = function(input, output, session) {
           width = 12
         )
       })
+
       
       tree2 <<- eventReactive(input$root, {
        ape::root(tree, input$outgroup)
@@ -371,7 +369,7 @@ server = function(input, output, session) {
       )
       
       output$phyloDownload <- renderUI({
-        tablerCard(
+        tablerDash::tablerCard(
           status = "yellow",
           statusSide = "left",
           width = 12,
@@ -385,8 +383,10 @@ server = function(input, output, session) {
             align = "center")
         )
       })
-      
     })
+    
+    
+    
     
     observeEvent(toListen(), {
       valuesSequences$genes <- names(sqs.aln)
@@ -424,7 +424,7 @@ server = function(input, output, session) {
                                   gene = dataset$file,
                                   Species = dataset$Species)
         
-        sqs.downloaded <<- sq.retrieve.indirect(acc.table = tFile, 
+        sqs.downloaded <<- phruta::sq.retrieve.indirect(acc.table = tFile, 
                                                 download.sqs = FALSE)
         
         progress$inc(1/npro, detail = "Sequences downloaded...")
@@ -433,7 +433,7 @@ server = function(input, output, session) {
       
       
       if( all(c(0, 1) %in% input$Process)){ #Curate if seqs have been downloaded
-        sqs.curated <<- sq.curate(filterTaxonomicCriteria = '[AZ]',
+        sqs.curated <<- phruta::sq.curate(filterTaxonomicCriteria = '[AZ]',
                                   kingdom = 'animals', 
                                   sqs.object = sqs.downloaded,
                                   removeOutliers = FALSE,
@@ -456,7 +456,7 @@ server = function(input, output, session) {
       }
       
       if( all(c(0, 1, 2) %in% input$Process)){ #Aln if seqs have been downloaded
-        sqs.aln <<- sq.aln(sqs.object = sqs.curated)
+        sqs.aln <<- phruta::sq.aln(sqs.object = sqs.curated)
         progress$inc(1/4, detail = "Sequences aligned...")
         
       }
@@ -485,7 +485,7 @@ server = function(input, output, session) {
       
       observe({
         output$geneRegions <- renderUI({
-          tablerStatCard(
+          tablerDash::tablerStatCard(
             value = valuesSampling$ngeneregions,
             title = "Gene regions",
             width = 12
@@ -493,7 +493,7 @@ server = function(input, output, session) {
         })
         
         output$nSeqs <- renderUI({
-          tablerStatCard(
+          tablerDash::tablerStatCard(
             value = valuesSampling$nseqs,
             title = "Sequences",
             width = 12
@@ -501,7 +501,7 @@ server = function(input, output, session) {
         })
         
         output$nTaxa <- renderUI({
-          tablerStatCard(
+          tablerDash::tablerStatCard(
             value = valuesSampling$spp,
             title = "Species",
             width = 12
@@ -509,7 +509,7 @@ server = function(input, output, session) {
         })
         
         output$Refresh <- renderUI({
-          tablerCard(
+          tablerDash::tablerCard(
             status = "yellow",
             statusSide = "left",
             width = 12,
@@ -527,7 +527,7 @@ server = function(input, output, session) {
         
         
         output$tableAccN <- renderUI({
-          tablerCard(
+          tablerDash::tablerCard(
             title = "Accession numbers",
             zoomable = TRUE,
             closable = FALSE,
@@ -556,7 +556,7 @@ server = function(input, output, session) {
       
       observe({
         output$SpeciesRegion <- renderUI({
-          tablerStatCard(
+          tablerDash::tablerStatCard(
             value = valuesSequences$nspecies,
             title = "Sequences",
             width = 12
@@ -565,7 +565,7 @@ server = function(input, output, session) {
         
         
         output$nGaps <- renderUI({
-          tablerStatCard(
+          tablerDash::tablerStatCard(
             value = valuesSequences$ntaxareg,
             title = "Sites",
             width = 12
@@ -573,7 +573,7 @@ server = function(input, output, session) {
         })
         
         output$dropGenes <- renderUI({
-          tablerCard(
+          tablerDash::tablerCard(
             status = "yellow",
             statusSide = "left",
             width = 12,
@@ -613,7 +613,7 @@ server = function(input, output, session) {
         )
         
         output$alnDownload <- renderUI({
-          tablerCard(
+          tablerDash::tablerCard(
             status = "yellow",
             statusSide = "left",
             width = 12,
@@ -626,7 +626,7 @@ server = function(input, output, session) {
         
         
         output$seqPlots <- renderUI({
-          tablerCard(
+          tablerDash::tablerCard(
             title = "Sequence alignments",
             zoomable = TRUE,
             closable = FALSE,
@@ -647,9 +647,10 @@ server = function(input, output, session) {
           }
         })
         
-        
+   if(3 %in% input$Process){
+     
         output$phyloControl <- renderUI({
-          tablerCard(
+          tablerDash::tablerCard(
             status = "yellow",
             statusSide = "left",
             width = 12,
@@ -663,7 +664,7 @@ server = function(input, output, session) {
         
         
         output$phyloPlots <- renderUI({
-          tablerCard(
+          tablerDash::tablerCard(
             title = "Phylogeny",
             zoomable = TRUE,
             closable = FALSE,
@@ -695,7 +696,7 @@ server = function(input, output, session) {
         )
         
         output$phyloDownload <- renderUI({
-          tablerCard(
+          tablerDash::tablerCard(
             status = "yellow",
             statusSide = "left",
             width = 12,
@@ -705,6 +706,7 @@ server = function(input, output, session) {
               align = "center")
           )
         })
+   }
         
       })
       
@@ -726,8 +728,8 @@ server = function(input, output, session) {
 
   output$progress <- renderUI({
     tagList(
-      tablerProgress(value = input$knob, size = "xs", status = "yellow"),
-      tablerProgress(value = input$knob, status = "red", size = "sm")
+      tablerDash::tablerProgress(value = input$knob, size = "xs", status = "yellow"),
+      tablerDash::tablerProgress(value = input$knob, status = "red", size = "sm")
     )
   })
   
@@ -747,7 +749,7 @@ server = function(input, output, session) {
       Taxagenes <- sub(" ", "", strsplit( input$genesearch, ",")[[1]])
     }
      
-    gs.seqs_gene <<- gene.sampling.retrieve(organism = Taxagenes, 
+    gs.seqs_gene <<- phruta::gene.sampling.retrieve(organism = Taxagenes, 
                                        speciesSampling = TRUE,
                                        npar = 6,
                                        nSearchesBatch = 500)
@@ -765,7 +767,7 @@ server = function(input, output, session) {
       })
     
     output$tableGenes <- renderUI({
-      tablerCard(
+      tablerDash::tablerCard(
         title = "Gene sampling",
         zoomable = TRUE,
         closable = FALSE,

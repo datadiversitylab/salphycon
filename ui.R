@@ -6,29 +6,29 @@
 ###################
 
 
-profileCard <- tablerProfileCard(
+profileCard <- tablerDash::tablerProfileCard(
   width = 12,
   title = "SALPHYCON",
   subtitle = "Basic phylogenetics in R",
   background = "https://cromanpa94.github.io/cromanpa/images/FrogMain_right_up.jpg",
   src = "img/salphycon_full.png",
-  tablerSocialLinks(
-    tablerSocialLink(
+  tablerDash::tablerSocialLinks(
+    tablerDash::tablerSocialLink(
       name = "salphycon",
       href = "https://github.com/cromanpa94/salphycon",
       icon = "github"
     ),
-    tablerSocialLink(
+    tablerDash::tablerSocialLink(
       name = "twitter",
       href = "https://www.twitter.com/cromanpa",
       icon = "twitter"
     ),
-    tablerSocialLink(
+    tablerDash::tablerSocialLink(
       name = "phruta",
       href = "https://github.com/cromanpa94/phruta",
       icon = "github"
     ),
-    tablerSocialLink(
+    tablerDash::tablerSocialLink(
       name = "email",
       href = "cromanpa94@arizona.edu",
       icon = "gear"
@@ -37,50 +37,50 @@ profileCard <- tablerProfileCard(
 )
 
 
-i18n <- Translator$new(translation_csvs_path = "translations/")
+i18n <- shiny.i18n::Translator$new(translation_csvs_path = "translations/")
 i18n$set_translation_language("English")
 
-ui = tablerDashPage(
+ui = tablerDash::tablerDashPage(
   title = "Salphycon",
   enable_preloader = FALSE,
   loading_duration = 2,
-  navbar = tablerDashNav(
+  navbar = tablerDash::tablerDashNav(
     h3(code("Salphycon"), "- phylogentics with", code("phruta")),
     id = "mymenu",
     src = "https://raw.githubusercontent.com/cromanpa94/phruta/main/vignettes/logo.png",
-    navMenu = tablerNavMenu(
-      tablerNavMenuItem(
+    navMenu = tablerDash::tablerNavMenu(
+      tablerDash::tablerNavMenuItem(
         shiny.i18n::usei18n(i18n),
         tabName = "Home",
         icon = "home",
         i18n$t("Home")
       ),
-      tablerNavMenuItem(
+      tablerDash::tablerNavMenuItem(
         tabName = "Settings",
         icon = "lock",
         i18n$t("Settings")
       ),
-      tablerNavMenuItem(
+      tablerDash::tablerNavMenuItem(
         tabName = "Sampling",
         icon = "box",
         i18n$t("Sampling")
       ),
-      tablerNavMenuItem(
+      tablerDash::tablerNavMenuItem(
         tabName = "Alignments",
         icon = "layers",
         i18n$t("Alignments")
       ),
-      tablerNavMenuItem(
+      tablerDash::tablerNavMenuItem(
         tabName = "Phylogenetics",
         icon = "activity",
         i18n$t("Phylogenetics")
       ),
-      tablerNavMenuItem(
+      tablerDash::tablerNavMenuItem(
         tabName = "GeneFinder",
         icon = "map",
         i18n$t("Gene finder")
       ),
-      tablerNavMenuItem(
+      tablerDash::tablerNavMenuItem(
         tabName = "About",
         icon = "info",
         i18n$t("About")
@@ -88,13 +88,13 @@ ui = tablerDashPage(
     )
   ),
   
-  footer = tablerDashFooter(
+  footer = tablerDash::tablerDashFooter(
     copyrights = "NOTE"
   ),
   
-  body = tablerDashBody( 
-    tablerTabItems(
-      tablerTabItem(
+  body = tablerDash::tablerDashBody( 
+    tablerDash::tablerTabItems(
+      tablerDash::tablerTabItem(
         tabName = i18n$t("Home"),
         fluidPage(
           shiny.i18n::usei18n(i18n),
@@ -103,11 +103,11 @@ ui = tablerDashPage(
               width = 2
             ),
             column(
-              tablerCard(
+              tablerDash::tablerCard(
                 title = "Language/Idioma",
                 width = 12,
                 column(width = 12,
-                prettyRadioButtons(
+                  shinyWidgets::prettyRadioButtons(
                   inline = TRUE,
                   inputId = "selected_language",
                   label = i18n$t(""), 
@@ -121,29 +121,29 @@ ui = tablerDashPage(
                 closable = FALSE, 
                 zoomable = FALSE
               ),
-              tablerProfileCard(
+              tablerDash::tablerProfileCard(
                 width = 12,
                 title = i18n$t("Welcome to SALPHYCON!"),
                 subtitle = i18n$t("{Salphycon} is a shiny app that extends the functionalities of the {phruta} R package. {Salphycon} is able to (1) find potentially (phylogenetically) relevant gene regions for a given set of taxa based on GenBank, (2) retrieve gene sequences and curate taxonomic information from the same database, (3) combine downloaded and local gene sequences, and (4) perform sequence alignment, phylogenetic inference, and basic tree dating tasks. Both {phruta} and {salphycon} are focused on species-level analyses."),
                 background = "https://cromanpa94.github.io/cromanpa/images/FrogMain_right_up.jpg",
                 src = "img/salphycon_full.png",
-                tablerSocialLinks(
-                  tablerSocialLink(
+                tablerDash::tablerSocialLinks(
+                  tablerDash::tablerSocialLink(
                     name = "salphycon",
                     href = "https://www.facebook.com",
                     icon = "github"
                   ),
-                  tablerSocialLink(
+                  tablerDash::tablerSocialLink(
                     name = "twitter",
                     href = "https://www.twitter.com",
                     icon = "twitter"
                   ),
-                  tablerSocialLink(
+                  tablerDash::tablerSocialLink(
                     name = "phruta",
                     href = "https://www.twitter.com",
                     icon = "github"
                   ),
-                  tablerSocialLink(
+                  tablerDash::tablerSocialLink(
                     name = "email",
                     href = "cromanpa94@arizona.edu",
                     icon = "gear"
@@ -153,7 +153,7 @@ ui = tablerDashPage(
               fluidRow(
               column(
                 width = 4,
-                tablerBlogCard(
+                tablerDash::tablerBlogCard(
                   title = i18n$t("Settings"),
                   width = 12,
                   i18n$t("Select the species-, gene-level sampling and tasks that you would like to execute in {salphycon}.")
@@ -161,7 +161,7 @@ ui = tablerDashPage(
               ),
               column(
                 width = 4,
-                tablerBlogCard(
+                tablerDash::tablerBlogCard(
                   title = i18n$t("Sampling"),
                   width = 12,
                   i18n$t("Once you have run the analyses under {Settings}, use this tab to edit and examine the species-, gene-level sampling.")
@@ -169,7 +169,7 @@ ui = tablerDashPage(
               ),
               column(
                 width = 4,
-                tablerBlogCard(
+                tablerDash::tablerBlogCard(
                   title = i18n$t("Alignments"),
                   width = 12,
                   i18n$t("Interested in visualizing the alignments assembled using {salphycon}? Check out the visuals in this tab.")
@@ -178,7 +178,7 @@ ui = tablerDashPage(
               ),fluidRow(
                 column(
                   width = 4,
-                  tablerBlogCard(
+                  tablerDash::tablerBlogCard(
                     title = i18n$t("Phylogenetics"),
                     width = 12,
                     i18n$t("If you decided to run some phylogenetic analyses on your dataset, use this tab to examine and retrieve the resulting trees.")
@@ -186,7 +186,7 @@ ui = tablerDashPage(
                 ),
                 column(
                   width = 4,
-                  tablerBlogCard(
+                  tablerDash::tablerBlogCard(
                     title = i18n$t("Gene finder"),
                     width = 12,
                     i18n$t("Find genes for a target taxon or set of taxa using {salphycon}.")
@@ -194,7 +194,7 @@ ui = tablerDashPage(
                 ),
                 column(
                   width = 4,
-                  tablerBlogCard(
+                  tablerDash::tablerBlogCard(
                     title = i18n$t("About"),
                     width = 12,
                     i18n$t("Find more information about the author and get details on how to cite {salphycon}.")
@@ -206,13 +206,13 @@ ui = tablerDashPage(
           )
         ),
       ),
-      tablerTabItem(
+      tablerDash::tablerTabItem(
         tabName = "Settings",
         fluidPage(
-          useTablerDash(),
-          chooseSliderSkin("Modern"),
+          shinyWidgets::useTablerDash(),
+          shinyWidgets::chooseSliderSkin("Modern"),
           div(style = "height:30px"),
-          tablerCard(
+          tablerDash::tablerCard(
             width = 12,
             title = h3(i18n$t("SETTINGS")),
             i18n$t("Select the species-, gene-level sampling and tasks that you would like to execute in {salphycon}. First, start by choosing the taxonomic makeup of your analyses. You can either provide a comma-separated list of taxa (e.g. species, clades) or upload a {.csv} file with a single column taxa in rows. Second, select the genetic makeup of your analyses. In the current release of {salphycon}, users are only able to select what is the minimum species-level sampling percentage per gene (e.g. only genes sampled in 20% of the species). Third, select the tasks that you are interested in running. Finally, run the analyses!"),
@@ -225,7 +225,7 @@ ui = tablerDashPage(
             ),
             column(
               width = 3,
-              tablerCard(
+              tablerDash::tablerCard(
                 status = "yellow",
                 statusSide = "left",
                 width = 12,
@@ -236,7 +236,7 @@ ui = tablerDashPage(
                 textInput("addTaxa", "", value = "", width = NULL, placeholder = "Halobates, Metrocoris, ..."),
                 uiOutput("filterPage1"),
                 
-                dropdown(
+                shinyWidgets::dropdown(
                   i18n$t("Select a file in {csv} format that includes taxonomic names in the rows and a single column. Please do not include column names."),
                   downloadButton("downloadTemplateTaxa", "Download template"),
                   fileInput("fileTaxa", h5(""), width = '80%',
@@ -246,10 +246,10 @@ ui = tablerDashPage(
                               ".csv")),
                   style = "unite", icon = icon("cogs"),
                   status = "warning", width = "300px",
-                  tooltip = tooltipOptions(title = "Upload a file!"),
-                  animate = animateOptions(
-                    enter = animations$fading_entrances$fadeInLeftBig,
-                    exit = animations$fading_exits$fadeOutRightBig
+                  tooltip = shinyWidgets::tooltipOptions(title = "Upload a file!"),
+                  animate = shinyWidgets::animateOptions(
+                    enter = shinyWidgets::animations$fading_entrances$fadeInLeftBig,
+                    exit = shinyWidgets::animations$fading_exits$fadeOutRightBig
                   )
                 )
               )
@@ -257,7 +257,7 @@ ui = tablerDashPage(
             column(
               width = 3,
               fluidRow(
-                tablerCard(
+                tablerDash::tablerCard(
                   status = "yellow",
                   statusSide = "left",
                   width = 12,
@@ -268,7 +268,7 @@ ui = tablerDashPage(
 
                   sliderInput("sliderGenes", h6(i18n$t("Threshold to find genes")),
                               min = 0, max = 100, value = 20),
-                  dropdown(
+                  shinyWidgets::dropdown(
                     i18n$t("Select a file in {csv} format that includes gene names in the rows and a single column. Please do not include column names."),
                     downloadButton("downloadTemplateGenes", "Download template"),
                     fileInput("fileGenes", h5(""), width = '80%',
@@ -278,14 +278,14 @@ ui = tablerDashPage(
                                 ".csv")),
                     style = "unite", icon = icon("cogs"),
                     status = "warning", width = "300px",
-                    tooltip = tooltipOptions(title = "Upload a file!"),
-                    animate = animateOptions(
-                      enter = animations$fading_entrances$fadeInLeftBig,
-                      exit = animations$fading_exits$fadeOutRightBig
+                    tooltip = shinyWidgets::tooltipOptions(title = "Upload a file!"),
+                    animate = shinyWidgets::animateOptions(
+                      enter = shinyWidgets::animations$fading_entrances$fadeInLeftBig,
+                      exit = shinyWidgets::animations$fading_exits$fadeOutRightBig
                     )
                   )
                 ),
-                tablerCard(
+                tablerDash::tablerCard(
                   status = "yellow",
                   statusSide = "left",
                   width = 12,
@@ -302,7 +302,7 @@ ui = tablerDashPage(
             column(
               width = 3,
               fluidRow(
-                tablerCard(
+                tablerDash::tablerCard(
                   status = "yellow",
                   statusSide = "left",
                   width = 12,
@@ -310,7 +310,7 @@ ui = tablerDashPage(
                   i18n$t("Select all the tasks that you would like to perform in {salphycon}. Sequence retrieval is requiered in the current release of the app. However, we will include compatibility for using local sequences in future releases."),
                   column(
                     12,
-                    awesomeCheckboxGroup("Process", 
+                    shinyWidgets::awesomeCheckboxGroup("Process", 
                                        h5(""), 
                                        choices = list("Retrieve" = 0,
                                                       "Curate" = 1, 
@@ -325,13 +325,13 @@ ui = tablerDashPage(
           )
         )
       ),
-      tablerTabItem(
+      tablerDash::tablerTabItem(
         tabName = "Sampling",
         fluidPage(
-          useTablerDash(),
-          chooseSliderSkin("Modern"),
+          shinyWidgets::useTablerDash(),
+          shinyWidgets::chooseSliderSkin("Modern"),
           div(style = "height:30px"),
-          tablerCard(
+          tablerDash::tablerCard(
             width = 12,
             title = h3(i18n$t("SAMPLING")),
             i18n$t("Once you have run the analyses under {Settings}, use this tab to edit and examine the species-, gene-level sampling. In this tab, you will get basic information on the sampling you retrieved from the basic settings defined in the previous tab. You will be able to make changes on the taxonomic and genetic makeup of the analyses."),
@@ -356,13 +356,13 @@ ui = tablerDashPage(
           )
         )
       ),
-      tablerTabItem(
+      tablerDash::tablerTabItem(
         tabName = "Alignments",
         fluidPage(
-          useTablerDash(),
-          chooseSliderSkin("Modern"),
+          shinyWidgets::useTablerDash(),
+          shinyWidgets::chooseSliderSkin("Modern"),
           div(style = "height:30px"),
-          tablerCard(
+          tablerDash::tablerCard(
             width = 12,
             title = h3(i18n$t("ALIGNMENTS")),
             i18n$t("Once you have defined the species- and gene-level makeup of your analyses in the previous two tabs, you will be able to visualize the resulting alignments. For now, the app will only display the masked alignments. You will be able to retrieve the alignments at this point and will be provided with information described each of the alignments."),
@@ -387,13 +387,13 @@ ui = tablerDashPage(
           )
         )
       ),
-      tablerTabItem(
+      tablerDash::tablerTabItem(
         tabName = "Phylogenetics",
         fluidPage(
-          useTablerDash(),
-          chooseSliderSkin("Modern"),
+          shinyWidgets::useTablerDash(),
+          shinyWidgets::chooseSliderSkin("Modern"),
           div(style = "height:30px"),
-          tablerCard(
+          tablerDash::tablerCard(
             width = 12,
             title = h3(i18n$t("PHYLOGENETICS")),
             i18n$t("If you decided to run some phylogenetic analyses on your dataset, this tab will allow you to examine and retrieve the resulting trees. This tab includes a basic visualizer, with the additional option of downloading the trees constructed in {salphycon}."),
@@ -412,13 +412,13 @@ ui = tablerDashPage(
           )
         )
       ),
-      tablerTabItem(
+      tablerDash::tablerTabItem(
         tabName = "GeneFinder",
         fluidPage(
-          useTablerDash(),
-          chooseSliderSkin("Modern"),
+          shinyWidgets::useTablerDash(),
+          shinyWidgets::chooseSliderSkin("Modern"),
           div(style = "height:30px"),
-          tablerCard(
+          tablerDash::tablerCard(
             width = 12,
             title = h3(i18n$t("Gene finder")),
             i18n$t("Find the distribution of sampled genes in GenBank for a target taxon or set of taxa."),
@@ -431,7 +431,7 @@ ui = tablerDashPage(
             ),
             column(
               width = 3,
-              tablerCard(
+              tablerDash::tablerCard(
                 status = "yellow",
                 statusSide = "left",
                 width = 12,
@@ -442,7 +442,7 @@ ui = tablerDashPage(
                 textInput("genesearch", "", value = "", width = NULL, placeholder = "Halobates, Metrocoris, ..."),
                 column(
                   12,
-                dropdown(
+                  shinyWidgets::dropdown(
                   i18n$t("Select a file in {csv} format that includes taxonomic names in the rows and a single column. Please do not include column names."),
                   fileInput("fileTaxaGenes", h5(""), width = '80%',
                             accept = c(
@@ -451,10 +451,10 @@ ui = tablerDashPage(
                               ".csv")),
                   style = "unite", icon = icon("cogs"),
                   status = "warning", width = "300px",
-                  tooltip = tooltipOptions(title = "Upload a file!"),
-                  animate = animateOptions(
-                    enter = animations$fading_entrances$fadeInLeftBig,
-                    exit = animations$fading_exits$fadeOutRightBig
+                  tooltip = shinyWidgets::tooltipOptions(title = "Upload a file!"),
+                  animate = shinyWidgets::animateOptions(
+                    enter = shinyWidgets::animations$fading_entrances$fadeInLeftBig,
+                    exit = shinyWidgets::animations$fading_exits$fadeOutRightBig
                   )
                 ), align = "center"
                 ),
@@ -473,13 +473,13 @@ ui = tablerDashPage(
           )
         )
       ),
-      # tablerTabItem(
+      # tablerDash::tablerTabItem(
       #   tabName = "TimeDating",
       #   fluidPage(
       #     useTablerDash(),
       #     chooseSliderSkin("Modern"),
       #     div(style = "height:30px"),
-      #     tablerCard(
+      #     tablerDash::tablerCard(
       #       width = 12,
       #       title = h3("TIME DATING"),
       #       "Configure and analyze time-calibrated phylogenies based on phylogenies constructed using {salphycon}.",
@@ -497,13 +497,13 @@ ui = tablerDashPage(
       #     )
       #   )
       # ),
-      tablerTabItem(
+      tablerDash::tablerTabItem(
         tabName = "About",
         fluidPage(
-          useTablerDash(),
-          chooseSliderSkin("Modern"),
+          shinyWidgets::useTablerDash(),
+          shinyWidgets::chooseSliderSkin("Modern"),
           div(style = "height:30px"),
-          tablerCard(
+          tablerDash::tablerCard(
             width = 12,
             title = h3(i18n$t("ABOUT")),
             i18n$t("Find more information about the author and get details on how to cite {salphycon}. 
@@ -519,19 +519,19 @@ ui = tablerDashPage(
             ),
             column(
               width = 6,
-              tablerProfileCard(
+              tablerDash::tablerProfileCard(
                 width = 6,
                 title = "Cristian Roman Palacios",
                 subtitle = i18n$t("Asistant Professor of Practice, UArizona"),
                 background = "https://preview.tabler.io/demo/photos/ilnur-kalimullin-218996-500.jpg",
                 src = "https://cromanpa94.github.io/cromanpa/contact/2019-11-21%2010.51.14.jpg",
-                tablerSocialLinks(
-                  tablerSocialLink(
+                tablerDash::tablerSocialLinks(
+                  tablerDash::tablerSocialLink(
                     name = "website",
                     href = "https://cromanpa94.github.io/cromanpa/",
                     icon = "home"
                   ),
-                  tablerSocialLink(
+                  tablerDash::tablerSocialLink(
                     name = "twitter",
                     href = "https://www.twitter.com/cromanpa",
                     icon = "twitter"
