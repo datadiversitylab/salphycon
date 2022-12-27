@@ -7,26 +7,27 @@
 
 
 server = function(input, output, session) {
-  
+
   sqs.curated <- NULL
   tree <- NULL
   sqs.aln <- NULL
   assign(".testMode", TRUE, envir = phruta:::pkg.env)
-  
+
+## Language settings
+
   observeEvent(input$selected_language, {
-    # This print is just for demonstration
     print(paste("Language change!", input$selected_language))
-    # Here is where we update language in session
     shiny.i18n::update_lang(session, input$selected_language)
   })
 
-  observeEvent(input$action, {
+## First input action (in the settings tab)
+
+observeEvent(input$action, {
     
     progress <- shiny::Progress$new()
     on.exit(progress$close())
     progress$set(message = "Running {phruta}...", value = 0)
-    
-    
+
     npro <- length(input$Process)
     
     # Add Clades or Species file
@@ -40,6 +41,7 @@ server = function(input, output, session) {
     taxa <-   sub(" ", "", strsplit( input$addTaxa, ",")[[1]])
     }
     
+    # Only retrieving sequences
     if( 0 %in% input$Process ) {
       tryCatch({
       #retrieve
@@ -78,6 +80,8 @@ server = function(input, output, session) {
     })
       }
 
+    ## If sequences need curated
+
     if( all(c(0, 1) %in% input$Process)){ #Curate if seqs have been downloaded
       tryCatch({
       sqs.curated <<- phruta::sq.curate(filterTaxonomicCriteria = '[AZ]',
@@ -103,6 +107,9 @@ server = function(input, output, session) {
       })
     }
     
+
+## If sequences need to be aligned
+
     if( all(c(0, 1, 2) %in% input$Process)){
       tryCatch({  
       
@@ -115,6 +122,8 @@ server = function(input, output, session) {
        
     }, error=function(e){})
       }
+
+      ## If tree must be build
     
     if( all(c(0, 1, 2, 3) %in% input$Process)){  
       tryCatch({  #RAxML if seqs have been aligned
@@ -127,11 +136,70 @@ server = function(input, output, session) {
         )
       })
       
-      tree.raxml(folder = '2.Alignments', 
+      phruta::tree.raxml(folder = '2.Alignments', 
                  FilePatterns = 'Masked_', 
                  raxml_exec = 'raxmlHPC', 
                  Bootstrap = 2
       )
+
+      tree <<- read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
+      tree_bst <<- read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
+      tip_names <<- tree$tip.label
+      
+      ##UI-related elements
+
+        output$phyloPlot <- renderPlot({
+         if(input$root == 0){
+          ape::plot.phylo(ape::ladderize(tree, right = FALSE))
+        }else{
+          ape::plot.phylo(ape::ladderize(tree2(), right = FALSE))
+        }
+        })
+
+      output$phyloPlots <- renderUI({
+        tablerDash::tablerCard(
+          title = "Phylogeny",
+          zoomable = TRUE,
+          closable = FALSE,
+          plotOutput("phyloPlot"),
+          status = "info",
+          statusSide = "left",
+          width = 12
+        )
+      })
+
+      tree2 <<- eventReactive(input$root, {
+       ape::root(tree, input$outgroup)
+      })
+      
+
+      output$downloadTree <- downloadHandler(
+        filename = function() { 
+          paste("phylogeny-phruta-", Sys.Date(), ".zip", sep="")
+        },
+        content = function(file) {
+          zip(zipfile = file, files = '3.Phylogeny')
+          unlink("3.Phylogeny", recursive = TRUE)
+          
+        },
+        contentType = "application/zip"
+      )
+      
+      output$phyloDownload <- renderUI({
+        tablerDash::tablerCard(
+          status = "yellow",
+          statusSide = "left",
+          width = 12,
+          column(
+            12,
+            selectInput("outgroup", "Select your outgroup",
+                        tip_names, multiple = TRUE),
+            actionButton("root", "Re-root", icon = icon("tree"),
+                         style = "color: #fff; background-color: #27ae60; border-color: #fff"),
+            downloadButton('downloadTree', 'Download'),
+            align = "center")
+        )
+      })
       
       progress$inc(1/npro, detail = "Tree constructed...")
       
@@ -186,7 +254,9 @@ server = function(input, output, session) {
         )
       })
       
-      
+## Outside elements for the UI
+
+### Accession numbers table
       
       output$tableAccN <- renderUI({
         tablerDash::tablerCard(
@@ -213,7 +283,7 @@ server = function(input, output, session) {
     })  
     
     
-    ##alignment tab boxes
+    ## Alignment tab boxes
     valuesSequences <- reactiveValues(nspecies = 0, ntaxareg = 0, genes = NULL, DNAbin = NULL)
     
     observe({
@@ -249,7 +319,6 @@ server = function(input, output, session) {
       
       
       output$downloadAln <- downloadHandler(
-        
         filename = function() { 
           paste("aln-phruta-", Sys.Date(), ".zip", sep="")
         },
@@ -308,86 +377,9 @@ server = function(input, output, session) {
           )
         }
       })
-      
-      
-      output$phyloControl <- renderUI({
-        tablerDash::tablerCard(
-          status = "yellow",
-          statusSide = "left",
-          width = 12,
-          column(
-            12,
-            selectInput("selPhylo", "Choose an option:",
-                        choices = c("test1", "test2")
-            ), align = "center")
-        )
-      })
-      
-      
-      output$phyloPlots <- renderUI({
-        tablerDash::tablerCard(
-          title = "Phylogeny",
-          zoomable = TRUE,
-          closable = FALSE,
-          plotOutput("phyloPlot"),
-          status = "info",
-          statusSide = "left",
-          width = 12
-        )
-      })
-
-      
-      tree2 <<- eventReactive(input$root, {
-       ape::root(tree, input$outgroup)
-      })
-      
-      output$phyloPlot <- renderPlot({
-        
-        if(3 %in% input$Process){
-          tree <<- ape::read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
-          tree_bst <<- ape::read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
-          tip_names <<- tree$tip.label
-        }
-        
-        if(input$root == 0){
-          ape::plot.phylo(ape::ladderize(tree, right = FALSE))
-        }else{
-          ape::plot.phylo(ape::ladderize(tree2(), right = FALSE))
-        }
-      })
-
-      output$downloadTree <- downloadHandler(
-        filename = function() { 
-          paste("phylogeny-phruta-", Sys.Date(), ".zip", sep="")
-        },
-        content = function(file) {
-          zip(zipfile = file, files = '3.Phylogeny')
-          unlink("3.Phylogeny", recursive = TRUE)
-          
-        },
-        contentType = "application/zip"
-      )
-      
-      output$phyloDownload <- renderUI({
-        tablerDash::tablerCard(
-          status = "yellow",
-          statusSide = "left",
-          width = 12,
-          column(
-            12,
-            selectInput("outgroup", "Select your outgroup",
-                        tip_names, multiple = TRUE),
-            actionButton("root", "Re-root", icon = icon("tree"),
-                         style = "color: #fff; background-color: #27ae60; border-color: #fff"),
-            downloadButton('downloadTree', 'Download'),
-            align = "center")
-        )
-      })
     })
     
-    
-    
-    
+
     observeEvent(toListen(), {
       valuesSequences$genes <- names(sqs.aln)
     })  
@@ -400,14 +392,15 @@ server = function(input, output, session) {
     
   })
   
-  dataUpdated <- reactive({
+## If the dataset is updated
+dataUpdated <- reactive({
     inFile <- input$file1
     if (is.null(inFile)) return(NULL)
     data <- read.csv(inFile$datapath, header = TRUE)
     data
-  })
-  
-  observeEvent(input$refresh, {
+})
+
+observeEvent(input$refresh, {
     
     if(!is.null(dataUpdated())){
       
@@ -471,11 +464,70 @@ server = function(input, output, session) {
           )
         })
         
-        tree.raxml(folder = '2.Alignments', 
+        phruta::tree.raxml(folder = '2.Alignments', 
                    FilePatterns = 'Masked_', 
                    raxml_exec = 'raxmlHPC', 
                    Bootstrap = 2
         )
+
+      tree <<- read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
+      tree_bst <<- read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
+      tip_names <<- tree$tip.label
+      
+      ##UI-related elements
+
+        output$phyloPlot <- renderPlot({
+         if(input$root == 0){
+          ape::plot.phylo(ape::ladderize(tree, right = FALSE))
+        }else{
+          ape::plot.phylo(ape::ladderize(tree2(), right = FALSE))
+        }
+        })
+
+      output$phyloPlots <- renderUI({
+        tablerDash::tablerCard(
+          title = "Phylogeny",
+          zoomable = TRUE,
+          closable = FALSE,
+          plotOutput("phyloPlot"),
+          status = "info",
+          statusSide = "left",
+          width = 12
+        )
+      })
+
+      tree2 <<- eventReactive(input$root, {
+       ape::root(tree, input$outgroup)
+      })
+      
+
+      output$downloadTree <- downloadHandler(
+        filename = function() { 
+          paste("phylogeny-phruta-", Sys.Date(), ".zip", sep="")
+        },
+        content = function(file) {
+          zip(zipfile = file, files = '3.Phylogeny')
+          unlink("3.Phylogeny", recursive = TRUE)
+          
+        },
+        contentType = "application/zip"
+      )
+      
+      output$phyloDownload <- renderUI({
+        tablerDash::tablerCard(
+          status = "yellow",
+          statusSide = "left",
+          width = 12,
+          column(
+            12,
+            selectInput("outgroup", "Select your outgroup",
+                        tip_names, multiple = TRUE),
+            actionButton("root", "Re-root", icon = icon("tree"),
+                         style = "color: #fff; background-color: #27ae60; border-color: #fff"),
+            downloadButton('downloadTree', 'Download'),
+            align = "center")
+        )
+      })
         
         progress$inc(1/npro, detail = "Tree constructed...")
       }
@@ -508,24 +560,8 @@ server = function(input, output, session) {
           )
         })
         
-        output$Refresh <- renderUI({
-          tablerDash::tablerCard(
-            status = "yellow",
-            statusSide = "left",
-            width = 12,
-            column(
-              12,
-              fileInput('file1', 'Choose CSV File',
-                        accept=c('text/csv',
-                                 'text/comma-separated-values,text/plain',
-                                 '.csv')),
-              actionButton("refresh", "Refresh", icon = icon("check"),
-                           style = "color: #fff; background-color: #27ae60; border-color: #fff"), align = "center")
-          )
-        })
         
-        
-        
+                
         output$tableAccN <- renderUI({
           tablerDash::tablerCard(
             title = "Accession numbers",
@@ -647,66 +683,6 @@ server = function(input, output, session) {
           }
         })
         
-   if(3 %in% input$Process){
-     
-        output$phyloControl <- renderUI({
-          tablerDash::tablerCard(
-            status = "yellow",
-            statusSide = "left",
-            width = 12,
-            column(
-              12,
-              selectInput("selPhylo", "Choose an option:",
-                          choices = c("test1", "test2")
-              ), align = "center")
-          )
-        })
-        
-        
-        output$phyloPlots <- renderUI({
-          tablerDash::tablerCard(
-            title = "Phylogeny",
-            zoomable = TRUE,
-            closable = FALSE,
-            plotOutput("phyloPlot"),
-            status = "info",
-            statusSide = "left",
-            width = 12
-          )
-        })
-        
-        output$phyloPlot <- renderPlot({
-          if(3 %in% input$Process){
-            tree <- read.tree("3.Phylogeny/RAxML_bipartitions.phruta")
-            tree_bst <- read.tree("3.Phylogeny/RAxML_bootstrap.phruta")
-            ape::plot.phylo(tree, type = "cladogram")
-          }
-        })
-        
-        output$downloadTree <- downloadHandler(
-          filename = function() { 
-            paste("phylogeny-phruta-", Sys.Date(), ".zip", sep="")
-          },
-          content = function(file) {
-            zip(zipfile = file, files = '3.Phylogeny')
-            unlink("3.Phylogeny", recursive = TRUE)
-            
-          },
-          contentType = "application/zip"
-        )
-        
-        output$phyloDownload <- renderUI({
-          tablerDash::tablerCard(
-            status = "yellow",
-            statusSide = "left",
-            width = 12,
-            column(
-              12,
-              downloadButton('downloadTree', 'Download'),
-              align = "center")
-          )
-        })
-   }
         
       })
       
@@ -719,21 +695,12 @@ server = function(input, output, session) {
         valuesSequences$ntaxareg <- length(sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked[[1]])
         valuesSequences$DNAbin <- sqs.aln[names(sqs.aln) == input$geneSel][[1]]$Aln.Masked
       })
-      
     }
-    
-    
-    
   })
 
-  output$progress <- renderUI({
-    tagList(
-      tablerDash::tablerProgress(value = input$knob, size = "xs", status = "yellow"),
-      tablerDash::tablerProgress(value = input$knob, status = "red", size = "sm")
-    )
-  })
-  
-  observeEvent(input$action2, {  tryCatch({ 
+## Gene finder tab
+
+observeEvent(input$action2, {  tryCatch({ 
     
     progress <- shiny::Progress$new()
     on.exit(progress$close())
@@ -783,24 +750,37 @@ server = function(input, output, session) {
     
   }, error=function(e){
               showNotification("No genes found.", type = 'error')
-  })})
+  })
+})
+
+## Progress bar
+output$progress <- renderUI({
+    tagList(
+      tablerDash::tablerProgress(value = input$knob, size = "xs", status = "yellow"),
+      tablerDash::tablerProgress(value = input$knob, status = "red", size = "sm")
+    )
+})
 
 
+## Templates
   output$downloadTemplateGenes <- downloadHandler(
-    filename = function() {
-      paste("phruta_genes_template", ".csv", sep="")
-    },
+    filename = "phruta_genes_template.csv",
     content = function(file) {
       write.table(gene_temp, file, row.names = FALSE, col.names=FALSE, sep=",")
     }
   )
 
   output$downloadTemplateTaxa <- downloadHandler(
-    filename = function() {
-      paste("phruta_taxa_template", ".csv", sep="")
-    },
+    filename = "phruta_taxa_template.csv",
     content = function(file) {
       write.table(taxa_temp, file, row.names = FALSE,  col.names = FALSE, sep=",")
+    }
+  )
+
+    output$downloadTemplateSampling <- downloadHandler(
+    filename = "phruta_sampling_template.csv",
+    content = function(file) {
+      write.table(samp_temp, file, row.names = FALSE,  sep=",")
     }
   )
 

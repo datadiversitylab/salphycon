@@ -22,6 +22,7 @@ source('server.R')
 #Load files
 taxa_temp <- read.csv("data/taxa_temp.csv", header = FALSE)
 gene_temp <- read.csv("data/genes_temp.csv", header = FALSE)
+samp_temp <- read.csv("data/sampling_temp.csv")
 
 #Run the app
 shinyApp(ui, server)

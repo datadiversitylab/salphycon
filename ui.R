@@ -347,7 +347,34 @@ ui = tablerDash::tablerDashPage(
               uiOutput("nTaxa"),
               uiOutput("nSeqs"),
               uiOutput("geneRegions"),
-              uiOutput("Refresh")
+              tablerDash::tablerCard(
+            status = "yellow",
+            statusSide = "left",
+            width = 12,
+            column(
+              12,
+              "Have a list of target accession numbers or need to update an existing run? Upload it below!",
+              shinyWidgets::dropdown(
+                  i18n$t("Refer to the template below to select the sequences to analyze.
+                   Note that this format is equivalent to downloading the resulting sampling dataset after
+                    an initial analysis in the app."),
+                  downloadButton("downloadTemplateSampling", "Download template"),
+                  fileInput('file1', '',
+                        accept=c('text/csv',
+                                 'text/comma-separated-values,text/plain',
+                                 '.csv')),
+                  style = "unite", icon = icon("cogs"),
+                  status = "warning", width = "300px",
+                  tooltip = shinyWidgets::tooltipOptions(title = "Upload a file!"),
+                  animate = shinyWidgets::animateOptions(
+                    enter = shinyWidgets::animations$fading_entrances$fadeInLeftBig,
+                    exit = shinyWidgets::animations$fading_exits$fadeOutRightBig
+                  )
+                ),
+              br(),              
+              actionButton("refresh", "Refresh", icon = icon("check"),
+                           style = "color: #fff; background-color: #27ae60; border-color: #fff"), align = "center")
+          )
             ),
             column(
               width = 6,
